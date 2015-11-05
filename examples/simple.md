@@ -4,8 +4,5 @@ This is the first paragraph that is displayed.
 
 This is the second paragraph that is shown.
 
-### Emily: I pick Emily
-emily > sunday > morning
-
-### Josh: I pick Josh
-josh > sunday > morning
+* Emily | emily > sunday > morning: I pick Emily
+* Josh | josh > sunday > morning: I pick Josh 
