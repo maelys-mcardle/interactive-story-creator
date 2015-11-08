@@ -1,11 +1,60 @@
-# Pick a character
+# Monday
 
-This is the first paragraph that is displayed.
+## Morning: Home
 
-This is the second paragraph that is shown.
+This is some text.
+This is still the first paragraph.
 
-[Emily](emily/sunday/morning) 
-I pick Emily
+This is another paragraph.
 
-[Josh](josh/sunday/morning) 
-I pick Josh 
+This is *italics*, this is **bold**, this is ~~crossed out~~.
+
+[cheese: I like cheese](next)
+[bread: I like bread](next)
+
+## Day: The Coffee Shop
+
+This is another paragraph.
+
+### Chose "cheese" on last
+
+You eat some cheese.
+
+### Chose "bread" on last
+
+You eat some bread.
+
+###
+
+This paragraph shows for all.
+
+~~[This option is crossed out]()~~
+[Go back to the morning way #1](last)
+[Go back to the morning way #2](Morning)
+[Go back to the morning way #3](Monday)
+[Go back to the morning way #4](Monday > Morning)
+[Go back to the morning way #5](simple.md)
+[Go back to the morning way #6](simple.md > Monday)
+[Go back to the morning way #7](simple.md > Monday > Morning)
+[Continue](next)
+
+## Night: Hotel Room
+
+Tonight we're looking at other formatting.
+
+> This is a quote.
+
+**Lists**
+
+* Item 
+* Item 
+* Item
+
+[Go to sleep](Tuesday)
+
+# Tuesday
+
+## Morning: Hotel Room
+
+Good morning!
+
