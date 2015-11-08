@@ -78,5 +78,7 @@ Good morning!
 Still here
 
 [Go to last](Morning)
+
 [Go to this one](Morning #2)
+
 [Another way to go to this one](Morning: Hotel Room #2)
