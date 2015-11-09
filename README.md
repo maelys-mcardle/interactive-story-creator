@@ -1,4 +1,4 @@
-# interactive-story-creator
+# Interactive Story Creator
 
 ## Description
 
