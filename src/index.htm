@@ -30,35 +30,36 @@
     </head>
     <body>
         
-        <div class="container">
+        <!-- Navigation Bar -->
         
-            <!-- Navigation Bar -->
-            
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">Untitled Story</a>
-                    </div>
-                    
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Play <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Donate</a></li>
-                        </ul>
-                        <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right" onClick="showCreateStoryDialog()">Create Story</button>
-                    </div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Untitled Story</a>
                 </div>
-            </nav>
+                
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Play <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Donate</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                    <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right" onClick="showCreateStoryDialog()">Create Story</button>
+                </div>
+            </div>
+        </nav>
         
-            <!-- Present story -->
+        <!-- Story -->
+            
+        <div class="container">
             
             <div class="panel panel-primary">
                 <div class="panel-body">
@@ -85,37 +86,52 @@
                     </div>
                 </div>
             </div>
-                
-            <!-- Create or edit story code -->
-            
-            <div id="create-edit-story-dialog" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header bg-primary">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">
-                            </h4>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label for="inputStoryTitle">Story Title</label>
-                                    <input type="email" class="form-control" id="inputStoryTitle" placeholder="Story title goes here...">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputStoryCode">Story Code</label>
-                                    <textarea class="form-control" id="inputStoryCode" rows="8" placeholder="Paste the code for the story here..."></textarea>
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary" onClick="loadStory()"></button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
             
         </div>
+        
+        <!-- Footer -->
+        
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">
+                    <span id="footerAuthorCopyright"></span>
+                    Story Creator by Maëlys McArdle.
+                </p>
+            </div>
+        </footer>
+
+        <!-- Create or edit story code -->
+        
+        <div id="create-edit-story-dialog" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="inputStoryTitle">Story Title</label>
+                                <input class="form-control" id="inputStoryTitle" placeholder="Story title goes here...">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStoryAuthors">Story Author(s)</label>
+                                <input class="form-control" id="inputStoryAuthors" placeholder="Author(s) for the story go here...">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputStoryCode">Story Code</label>
+                                <textarea class="form-control" id="inputStoryCode" rows="8" placeholder="Paste the code for the story here..."></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onClick="loadStory()"></button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
     </body>
 </html>
