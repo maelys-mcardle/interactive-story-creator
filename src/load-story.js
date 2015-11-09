@@ -1,5 +1,6 @@
 const DEFAULT_STORY_TITLE = "One Week";
 const html = {
+    loadStoryNavbarButton: "#loadStoryNavbarButton",
     inputStoryTitle: "#inputStoryTitle",
     inputStoryCode: "#inputStoryCode",
     createEditStoryDialog: "#create-edit-story-dialog",
@@ -41,6 +42,10 @@ function loadStory()
     // Set the page title to the new story title.
     document.title = storyTitle;
     $(".navbar-brand").text(storyTitle);
+    
+    // Update the navbar button to edit.
+    $("#loadStoryNavbarButton").text("Edit Story");
+    $("#loadStoryNavbarButton").unbind('click').click( showEditStoryDialog );
     
     // Close the dialog.
     hideCreateStoryDialog();    
