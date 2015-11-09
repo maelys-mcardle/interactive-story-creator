@@ -60,6 +60,9 @@ function loadStory()
     $( html.loadStoryNavbarButton ).text("Edit Story");
     $( html.loadStoryNavbarButton ).unbind('click').click( showEditStoryDialog );
     
+    // Parse the story.
+    var story = parseStory( storyCode );
+    
     // Close the dialog.
     hideCreateStoryDialog();    
 }
