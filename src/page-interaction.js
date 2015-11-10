@@ -45,7 +45,7 @@ function loadStory()
     }
     
     if (storyAuthors == "") {
-        storyAuthors = DEFAULT_STORY_AUTHORS
+        storyAuthors = DEFAULT_STORY_AUTHORS;
     }
     
     // Set the page title to the new story title.
