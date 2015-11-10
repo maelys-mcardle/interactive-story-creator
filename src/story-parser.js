@@ -15,48 +15,92 @@
  
 function parseStory( storyCode )
 {
-    let chapters = [];
+    let story = {
+        "chapters" : [],
+        
+        "current chapter" : {
+            "day": "",
+            "pages": [],
+        },
+        
+        "current page" : {
+            "time" : "",
+            "location": "",
+            "paragraphs": [],
+            "choice links": [],
+        },
+        
+        "current paragraph": {
+            "is choice": false,
+            "choice id": "",
+            "content": "",
+        }
+    };
     
-    let linesOfStoryCode = storyCode.split("\n");
-    let currentChapter = "Untitled";
-    
-    let doNothing = function() {};
-    let startNewChoiceLink = doNothing;
-    let startNewChoiceParagraph = doNothing;
-    let startNewPage = doNothing;
-    let startNewChapter = doNothing;
-    let loadIntoParagraph = doNothing;
-    
-    linesOfStoryCode.forEach( function ( line ) {
+    // Go line by line.  
+    storyCode.split("\n").forEach( function ( line ) {
         
         let trimmedLine = line.trim();
         
         if ( trimmedLine.startsWith("[") ) {
             
-            startNewChoiceLink( trimmedLine );
+            story = addChoiceLink( story, trimmedLine );
             
         } else if ( trimmedLine.startsWith("###") ) {
             
-            startNewChoiceParagraph( trimmedLine );
+            story = endCurrentChoiceParagraph( story );
+            story = startNewChoiceParagraph( story, trimmedLine );
             
         } else if ( trimmedLine.startsWith("##") ) {
             
-            startNewPage( trimmedLine );
+            story = endCurrentPage( story );            
+            story = startNewPage( story, trimmedLine );
             
         } else if ( trimmedLine.startsWith("#") ) {
             
-            startNewChapter( trimmedLine );
-            
-        } else if ( trimmedLine.startsWith("[") ) {
-            
-            startNewChoiceLink( trimmedLine );
-            
+            story = endCurrentChapter( story );
+            story = startNewChapter( story, trimmedLine );
+
         } else {
             
-            loadIntoParagraph( line );
+            story = loadContentInPageOrChoiceParagraph( story, line );
             
         }
         
     });
     
+    return story;
 }
+
+function startNewChapter( story, trimmedLine )
+{
+}
+
+function endCurrentChapter( story )
+{
+}
+
+function addChoiceLink( story, trimmedLine )
+{
+}
+
+function startNewPage( story, trimmedLine )
+{
+}
+
+function endCurrentPage( story )
+{
+}
+
+function startNewChoiceParagraph( story, trimmedLine )
+{
+}
+
+function endCurrentChoiceParagraph( story )
+{
+}
+
+function loadContentInPageOrChoiceParagraph( story, line )
+{
+}
+
