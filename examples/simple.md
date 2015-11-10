@@ -29,7 +29,7 @@ You eat some bread.
 
 This paragraph shows for all.
 
-~~[This option is crossed out]()~~
+[~~This option is crossed out~~]()
 
 [Go back to the morning way #1](last)
 
