@@ -1,3 +1,5 @@
+"use strict";
+
 /*
  * # Level 1 Headers are Chapters (they get title pages)
  * 
@@ -13,6 +15,48 @@
  
 function parseStory( storyCode )
 {
+    let chapters = [];
     
+    let linesOfStoryCode = storyCode.split("\n");
+    let currentChapter = "Untitled";
+    
+    let doNothing = function() {};
+    let startNewChoiceLink = doNothing;
+    let startNewChoiceParagraph = doNothing;
+    let startNewPage = doNothing;
+    let startNewChapter = doNothing;
+    let loadIntoParagraph = doNothing;
+    
+    linesOfStoryCode.forEach( function ( line ) {
+        
+        let trimmedLine = line.trim();
+        
+        if ( trimmedLine.startsWith("[") ) {
+            
+            startNewChoiceLink( trimmedLine );
+            
+        } else if ( trimmedLine.startsWith("###") ) {
+            
+            startNewChoiceParagraph( trimmedLine );
+            
+        } else if ( trimmedLine.startsWith("##") ) {
+            
+            startNewPage( trimmedLine );
+            
+        } else if ( trimmedLine.startsWith("#") ) {
+            
+            startNewChapter( trimmedLine );
+            
+        } else if ( trimmedLine.startsWith("[") ) {
+            
+            startNewChoiceLink( trimmedLine );
+            
+        } else {
+            
+            loadIntoParagraph( line );
+            
+        }
+        
+    });
     
 }

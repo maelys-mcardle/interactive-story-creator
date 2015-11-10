@@ -1,3 +1,5 @@
+"use strict";
+
 const DEFAULT_STORY_TITLE = "One Week";
 const DEFAULT_STORY_AUTHORS = "Eliot, Ollie & Maëlys";
 
@@ -35,9 +37,9 @@ function showEditStoryDialog()
 function loadStory()
 {
     // Load the story title and code.
-    var storyTitle = $( html.inputStoryTitle ).val();
-    var storyAuthors = $( html.inputStoryAuthors ).val();
-    var storyCode = $( html.inputStoryCode ).val();
+    let storyTitle = $( html.inputStoryTitle ).val();
+    let storyAuthors = $( html.inputStoryAuthors ).val();
+    let storyCode = $( html.inputStoryCode ).val();
     
     // If the title is blank.
     if (storyTitle == "") {
@@ -61,7 +63,7 @@ function loadStory()
     $( html.loadStoryNavbarButton ).unbind('click').click( showEditStoryDialog );
     
     // Parse the story.
-    var story = parseStory( storyCode );
+    let story = parseStory( storyCode );
     
     // Close the dialog.
     hideCreateStoryDialog();    
@@ -73,6 +75,10 @@ $(function() {
     // Set the placeholder to be the default title.
     $( html.inputStoryTitle ).prop("placeholder", DEFAULT_STORY_TITLE);
     $( html.inputStoryAuthors ).prop("placeholder", DEFAULT_STORY_AUTHORS);
+    
+    // Set the navbar button.
+    $( html.loadStoryNavbarButton ).text("Create Story");
+    $( html.loadStoryNavbarButton ).click( showCreateStoryDialog );
     
     // Show the dialog to create the story on page load.
     showCreateStoryDialog();
