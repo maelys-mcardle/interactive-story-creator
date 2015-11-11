@@ -108,7 +108,7 @@ function isChoiceStart( line )
     
     if ( caseInsensitive( choiceCode ).startsWith( caseInsensitive( "Chose " ) ) {
         
-       let choiceIdAndSource =  
+       let choiceIdAndTarget = choiceCode.slice( "Chose ".length )
     
     if ( choiceCode === "" ) {
         return { 
