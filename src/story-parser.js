@@ -35,6 +35,11 @@ function parseStory( storyCode )
             "choice id": "",
             "content": "",
         }
+        
+        "current choice": {
+            "active": false,
+            "choice id": "",
+        }
     };
     
     // Go line by line.  
@@ -44,35 +49,45 @@ function parseStory( storyCode )
         
         if ( trimmedLine.startsWith("[") ) {
             
+            story = endCurrentParagraph( story );
             story = addChoiceLink( story, trimmedLine );
             
         } else if ( trimmedLine.startsWith("###") ) {
             
-            story = endCurrentChoiceParagraph( story );
-            story = startNewChoiceParagraph( story, trimmedLine );
+            story = endCurrentParagraph( story );
+            story = endCurrentChoice( story );
+            story = startNewChoice( story, trimmedLine );
             
         } else if ( trimmedLine.startsWith("##") ) {
             
-            story = endCurrentPage( story );            
+            story = endCurrentParagraph( story );
+            story = endCurrentPage( story );
             story = startNewPage( story, trimmedLine );
             
         } else if ( trimmedLine.startsWith("#") ) {
             
+            story = endCurrentParagraph( story );
+            story = endCurrentPage( story );
             story = endCurrentChapter( story );
             story = startNewChapter( story, trimmedLine );
 
         } else {
             
-            story = loadContentInPageOrChoiceParagraph( story, line );
+            story = appendCurrentParagraph( story, line );
             
         }
         
     });
     
+    // Terminate open paragraphs/page/chapters.
+    story = endCurrentParagraph( story );
+    story = endCurrentPage( story );
+    story = endCurrentChapter( story );
+    
     return story;
 }
 
-function startNewChapter( story, trimmedLine )
+function startNewChapter( story, line )
 {
 }
 
@@ -80,11 +95,7 @@ function endCurrentChapter( story )
 {
 }
 
-function addChoiceLink( story, trimmedLine )
-{
-}
-
-function startNewPage( story, trimmedLine )
+function startNewPage( story, line )
 {
 }
 
@@ -92,15 +103,22 @@ function endCurrentPage( story )
 {
 }
 
-function startNewChoiceParagraph( story, trimmedLine )
+function startNewChoice( story, line )
 {
 }
 
-function endCurrentChoiceParagraph( story )
+function endCurrentChoice( story )
 {
 }
 
-function loadContentInPageOrChoiceParagraph( story, line )
+function appendCurrentParagraph( story, line )
 {
 }
 
+function endCurrentParagraph( story )
+{
+}
+
+function addChoiceLink( story, line )
+{
+}
