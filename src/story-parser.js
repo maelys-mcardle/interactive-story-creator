@@ -26,19 +26,17 @@ function parseStory( storyCode )
         "current page" : {
             "time" : "",
             "location": "",
-            "paragraphs": [],
+            "text": [],
             "choice links": [],
         },
         
-        "current paragraph": {
-            "is choice": false,
-            "choice id": "",
-            "text": "",
-        }
-        
-        "current choice": {
-            "active": false,
-            "choice id": "",
+        "current text": {
+            "choice" : {
+                "id": "",
+                "page": "",
+                "chapter": "",
+            },
+            "content": "",
         }
     };
     
@@ -50,42 +48,42 @@ function parseStory( storyCode )
         if ( trimmedLine.startsWith("[") ) {
             
             // New choice link.
-            story = endCurrentParagraph( story );
+            story = endCurrentText( story );
             story = addChoiceLink( story, trimmedLine );
             
         } else if ( trimmedLine.startsWith("###") ) {
             
-            // New choice/paragraph.
-            story = endCurrentParagraph( story );
-            story = startNewParagraph( story );
+            // New choice/content.
+            story = endCurrentText( story );
+            story = startNewText( story, parseChoiceFromHeader( trimmedLine ) );
             
         } else if ( trimmedLine.startsWith("##") ) {
             
             // New page/paragraph.
-            story = endCurrentParagraph( story );
+            story = endCurrentText( story );
             story = endCurrentPage( story );
             story = startNewPage( story, trimmedLine );
-            story = startNewParagraph( story );
+            story = startNewText( story, {} );
             
         } else if ( trimmedLine.startsWith("#") ) {
             
             // New chapter.
-            story = endCurrentParagraph( story );
+            story = endCurrentText( story );
             story = endCurrentPage( story );
             story = endCurrentChapter( story );
-            story = startNewChapter( story, trimmedLine );
+            story = startNewChapter( story, chapterInfoFromHeader( trimmedLine ) );
 
         } else {
             
             // Continued paragraph.
-            story = appendCurrentParagraph( story, line );
+            story = appendCurrentText( story, line );
             
         }
         
     });
     
     // Terminate open paragraphs/page/chapters.
-    story = endCurrentParagraph( story );
+    story = endCurrentText( story );
     story = endCurrentPage( story );
     story = endCurrentChapter( story );
     
@@ -139,26 +137,26 @@ function endCurrentPage( story )
 {
 }
 
-function startNewChoice( story, line )
+function startNewText( story )
 {
 }
 
-function endCurrentChoice( story )
+function appendCurrentText( story, line )
 {
 }
 
-function startNewParagraph( story )
-{
-}
-
-function appendCurrentParagraph( story, line )
-{
-}
-
-function endCurrentParagraph( story )
+function endCurrentText( story )
 {
 }
 
 function addChoiceLink( story, line )
+{
+}
+
+function parseChoiceFromHeader( line )
+{
+}
+
+function chapterInfoFromHeader ( line )
 {
 }
