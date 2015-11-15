@@ -49,20 +49,23 @@ function parseStory( storyCode )
             
             // New choice link.
             story = endCurrentText( story );
-            story = addChoiceLink( story, trimmedLine );
+            story = addChoiceLink( story, 
+                choiceLinkFromLink( trimmedLine ) );
             
         } else if ( trimmedLine.startsWith("###") ) {
             
             // New choice/content.
             story = endCurrentText( story );
-            story = startNewText( story, parseChoiceFromHeader( trimmedLine ) );
+            story = startNewText( story, 
+                choiceInfoFromHeader( trimmedLine ) );
             
         } else if ( trimmedLine.startsWith("##") ) {
             
             // New page/paragraph.
             story = endCurrentText( story );
             story = endCurrentPage( story );
-            story = startNewPage( story, trimmedLine );
+            story = startNewPage( story, 
+                pageInfoFromHeader( trimmedLine ) );
             story = startNewText( story, {} );
             
         } else if ( trimmedLine.startsWith("#") ) {
@@ -71,11 +74,12 @@ function parseStory( storyCode )
             story = endCurrentText( story );
             story = endCurrentPage( story );
             story = endCurrentChapter( story );
-            story = startNewChapter( story, chapterInfoFromHeader( trimmedLine ) );
+            story = startNewChapter( story, 
+                chapterInfoFromHeader( trimmedLine ) );
 
         } else {
             
-            // Continued paragraph.
+            // Continued text.
             story = appendCurrentText( story, line );
             
         }
@@ -120,16 +124,15 @@ function isChoiceStart( line )
     }
 }
 
-function startNewChapter( story, line )
+function startNewChapter( story, chapterInfo )
 {
-    var chapterTitle = everythingAfterSubstring( "#", line );
 }
 
 function endCurrentChapter( story )
 {
 }
 
-function startNewPage( story, line )
+function startNewPage( story, pageInfo )
 {
 }
 
@@ -137,7 +140,7 @@ function endCurrentPage( story )
 {
 }
 
-function startNewText( story )
+function startNewText( story, choiceInfo )
 {
 }
 
@@ -149,14 +152,24 @@ function endCurrentText( story )
 {
 }
 
-function addChoiceLink( story, line )
+function addChoiceLink( story, link )
 {
 }
 
-function parseChoiceFromHeader( line )
+function choiceInfoFromHeader( line )
 {
 }
 
-function chapterInfoFromHeader ( line )
+function choiceLinkFromLink( line )
 {
+}
+
+function chapterInfoFromHeader( line )
+{
+    var chapterTitle = everythingAfterSubstring( "#", line );
+}
+
+function pageInfoFromHeader( line )
+{
+    var chapterTitle = everythingAfterSubstring( "#", line );
 }
