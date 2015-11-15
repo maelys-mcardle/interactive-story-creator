@@ -33,8 +33,7 @@ function parseStory( storyCode )
         "current text": {
             "choice" : {
                 "id": "",
-                "page": "",
-                "chapter": "",
+                "target": "",
             },
             "content": "",
         }
@@ -104,26 +103,6 @@ function caseInsensitive( string )
     return string.toUpperCase()
 }
 
-function isChoiceStart( line )
-{
-    let choiceCode = everythingAfterSubstring( "###", line );
-    
-    if ( caseInsensitive( choiceCode ).startsWith( caseInsensitive( "Chose " ) ) {
-        
-       let choiceIdAndTarget = choiceCode.slice( "Chose ".length )
-    
-    if ( choiceCode === "" ) {
-        return { 
-            "is choice": false, 
-            "choice id": null,
-            "choice target": null,
-        }
-    } else {
-    
-        
-    }
-}
-
 function startNewChapter( story, chapterInfo )
 {
 }
@@ -158,6 +137,24 @@ function addChoiceLink( story, link )
 
 function choiceInfoFromHeader( line )
 {
+    let fullChoice = everythingAfterSubstring( "###", line );
+    let targetId = "";
+    let targetPage = "";
+    
+    if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " ) ) {
+        
+       let choiceIdAndTarget = fullChoice.slice( "Chose ".length ).trim();
+       
+       // Choice ID either is contained in bunny quotes, 
+       // or is otherwise the words before " on "
+       if ( choiceIdAndTarget.startswith( '""' )
+
+    }
+    
+    return {
+        "id": targetId,
+        "target": targetPage,
+    };
 }
 
 function choiceLinkFromLink( line )
@@ -166,10 +163,17 @@ function choiceLinkFromLink( line )
 
 function chapterInfoFromHeader( line )
 {
-    var chapterTitle = everythingAfterSubstring( "#", line );
+    return { 
+        "day": everythingAfterSubstring( "#", line ) 
+    }; 
 }
 
 function pageInfoFromHeader( line )
 {
-    var chapterTitle = everythingAfterSubstring( "#", line );
+    let pageTitle = everythingAfterSubstring( "#", line );
+    let timeAndLocation = pageTitle.split( ":" );
+    return { 
+        "time": timeAndLocation[0].trim(), 
+        "location": timeAndLocation.slice( 1 ).join( ":" ).trim(),
+    }
 }
