@@ -138,16 +138,20 @@ function addChoiceLink( story, link )
 function choiceInfoFromHeader( line )
 {
     let fullChoice = everythingAfterSubstring( "###", line );
-    let targetId = "";
-    let targetPage = "";
+    let choiceId = "";
+    let choiceTarget = "";
     
     if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " ) ) {
         
-       let choiceIdAndTarget = fullChoice.slice( "Chose ".length ).trim();
+       let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
        
-       // Choice ID either is contained in bunny quotes, 
-       // or is otherwise the words before " on "
-       if ( choiceIdAndTarget.startswith( '""' )
+       // Choice ID either is:
+       // 1. contained in bunny quotes, OR
+       // 2. before the word "on", OR
+       // 3. all text.
+       if ( choiceIdAndTarget.startswith( '"' ) {
+           choiceId = 
+       }
 
     }
     
