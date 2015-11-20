@@ -138,12 +138,13 @@ function addChoiceLink( story, link )
 
 function choiceInfoFromHeader( line )
 {
-    let fullChoice = everythingAfterSubstring( "###", line );
+    let fullChoice = caseInsensitive( everythingAfterSubstring( "###", line ) );
     let choiceId = "";
     let choiceTarget = "";
     
-    if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " ) ) {
+    if ( fullChoice.startsWith( caseInsensitive( "Chose " ) ) {
         
+        // Get everything after the opening keyword "Chose"
        let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
        
        // Choice ID either is:
@@ -151,14 +152,24 @@ function choiceInfoFromHeader( line )
        // 2. before the word "on", OR
        // 3. all text.
        if ( choiceIdAndTarget.startswith( '"' ) {
-           choiceId = 
+           
+           let {left, right} = splitInTwoParts( '"', choiceIdAndTarget.substring(1) );
+           choiceId = left;
+           {left, right} = splitInTwoParts( caseInsensitive( " on ", right );
+           let choiceTarget = right;
+           
+       } else {
+           
+           let {left, right} = splitInTwoParts( caseInsensitive( " on ", choiceIdAndTarget );
+           choiceId = left;
+           choiceTarget = right;
        }
 
     }
     
     return {
-        id: targetId,
-        target: targetPage,
+        id: choiceId,
+        target: choiceTarget,
     };
 }
 
@@ -184,11 +195,11 @@ function pageInfoFromHeader( line )
     }
 }
 
-function splitInTwoParts( character, line )
+function splitInTwoParts( divider, line )
 {
-    let splitString = string.split( character );
+    let splitString = string.split( divider );
     let left = splitString[0].trim();
-    let right = splitString.slice( 1 ).join( character ).trim();
+    let right = splitString.slice( 1 ).join( divider ).trim();
     
     return { left: left, right: right };
 }
