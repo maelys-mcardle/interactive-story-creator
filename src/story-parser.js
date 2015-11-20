@@ -16,28 +16,10 @@
 function parseStory( storyCode )
 {
     let story = {
-        
         chapters: [],
-        
-        currentChapter: {
-            day: "",
-            pages: [],
-        },
-        
-        currentPage: {
-            time: "",
-            location: "",
-            text: [],
-            links: [],
-        },
-        
-        currentText: {
-            content: "",
-            choice: {
-                id: "",
-                target: "",
-            },
-        }
+        currentChapter: emptyChapter(), 
+        currentPage: emptyPage(),        
+        currentText: emptyText(),
     };
     
     // Go line by line.  
@@ -94,6 +76,35 @@ function parseStory( storyCode )
     return story;
 }
 
+function emptyChapter()
+{
+    return {
+        day: "",
+        pages: [],
+    };
+}
+
+function emptyPage()
+{
+    return {
+        time: "",
+        location: "",
+        text: [],
+        links: [],
+    };
+}
+
+function emptyText()
+{
+    return {
+        content: "",
+        choice: {
+            id: "",
+            target: "",
+        },
+    };
+}
+
 function everythingAfterSubstring( substring, line )
 {
     return line.slice( substring.length ).trim();
@@ -106,30 +117,45 @@ function caseInsensitive( string )
 
 function startNewChapter( story, chapterInfo )
 {
+    story.currentChapter = emptyChapter();
+    story.currentChapter.day = chapterInfo.day;
 }
 
 function endCurrentChapter( story )
 {
+    story.chapters.push( story.currentChapter );
+    story.currentChapter = emptyChapter();
 }
 
 function startNewPage( story, pageInfo )
 {
+    story.currentPage = emptyPage();
+    story.currentPage.time = pageInfo.time;
+    story.currentPage.location = pageInfo.location;
 }
 
 function endCurrentPage( story )
 {
+    story.currentChapter.pages.push( story.currentPage );
+    story.currentPage = emptyPage();
 }
 
-function startNewText( story, choiceInfo )
+function startNewText( story, textInfo )
 {
+    story.currentText = emptyText();
+    story.currentText.choice.id = textInfo.id;
+    story.currentText.choice.target = textInfo.target;
 }
 
 function appendCurrentText( story, line )
 {
+    story.currentText.content.concat( line );
 }
 
 function endCurrentText( story )
 {
+    story.currentPage.text.push( story.currentText );
+    story.currentText = emptyText();
 }
 
 function addChoiceLink( story, link )
