@@ -16,26 +16,27 @@
 function parseStory( storyCode )
 {
     let story = {
-        "chapters" : [],
         
-        "current chapter" : {
-            "day": "",
-            "pages": [],
+        chapters: [],
+        
+        currentChapter: {
+            day: "",
+            pages: [],
         },
         
-        "current page" : {
-            "time" : "",
-            "location": "",
-            "text": [],
-            "choice links": [],
+        currentPage: {
+            time: "",
+            location: "",
+            text: [],
+            links: [],
         },
         
-        "current text": {
-            "choice" : {
-                "id": "",
-                "target": "",
+        currentText: {
+            content: "",
+            choice: {
+                id: "",
+                target: "",
             },
-            "content": "",
         }
     };
     
@@ -156,8 +157,8 @@ function choiceInfoFromHeader( line )
     }
     
     return {
-        "id": targetId,
-        "target": targetPage,
+        id: targetId,
+        target: targetPage,
     };
 }
 
@@ -168,16 +169,26 @@ function choiceLinkFromLink( line )
 function chapterInfoFromHeader( line )
 {
     return { 
-        "day": everythingAfterSubstring( "#", line ) 
+        day: everythingAfterSubstring( "#", line ) 
     }; 
 }
 
 function pageInfoFromHeader( line )
 {
     let pageTitle = everythingAfterSubstring( "#", line );
-    let timeAndLocation = pageTitle.split( ":" );
+    let {left, right} = splitInTwoParts( ":", line );
+    
     return { 
-        "time": timeAndLocation[0].trim(), 
-        "location": timeAndLocation.slice( 1 ).join( ":" ).trim(),
+        time: left,
+        location: right,
     }
+}
+
+function splitInTwoParts( character, line )
+{
+    let splitString = string.split( character );
+    let left = splitString[0].trim();
+    let right = splitString.slice( 1 ).join( character ).trim();
+    
+    return { left: left, right: right };
 }
