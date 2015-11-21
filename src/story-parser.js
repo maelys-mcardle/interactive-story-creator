@@ -112,7 +112,7 @@ function everythingAfterSubstring( substring, line )
 
 function caseInsensitive( string )
 {
-    return string.toUpperCase()
+    return string.toUpperCase();
 }
 
 function startNewChapter( story, chapterInfo )
@@ -169,7 +169,7 @@ function choiceInfoFromHeader( line )
     let choiceId = "";
     let choiceTarget = "";
     
-    if ( fullChoice.startsWith( caseInsensitive( "Chose " ) ) {
+    if ( fullChoice.startsWith( caseInsensitive( "Chose " )  ) ) {
         
         // Get everything after the opening keyword "Chose"
        let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
@@ -178,18 +178,23 @@ function choiceInfoFromHeader( line )
        // 1. contained in bunny quotes, OR
        // 2. before the word "on", OR
        // 3. all text.
-       if ( choiceIdAndTarget.startswith( '"' ) {
+       if ( choiceIdAndTarget.startswith( '"' ) ) {
            
-           let {left, right} = splitInTwoParts( '"', choiceIdAndTarget.substring(1) );
-           choiceId = left;
-           {left, right} = splitInTwoParts( caseInsensitive( " on " ), right );
-           let choiceTarget = right;
+            let splitChoiceIdAndTarget = splitInTwoParts( '"', 
+                choiceIdAndTarget.substring(1) );
+            choiceId = choiceIdOnAndTarget.left.trim();
+           
+            let onAndTarget = splitInTwoParts( 
+                caseInsensitive( " on " ), choiceIdOnAndTarget.right );
+            choiceTarget = onAndTarget.right.trim();
            
        } else {
            
-           let {left, right} = splitInTwoParts( caseInsensitive( " on " ), choiceIdAndTarget );
-           choiceId = left;
-           choiceTarget = right;
+            let splitChoiceIdAndTarget = splitInTwoParts( 
+                caseInsensitive( " on " ), choiceIdAndTarget );
+            
+            choiceId = splitChoiceIdAndTarget.left.trim();
+            choiceTarget = splitChoiceIdAndTarget.right.trim();
        }
 
     }
@@ -204,15 +209,16 @@ function choiceLinkFromLink( line )
 {
     // [link id: link text](target page)
     // [link text](target page)
-    let {left, right} = splitInTwoParts( "](", line );
-    let linkText = left;
-    let linkTarget = right.substring( 0, right.indexOf( ")" ) );
+    let linkTextAndTarget = splitInTwoParts( "](", line );
+    let linkText = linkTextAndTarget.left.trim();
+    let linkTarget = linkTextAndTarget.right.substring( 
+        0, right.indexOf( ")" ) ).trim();
     let linkId = "";
     
     if ( linkText.includes( ":" ) ) {
-        let {left, right} = splitInTwoParts( ":", linkText );
-        linkId = left;
-        linkText = right;
+        let linkIdAndText = splitInTwoParts( ":", linkText );
+        linkId = linkIdAndText.left.trim();
+        linkText = linkIdAndText.right.trim();
     }
     
     return {
@@ -232,11 +238,11 @@ function chapterInfoFromHeader( line )
 function pageInfoFromHeader( line )
 {
     let pageTitle = everythingAfterSubstring( "#", line );
-    let {left, right} = splitInTwoParts( ":", line );
+    let timeAndLocation = splitInTwoParts( ":", line );
     
     return { 
-        time: left,
-        location: right,
+        time: timeAndLocation.left,
+        location: timeAndLocation.right,
     }
 }
 
