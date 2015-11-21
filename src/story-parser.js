@@ -160,6 +160,7 @@ function endCurrentText( story )
 
 function addChoiceLink( story, link )
 {
+    story.currentPage.links.push( link );
 }
 
 function choiceInfoFromHeader( line )
@@ -181,12 +182,12 @@ function choiceInfoFromHeader( line )
            
            let {left, right} = splitInTwoParts( '"', choiceIdAndTarget.substring(1) );
            choiceId = left;
-           {left, right} = splitInTwoParts( caseInsensitive( " on ", right );
+           {left, right} = splitInTwoParts( caseInsensitive( " on " ), right );
            let choiceTarget = right;
            
        } else {
            
-           let {left, right} = splitInTwoParts( caseInsensitive( " on ", choiceIdAndTarget );
+           let {left, right} = splitInTwoParts( caseInsensitive( " on " ), choiceIdAndTarget );
            choiceId = left;
            choiceTarget = right;
        }
@@ -201,6 +202,24 @@ function choiceInfoFromHeader( line )
 
 function choiceLinkFromLink( line )
 {
+    // [link id: link text](target page)
+    // [link text](target page)
+    let {left, right} = splitInTwoParts( "](", line );
+    let linkText = left;
+    let linkTarget = right.substring( 0, right.indexOf( ")" ) );
+    let linkId = "";
+    
+    if ( linkText.includes( ":" ) ) {
+        let {left, right} = splitInTwoParts( ":", linkText );
+        linkId = left;
+        linkText = right;
+    }
+    
+    return {
+        id: linkId,
+        text: linkText,
+        target: linkTarget,
+    }
 }
 
 function chapterInfoFromHeader( line )
