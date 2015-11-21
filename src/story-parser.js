@@ -119,12 +119,14 @@ function startNewChapter( story, chapterInfo )
 {
     story.currentChapter = emptyChapter();
     story.currentChapter.day = chapterInfo.day;
+    return story;
 }
 
 function endCurrentChapter( story )
 {
     story.chapters.push( story.currentChapter );
     story.currentChapter = emptyChapter();
+    return story;
 }
 
 function startNewPage( story, pageInfo )
@@ -132,12 +134,14 @@ function startNewPage( story, pageInfo )
     story.currentPage = emptyPage();
     story.currentPage.time = pageInfo.time;
     story.currentPage.location = pageInfo.location;
+    return story;
 }
 
 function endCurrentPage( story )
 {
     story.currentChapter.pages.push( story.currentPage );
     story.currentPage = emptyPage();
+    return story;
 }
 
 function startNewText( story, textInfo )
@@ -145,22 +149,26 @@ function startNewText( story, textInfo )
     story.currentText = emptyText();
     story.currentText.choice.id = textInfo.id;
     story.currentText.choice.target = textInfo.target;
+    return story;
 }
 
 function appendCurrentText( story, line )
 {
     story.currentText.content.concat( line );
+    return story;
 }
 
 function endCurrentText( story )
 {
     story.currentPage.text.push( story.currentText );
     story.currentText = emptyText();
+    return story;
 }
 
 function addChoiceLink( story, link )
 {
     story.currentPage.links.push( link );
+    return story;
 }
 
 function choiceInfoFromHeader( line )
@@ -172,13 +180,13 @@ function choiceInfoFromHeader( line )
     if ( fullChoice.startsWith( caseInsensitive( "Chose " )  ) ) {
         
         // Get everything after the opening keyword "Chose"
-       let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
+        let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
        
-       // Choice ID either is:
-       // 1. contained in bunny quotes, OR
-       // 2. before the word "on", OR
-       // 3. all text.
-       if ( choiceIdAndTarget.startswith( '"' ) ) {
+        // Choice ID either is:
+        // 1. contained in bunny quotes, OR
+        // 2. before the word "on", OR
+        // 3. all text.
+        if ( choiceIdAndTarget.startswith( '"' ) ) {
            
             let splitChoiceIdAndTarget = splitInTwoParts( '"', 
                 choiceIdAndTarget.substring(1) );
@@ -188,14 +196,14 @@ function choiceInfoFromHeader( line )
                 caseInsensitive( " on " ), choiceIdOnAndTarget.right );
             choiceTarget = onAndTarget.right.trim();
            
-       } else {
+        } else {
            
             let splitChoiceIdAndTarget = splitInTwoParts( 
                 caseInsensitive( " on " ), choiceIdAndTarget );
             
             choiceId = splitChoiceIdAndTarget.left.trim();
             choiceTarget = splitChoiceIdAndTarget.right.trim();
-       }
+        }
 
     }
     
@@ -248,7 +256,7 @@ function pageInfoFromHeader( line )
 
 function splitInTwoParts( divider, line )
 {
-    let splitString = string.split( divider );
+    let splitString = line.split( divider );
     let left = splitString[0].trim();
     let right = splitString.slice( 1 ).join( divider ).trim();
     
