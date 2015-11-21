@@ -105,6 +105,22 @@ function emptyText()
     };
 }
 
+function isChapterEmpty( chapter )
+{
+    return !( chapter.pages.length || chapter.day.length );
+}
+
+function isPageEmpty( page )
+{
+    return !( page.text.length || page.links.length ||
+              page.time.length || page.location.length );
+}
+
+function isTextEmpty( text )
+{
+    return !( text.content.length );
+}
+
 function everythingAfterSubstring( substring, line )
 {
     return line.slice( substring.length ).trim();
@@ -124,7 +140,10 @@ function startNewChapter( story, chapterInfo )
 
 function endCurrentChapter( story )
 {
-    story.chapters.push( story.currentChapter );
+    if( !isChapterEmpty( story.currentChapter ) ) {
+        story.chapters.push( story.currentChapter );
+    }
+    
     story.currentChapter = emptyChapter();
     return story;
 }
@@ -139,7 +158,10 @@ function startNewPage( story, pageInfo )
 
 function endCurrentPage( story )
 {
-    story.currentChapter.pages.push( story.currentPage );
+    if ( !isPageEmpty( story.currentPage ) ) {
+        story.currentChapter.pages.push( story.currentPage );
+    }
+    
     story.currentPage = emptyPage();
     return story;
 }
@@ -160,7 +182,10 @@ function appendCurrentText( story, line )
 
 function endCurrentText( story )
 {
-    story.currentPage.text.push( story.currentText );
+    if ( !isTextEmpty( story.currentText ) ) {
+        story.currentPage.text.push( story.currentText );
+    }
+    
     story.currentText = emptyText();
     return story;
 }
@@ -190,19 +215,19 @@ function choiceInfoFromHeader( line )
            
             let splitChoiceIdAndTarget = splitInTwoParts( '"', 
                 choiceIdAndTarget.substring(1) );
-            choiceId = choiceIdOnAndTarget.left.trim();
+            choiceId = choiceIdOnAndTarget.left;
            
             let onAndTarget = splitInTwoParts( 
                 caseInsensitive( " on " ), choiceIdOnAndTarget.right );
-            choiceTarget = onAndTarget.right.trim();
+            choiceTarget = onAndTarget.right;
            
         } else {
            
             let splitChoiceIdAndTarget = splitInTwoParts( 
                 caseInsensitive( " on " ), choiceIdAndTarget );
             
-            choiceId = splitChoiceIdAndTarget.left.trim();
-            choiceTarget = splitChoiceIdAndTarget.right.trim();
+            choiceId = splitChoiceIdAndTarget.left;
+            choiceTarget = splitChoiceIdAndTarget.right;
         }
 
     }
@@ -245,8 +270,8 @@ function chapterInfoFromHeader( line )
 
 function pageInfoFromHeader( line )
 {
-    let pageTitle = everythingAfterSubstring( "#", line );
-    let timeAndLocation = splitInTwoParts( ":", line );
+    let pageTitle = everythingAfterSubstring( "##", line );
+    let timeAndLocation = splitInTwoParts( ":", pageTitle );
     
     return { 
         time: timeAndLocation.left,
