@@ -2,17 +2,26 @@
 
 const DEFAULT_STORY_TITLE = "One Week";
 const DEFAULT_STORY_AUTHORS = "Eliot, Ollie & Maëlys";
+const SHOW_STORY_UPDATED_MESSAGE_DURATION = 3000;
 
 const html = {
     loadStoryNavbarButton: "#loadStoryNavbarButton",
+    createStoryJumbotronButton: "#createStoryJumbotronButton",
     inputStoryTitle: "#inputStoryTitle",
     inputStoryAuthors: "#inputStoryAuthors",
     inputStoryCode: "#inputStoryCode",
     createEditStoryDialog: "#create-edit-story-dialog",
     createEditStoryDialogTitle: "#create-edit-story-dialog .modal-title",
     createEditStoryDialogActionButton: "#create-edit-story-dialog .modal-footer .btn-primary",
+    noStoryMessage: "#no-story-message",
+    storyUpdatedMessage: "#story-updated-message",
+    storyContainer: "#story-container",
     footerAuthorCopyright: "#footerAuthorCopyright",
     
+};
+
+let global = {
+    showStoryTimeout: undefined,
 };
 
 function showCreateStoryDialog()
@@ -32,6 +41,21 @@ function showEditStoryDialog()
     $( html.createEditStoryDialogTitle ).text("Edit Story");
     $( html.createEditStoryDialogActionButton ).text("Edit Story");
     $( html.createEditStoryDialog ).modal();
+}
+
+function showStoryUpdatedMessage()
+{
+    // Clear any previous timeout.
+    clearTimeout( global.showStoryTimeout );
+    
+    // Show the message.
+    $( html.storyUpdatedMessage ).slideDown();
+    
+    // Have the message go away after a time.
+    global.showStoryTimeout = setTimeout( 
+        function() {
+            $( html.storyUpdatedMessage ).slideUp();
+        }, SHOW_STORY_UPDATED_MESSAGE_DURATION );
 }
 
 function loadStory()
@@ -65,8 +89,17 @@ function loadStory()
     // Parse the story.
     let story = parseStory( storyCode );
     
+    // Fade out the message that there's no story. Once gone, fade in the 
+    // generated story.
+    $( html.noStoryMessage ).fadeOut('slow', function() {
+        $( html.storyContainer ).fadeIn();
+    });
+    
+    // Show the story updated dialog.
+    showStoryUpdatedMessage();
+    
     // Close the dialog.
-    hideCreateStoryDialog();    
+    hideCreateStoryDialog();
 }
 
 // Called on start.
@@ -76,11 +109,12 @@ $(function() {
     $( html.inputStoryTitle ).prop("placeholder", DEFAULT_STORY_TITLE);
     $( html.inputStoryAuthors ).prop("placeholder", DEFAULT_STORY_AUTHORS);
     
-    // Set the navbar button.
+    // Set the initial buttons.
     $( html.loadStoryNavbarButton ).text("Create Story");
     $( html.loadStoryNavbarButton ).click( showCreateStoryDialog );
+    $( html.createStoryJumbotronButton).click( showCreateStoryDialog );
     
-    // Show the dialog to create the story on page load.
-    showCreateStoryDialog();
+    // Initialize tooltips.
+    $('[data-toggle="tooltip"]').tooltip()
 
 });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Untitled Story</title>
+        <title>Story Creator</title>
         <meta charset="UTF-8">
         
         <!-- jQuery -->
@@ -41,26 +41,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Untitled Story</a>
+                    <a class="navbar-brand" href="#">Story Creator</a>
                 </div>
                 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Play <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Donate</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="#">Examples</a></li>
                     </ul>
                     <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right"></button>
                 </div>
             </div>
         </nav>
         
-        <!-- Story -->
+        <!-- Body -->
             
         <div class="container">
             
-            <div class="panel panel-primary">
+            <!-- Message when story updated. -->
+            
+            <div id="story-updated-message" class="alert alert-info collapse" role="alert">
+                <span class="glyphicon glyphicon-ok pulse"></span>
+                Story has been updated.
+            </div>
+            
+            <!-- Story -->
+            
+            <div id="story-container" class="panel panel-primary collapse">
                 <div class="panel-body">
 
                     <h4 class="alert alert-info">
@@ -86,6 +94,22 @@
                 </div>
             </div>
             
+            <!-- Message when there's no story -->
+            
+            <div id="no-story-message" class="jumbotron">
+                <h1>Submit a story!</h1>
+                <p>
+                    No story has been submitted yet! Click on the "Create Story"
+                    link below to write your own, or click on "Examples" in the
+                    menu above to see some examples of code.
+                </p>
+                <p>
+                    <a id="createStoryJumbotronButton" class="btn btn-primary btn-lg" href="#" role="button">
+                        Create Story
+                    </a>
+                </p>
+            </div>
+
         </div>
         
         <!-- Footer -->
@@ -113,15 +137,20 @@
                         <form>
                             <div class="form-group">
                                 <label for="inputStoryTitle">Story Title</label>
-                                <input class="form-control" id="inputStoryTitle" placeholder="Story title goes here...">
+                                <input class="form-control" id="inputStoryTitle" 
+                                    data-toggle="tooltip" data-placement="bottom" title="Filling this in is optional"
+                                    placeholder="Story title goes here...">
                             </div>
                             <div class="form-group">
                                 <label for="inputStoryAuthors">Story Author(s)</label>
-                                <input class="form-control" id="inputStoryAuthors" placeholder="Author(s) for the story go here...">
+                                <input class="form-control" id="inputStoryAuthors" 
+                                    data-toggle="tooltip" data-placement="bottom" title="Filling this in is optional"
+                                    placeholder="Author(s) for the story go here...">
                             </div>
                             <div class="form-group">
                                 <label for="inputStoryCode">Story Code</label>
-                                <textarea class="form-control" id="inputStoryCode" rows="8" placeholder="Paste the code for the story here..."></textarea>
+                                <textarea class="form-control" id="inputStoryCode" rows="8" 
+                                    placeholder="Paste the code for the story here..."></textarea>
                             </div>
                     </div>
                     <div class="modal-footer">
