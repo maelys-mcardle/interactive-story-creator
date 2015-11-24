@@ -1,5 +1,7 @@
 "use strict";
 
+const NEWLINE_CHARACTER = "\n";
+
 /*
  * # Level 1 Headers are Chapters (they get title pages)
  * 
@@ -23,7 +25,7 @@ function parseStory( storyCode )
     };
     
     // Go line by line.  
-    storyCode.split("\n").forEach( function ( line ) {
+    storyCode.split( NEWLINE_CHARACTER ).forEach( function ( line ) {
         
         let trimmedLine = line.trim();
         
@@ -176,7 +178,7 @@ function startNewText( story, textInfo )
 
 function appendCurrentText( story, line )
 {
-    story.currentText.content.concat( line );
+    story.currentText.content += line + NEWLINE_CHARACTER;
     return story;
 }
 
@@ -243,9 +245,9 @@ function choiceLinkFromLink( line )
     // [link id: link text](target page)
     // [link text](target page)
     let linkTextAndTarget = splitInTwoParts( "](", line );
-    let linkText = linkTextAndTarget.left.trim();
+    let linkText = everythingAfterSubstring( "[", linkTextAndTarget.left ).trim();
     let linkTarget = linkTextAndTarget.right.substring( 
-        0, right.indexOf( ")" ) ).trim();
+        0, linkTextAndTarget.right.indexOf( ")" ) ).trim();
     let linkId = "";
     
     if ( linkText.includes( ":" ) ) {
