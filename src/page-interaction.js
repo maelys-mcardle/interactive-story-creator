@@ -119,6 +119,9 @@ function loadStory()
     // Parse the story.
     let story = parseStory( storyCode );
     
+    // Load the initial page.
+    showStoryPage( story );
+    
     // Fade out the message that there's no story. Once gone, fade in the 
     // generated story.
     $( html.noStoryMessage ).fadeOut('slow', function() {
