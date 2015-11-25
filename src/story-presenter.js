@@ -1,17 +1,32 @@
 var history = [];
 
-function appendHistory( history, day, time, location, choiceId )
+function appendHistory( page, clickedChoice )
 {
     history.push({
-        day: day,
-        time: time,
-        location: location,
-        choiceId: choiceId });
+        page: page,
+        choice: clickedChoice });
         
     return history;
 }
 
-function showStoryPage( story, linkText )
+function showStoryPage( story, link )
 {
+    
+}
+
+function parseLink( story, link )
+{
+    // Link Examples:
+    //
+    //   last
+    //   next
+    //   [Day]
+    //   [Time]
+    //   [Time] #2
+    //   [Day] > [Time]
+    //   [Day] > [Time] : [Location]
+    //   [Day] > [Time] : [Location] #2
+    //
+    
     
 }
