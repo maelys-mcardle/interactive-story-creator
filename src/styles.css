@@ -26,7 +26,6 @@ body {
 }
 
 /* For the pulsing animation. */
-
 .pulse
 {
 	animation-name: pulse-animation;

@@ -47,9 +47,9 @@
                 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Play <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">History</a></li>
+                    <ul id="navbar-links" class="nav navbar-nav">
+                        <li id="play-navbar-link" class="active"><a href="javascript:clickNavbarPlay()">Play</a></li>
+                        <li id="history-navbar-link"><a href="javascript:clickNavbarHistory()">History</a></li>
                     </ul>
                     <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right"></button>
                 </div>
@@ -70,48 +70,76 @@
             </div>
             
             <!-- Story -->
+             
+            <div id="story-container">
             
-            <div id="story-container" class="panel panel-primary collapse">
-                <div class="panel-body">
+                <!-- Contents when there's a story -->
+                
+                <div class="panel panel-primary collapse">
+                    <div class="panel-body">
 
-                    <h4 class="alert alert-info">
+                        <h4 class="alert alert-info">
 
-                        <span class="glyphicon glyphicon-map-marker"></span>
-                        Bedroom
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            <span id="story-location"></span>
+                            
+                            <span class="pull-right">
+                                <span class="glyphicon glyphicon-time"></span>
+                                <span id="story-day"></span>,
+                                <span id="story-time"></span>
+                            </span>
+
+                        </h4>
                         
-                        <span class="pull-right">
-                            <span class="glyphicon glyphicon-time"></span>
-                            Sunday, Morning
-                        </span>
-
-                    </h4>
-                    
-                    <p>This is a paragraph of text.</p>
-                    <p>This is another paragraph</p>
-                </div>
-                <div class="panel-footer">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item">Go to the bathroom</a>
-                        <a href="#" class="list-group-item">Leave the house</a>
+                        <div id="story-text"></div>
+                        
+                    </div>
+                    <div class="panel-footer">
+                        <div id="story-choices" class="list-group">
+                            <!-- <a href="#" class="list-group-item">Link Text</a> -->
+                        </div>
                     </div>
                 </div>
+                
+                <!-- Message when there's no story -->
+                
+                <div id="no-story-message" class="jumbotron">
+                    <h1>Submit a story!</h1>
+                    <p>
+                        No story has been submitted yet! Click on the button below 
+                        to write your own, or view 
+                        <a href="https://github.com/maelys-mcardle/interactive-story-creator/tree/master/examples">examples of code here</a> 
+                        to learn how to put stories together.
+                    </p>
+                    <p>
+                        <a id="createStoryJumbotronButton" class="btn btn-primary btn-lg" href="#" role="button">
+                            Create Story
+                        </a>
+                    </p>
+                </div>
+            
             </div>
             
-            <!-- Message when there's no story -->
+            <!-- History -->
             
-            <div id="no-story-message" class="jumbotron">
-                <h1>Submit a story!</h1>
-                <p>
-                    No story has been submitted yet! Click on the button below 
-                    to write your own, or view 
-                    <a href="https://github.com/maelys-mcardle/interactive-story-creator/tree/master/examples">examples of code here</a> 
-                    to learn how to put stories together.
-                </p>
-                <p>
-                    <a id="createStoryJumbotronButton" class="btn btn-primary btn-lg" href="#" role="button">
-                        Create Story
+            <div id="history-container" class="collapse">
+                
+                <div class="page-header">
+                    <h1>Action History</h1>
+                </div>
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item disabled">
+                        <h4 class="list-group-item-heading">
+                            Empty History
+                        </h4>
+                        <p class="list-group-item-text">
+                            Come back here when you start playing through a story!
+                            You'll be able to go back in time and try different choices.
+                        </p>
                     </a>
-                </p>
+                </div>
+                
             </div>
 
         </div>

@@ -1,10 +1,17 @@
 "use strict";
 
-const DEFAULT_STORY_TITLE = "One Week";
-const DEFAULT_STORY_AUTHORS = "Eliot, Ollie & Maëlys";
-const SHOW_STORY_UPDATED_MESSAGE_DURATION = 3000;
+const defaultStory = {
+    title: "One Week",
+    authors: "Eliot, Ollie & Maëlys",
+};
+
+const constants = {
+    updatedMessageDuration: 3000,
+    activeLinkClass: "active",
+};
 
 const html = {
+    footerAuthorCopyright: "#footerAuthorCopyright",
     loadStoryNavbarButton: "#loadStoryNavbarButton",
     createStoryJumbotronButton: "#createStoryJumbotronButton",
     inputStoryTitle: "#inputStoryTitle",
@@ -16,8 +23,15 @@ const html = {
     noStoryMessage: "#no-story-message",
     storyUpdatedMessage: "#story-updated-message",
     storyContainer: "#story-container",
-    footerAuthorCopyright: "#footerAuthorCopyright",
-    
+    storyText: "#story-text",
+    storyLocation: "#story-location",
+    storyDay: "#story-day",
+    storyTime: "#story-time",
+    storyChoices: "#story-choices",
+    historyContainer: "#history-container",
+    activeNavbarLink: "#navbar-links .active",
+    playNavbarLink: "#play-navbar-link",
+    historyNavbarLink: "#history-navbar-link",
 };
 
 let global = {
@@ -55,7 +69,23 @@ function showStoryUpdatedMessage()
     global.showStoryTimeout = setTimeout( 
         function() {
             $( html.storyUpdatedMessage ).slideUp();
-        }, SHOW_STORY_UPDATED_MESSAGE_DURATION );
+        }, constants.updatedMessageDuration );
+}
+
+function clickNavbarPlay()
+{
+    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
+    $( html.playNavbarLink ).addClass( constants.activeLinkClass );
+    $( html.historyContainer ).hide();
+    $( html.storyContainer ).show();
+}
+
+function clickNavbarHistory()
+{
+    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
+    $( html.historyNavbarLink ).addClass( constants.activeLinkClass );
+    $( html.storyContainer ).hide();
+    $( html.historyContainer ).show();
 }
 
 function loadStory()
@@ -67,11 +97,11 @@ function loadStory()
     
     // If the title is blank.
     if (storyTitle == "") {
-        storyTitle = DEFAULT_STORY_TITLE;
+        storyTitle = defaultStory.title;
     }
     
     if (storyAuthors == "") {
-        storyAuthors = DEFAULT_STORY_AUTHORS;
+        storyAuthors = defaultStory.authors;
     }
     
     // Set the page title to the new story title.
@@ -106,8 +136,8 @@ function loadStory()
 $(function() {
     
     // Set the placeholder to be the default title.
-    $( html.inputStoryTitle ).prop("placeholder", DEFAULT_STORY_TITLE);
-    $( html.inputStoryAuthors ).prop("placeholder", DEFAULT_STORY_AUTHORS);
+    $( html.inputStoryTitle ).prop("placeholder", defaultStory.title );
+    $( html.inputStoryAuthors ).prop("placeholder", defaultStory.authors );
     
     // Set the initial buttons.
     $( html.loadStoryNavbarButton ).text("Create Story");
