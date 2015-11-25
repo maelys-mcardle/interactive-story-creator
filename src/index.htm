@@ -23,6 +23,7 @@
         
         <script src="page-interaction.js"></script>
         <script src="story-parser.js"></script>
+        <script src="story-presenter.js"></script>
         
         <link rel="stylesheet" href="styles.css">
 
@@ -48,7 +49,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Play <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Examples</a></li>
+                        <li><a href="#">History</a></li>
                     </ul>
                     <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right"></button>
                 </div>
@@ -61,7 +62,7 @@
             
             <!-- Message when story updated. -->
             
-            <div id="story-updated-message" class="alert alert-success collapse" role="alert">
+            <div id="story-updated-message" class="alert alert-warning collapse" role="alert">
                 <strong>
                     <span class="glyphicon glyphicon-ok pulse"></span>
                     Story has been updated!
@@ -101,9 +102,10 @@
             <div id="no-story-message" class="jumbotron">
                 <h1>Submit a story!</h1>
                 <p>
-                    No story has been submitted yet! Click on the "Create Story"
-                    link below to write your own, or click on "Examples" in the
-                    menu above to see some examples of code.
+                    No story has been submitted yet! Click on the button below 
+                    to write your own, or view 
+                    <a href="https://github.com/maelys-mcardle/interactive-story-creator/tree/master/examples">examples of code here</a> 
+                    to learn how to put stories together.
                 </p>
                 <p>
                     <a id="createStoryJumbotronButton" class="btn btn-primary btn-lg" href="#" role="button">

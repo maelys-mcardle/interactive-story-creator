@@ -184,12 +184,23 @@ function appendCurrentText( story, line )
 
 function endCurrentText( story )
 {
-    if ( !isTextEmpty( story.currentText ) ) {
-        story.currentPage.text.push( story.currentText );
+    if ( !isTextEmpty( trimText( story.currentText ) ) ) {
+        story.currentPage.text.push( trimText( story.currentText ) );
     }
     
     story.currentText = emptyText();
     return story;
+}
+
+function trimText( text )
+{
+    return {
+        content: text.content.trim(),
+        choice: {
+            id: text.choice.id,
+            target: text.choice.target,
+        }
+    }
 }
 
 function addChoiceLink( story, link )
@@ -200,11 +211,11 @@ function addChoiceLink( story, link )
 
 function choiceInfoFromHeader( line )
 {
-    let fullChoice = caseInsensitive( everythingAfterSubstring( "###", line ) );
+    let fullChoice = everythingAfterSubstring( "###", line );
     let choiceId = "";
     let choiceTarget = "";
     
-    if ( fullChoice.startsWith( caseInsensitive( "Chose " )  ) ) {
+    if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " )  ) ) {
         
         // Get everything after the opening keyword "Chose"
         let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
@@ -213,20 +224,21 @@ function choiceInfoFromHeader( line )
         // 1. contained in bunny quotes, OR
         // 2. before the word "on", OR
         // 3. all text.
-        if ( choiceIdAndTarget.startswith( '"' ) ) {
-           
-            let splitChoiceIdAndTarget = splitInTwoParts( '"', 
+        if ( choiceIdAndTarget.startsWith( '"' ) ) {
+
+            let choiceIdAndOnAndTarget = splitInTwoParts( '"', 
                 choiceIdAndTarget.substring(1) );
-            choiceId = choiceIdOnAndTarget.left;
-           
-            let onAndTarget = splitInTwoParts( 
-                caseInsensitive( " on " ), choiceIdOnAndTarget.right );
+
+            let onAndTarget = splitInTwoParts( " on ", 
+                choiceIdAndOnAndTarget.right );
+            
+            choiceId = choiceIdAndOnAndTarget.left;
             choiceTarget = onAndTarget.right;
            
         } else {
            
-            let splitChoiceIdAndTarget = splitInTwoParts( 
-                caseInsensitive( " on " ), choiceIdAndTarget );
+            let splitChoiceIdAndTarget = splitInTwoParts( " on ", 
+                choiceIdAndTarget );
             
             choiceId = splitChoiceIdAndTarget.left;
             choiceTarget = splitChoiceIdAndTarget.right;
