@@ -23,6 +23,16 @@ function parseTargets( story )
     return story;
 }
 
+function createTarget( path, found, chapter, page )
+{
+    return {
+        path: path,
+        found: found,
+        chapter: chapter,
+        page: page,
+    };
+}
+
 function processLinkOnPage( story, chapterIndex, pageIndex, linkIndex, link )
 {
     // Grab the target address.
@@ -44,16 +54,6 @@ function processChoiceOnPage( story, chapterIndex, pageIndex, textIndex, text )
     story.chapters[ chapterIndex ].pages[ pageIndex ].tests[ textIndex ] = text;
     
     return story;
-}
-
-function createTarget( path, found, chapter, page )
-{
-    return {
-        path: path,
-        found: found,
-        chapter: chapter,
-        page: page,
-    };
 }
 
 function processTarget( story, chapterIndex, pageIndex, target )
@@ -92,6 +92,7 @@ function processTarget( story, chapterIndex, pageIndex, target )
 
 function processRelativePath( story, chapterIndex, pageIndex, path, difference )
 {
+    
     return createTarget( path, false, 0, 0 );
 }
 
