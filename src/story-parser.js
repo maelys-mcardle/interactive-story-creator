@@ -91,7 +91,7 @@ function emptyPage()
     return {
         time: "",
         location: "",
-        text: [],
+        texts: [],
         links: [],
     };
 }
@@ -114,8 +114,8 @@ function isChapterEmpty( chapter )
 
 function isPageEmpty( page )
 {
-    return !( page.text.length || page.links.length ||
-              page.time.length || page.location.length );
+    return !( page.texts.length || page.links.length ||
+              page.time.length  || page.location.length );
 }
 
 function isTextEmpty( text )
@@ -175,7 +175,7 @@ function appendCurrentText( story, line )
 function endCurrentText( story )
 {
     if ( !isTextEmpty( trimText( story.currentText ) ) ) {
-        story.currentPage.text.push( trimText( story.currentText ) );
+        story.currentPage.texts.push( trimText( story.currentText ) );
     }
     
     story.currentText = emptyText();

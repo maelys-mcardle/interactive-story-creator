@@ -14,9 +14,36 @@
  *
  */
 
-function processLinks( story )
+function processTargets( story )
 {   
-    // Traverse story and find links.
+    // Traverse story and process the targets in links/choices.
+    story.chapters.forEach( function( chapter, chapterIndex ) {
+        chapter.pages.forEach( function( page, pageIndex ) {
+            
+            // Process links.
+            page.links.forEach( function( link, linkIndex ) {
+                story = processLinkOnPage( story, chapterIndex, 
+                    pageIndex, linkIndex, link );
+            });
+            
+            // Process choices.
+            page.texts.forEach( function( text, textIndex ) {
+                story = processChoiceOnText( story, chapterIndex, 
+                    pageIndex, textIndex, text );
+            }
+        });
+    });
     
     return story;
 }
+
+function processLinkOnPage( story, chapterIndex, pageIndex, linkIndex, link )
+{
+    return story;
+}
+
+function processChoiceOnText( story, chapterIndex, pageIndex, textIndex, text )
+{
+    return story;
+}
+

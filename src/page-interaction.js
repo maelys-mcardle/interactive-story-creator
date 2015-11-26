@@ -120,9 +120,9 @@ function loadStory()
     // Parse the story.
     let story = parseStory( storyCode );
     
-    // Pass the story through the linker. This translates the links 
+    // Pass the story through the linker. This translates the targets 
     // into addresses and warns of any errors.
-    story = processLinks( storyCode );
+    story = processTargets( storyCode );
     
     // Load the initial page.
     showStoryPage( story );
