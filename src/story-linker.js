@@ -63,6 +63,7 @@ function processTarget( story, chapterIndex, pageIndex, target )
      * 
      *     last
      *     next
+     *     next #2
      *     [Day]
      *     [Time]
      *     [Time] #2
@@ -77,7 +78,7 @@ function processTarget( story, chapterIndex, pageIndex, target )
     let matchIncrement = getMatchIncrement( path );
 
     // Find the desired target.
-    if ( path === "" ) {
+    if ( !path ) {
         target = createTarget( path, false );
     } else if ( path === caseInsensitive( "next" ) ) {
         target = processRelativePath( story, chapterIndex, pageIndex, path, matchIncrement );
@@ -90,15 +91,44 @@ function processTarget( story, chapterIndex, pageIndex, target )
     return target;
 }
 
-function processRelativePath( story, chapterIndex, pageIndex, path, difference )
+function processRelativePath( story, chapterIndex, pageIndex, path, incrementOrDecrementBy )
 {
+    // For when you want to go up or down by a certain amount of pages from a
+    // given chapter and page.
     
-    return createTarget( path, false, 0, 0 );
+    let target = createTarget( path, false );
+    
+    for ( let count = 0; count < Math.abs( incrementOrDecrementBy ); count++ ) {
+        target = getNextOrLastChapterAndPage( story, path, chapterIndex, 
+            pageIndex, ( incrementOrDecrementBy >= 0 ) ? true : false );
+    }
+    
+    return target;
 }
 
-function processAbsolutePath( story, chapterIndex, pageIndex, path, matchIncrement )
+function processAbsolutePath( story, chapterIndex, pageIndex, path, skipToMatchNo )
 {
-    return createTarget( path, false, 0, 0 );
+    // For when you want to jump to a specific page.
+    
+    // Get the tokens.
+    let tokens = path.split( ">" );
+    
+    // For each token, trim.
+    tokens = tokens.map( function( token ) { return token.trim() });
+    
+    // Remove the match increment from the last token.
+    if ( tokens.length > 0 ) {
+        let lastToken = tokens[ tokens.length - 1 ];
+        let positionOfNumberSign = lastToken.lastIndexOf( "#" );
+        if ( positionOfNumberSign >= 0 ) {
+            tokens[ tokens.length - 1 ] = 
+                lastToken.substring( 0, positionOfNumberSign );
+        }
+    }
+    
+    // The first token is either 
+    
+    return createTarget( path, false );
 }
 
 function getMatchIncrement( path )
@@ -106,16 +136,57 @@ function getMatchIncrement( path )
     // If the path ends with #<Number> then the match number to get is that
     // number, otherwise it's assumed to be the first match (1.)
     
-    let placementOfPound = path.lastIndexOf( "#" );
+    let positionOfNumberSign = path.lastIndexOf( "#" );
     
-    if ( placementOfPound >= 0 ) {
-        let matchNumber = parseInt( path.slice( placementOfPound + 1) );
+    if ( positionOfNumberSign >= 0 ) {
+        let matchNumber = parseInt( path.slice( positionOfNumberSign + 1) );
         if ( Number.isInteger( matchNumber ) ) {
             return matchNumber;
+        } else {
+            // There's a # in a target, but no valid number that follows.
+            // This should be identified as a malformed link.
         }
     }
     
     return 1;
+}
+
+function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialPageIndex, isNext )
+{
+    let incrementOrDecrementBy = ( isNext ) ? +1 : -1;
+    
+    // Start at the current chapter.
+    // When this chapter is exhausted, go up or down one,
+    // until all chapters have been explored.
+    for ( let chapterIndex = initialChapterIndex; 
+              chapterIndex >= 0 && 
+              chapterIndex < story.chapters.length; 
+              chapterIndex + incrementOrDecrementBy ) {
+              
+        // The initial page is, if we're on the same chapter we started with,
+        // the immediate next or previous page. Otherwise, it's the first page
+        // of the next chapter (if we're incrementing) or the last page of the 
+        // previous chapter (if we're decrementing).
+        let startPage = 
+            ( chapterIndex === initialChapterIndex ) ?
+                initialPageIndex + incrementOrDecrementBy :
+                    ( isNext ? 
+                        0 : 
+                        story.chapters[ chapterIndex ].pages.length - 1 );
+        
+        // Go up or down a page, until all have been exhausted in this chapter.
+        for ( let pageIndex = startPage;
+                  pageIndex >= 0 &&
+                  pageIndex < story.chapters[ chapterIndex ].pages.length; 
+                  pageIndex + incrementOrDecrementBy ) {
+                      
+            if ( doesChapterAndPageExist( story, chapterIndex, pageIndex ) ) {
+                return createTarget( path, true, chapterIndex, pageIndex );
+            }
+        }
+    }
+
+    return createTarget( path, false );
 }
 
 function doesChapterAndPageExist( story, chapterIndex, pageIndex )
