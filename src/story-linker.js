@@ -110,6 +110,9 @@ function processAbsolutePath( story, chapterIndex, pageIndex, path, skipToMatchN
 {
     // For when you want to jump to a specific page.
     
+    // Default target.
+    let target = createTarget( path, false );
+    
     // Get the tokens.
     let tokens = path.split( ">" );
     
@@ -126,9 +129,37 @@ function processAbsolutePath( story, chapterIndex, pageIndex, path, skipToMatchN
         }
     }
     
-    // The first token is either 
+    // If there's one token, then it can be a chapter name or a page in the
+    // current chapter. Look at the pages in the current chapter first, then
+    // look at chapter names. If there's two tokens, then the first is a chapter
+    // name and the second is a page name. Page names can be split in 
+    // time: location, or just time.
     
-    return createTarget( path, false );
+    if ( tokens.length === 1 ) {
+        
+        target = locatePage( story, path, 
+            chapterIndex, tokens[0], skipToMatchNo );
+        
+    } else if ( tokens.length === 2 ) {
+        
+        target = locateChapterAndPage( story, path, 
+            tokens[0], tokens[1], skipToMatchNo );
+        
+    } else {
+        
+        // 3+ Tokens. This is unsupported right now.
+        
+    }
+    
+    return target;
+}
+
+function locatePage( story, path, chapterIndex, timeAndLocationToFind, skipToMatchNo )
+{
+}
+
+function locateChapterAndPage( story, path, dayToFind, timeAndLocationToFind, skipToMatchNo )
+{
 }
 
 function getMatchIncrement( path )
