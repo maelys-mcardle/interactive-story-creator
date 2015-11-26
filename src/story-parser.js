@@ -102,7 +102,9 @@ function emptyText()
         content: "",
         choice: {
             id: "",
-            target: "",
+            target: {
+                path: "",
+            },
         },
     };
 }
@@ -203,42 +205,44 @@ function choiceInfoFromHeader( line )
 {
     let fullChoice = everythingAfterSubstring( "###", line );
     let choiceId = "";
-    let choiceTarget = "";
+    let choicePath = "";
     
     if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " ) ) ) {
         
         // Get everything after the opening keyword "Chose"
-        let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
+        let choiceIdAndPath = fullChoice.substring( "Chose ".length ).trim();
        
         // Choice ID either is:
         // 1. contained in bunny quotes, OR
         // 2. before the word "on", OR
         // 3. all text.
-        if ( choiceIdAndTarget.startsWith( '"' ) ) {
+        if ( choiceIdAndPath.startsWith( '"' ) ) {
 
-            let choiceIdAndOnAndTarget = splitInTwoParts( '"', 
-                choiceIdAndTarget.substring(1) );
+            let choiceIdAndOnAndPath = splitInTwoParts( '"', 
+                choiceIdAndPath.substring(1) );
 
-            let onAndTarget = splitInTwoParts( " on ", 
-                choiceIdAndOnAndTarget.right );
+            let onAndPath = splitInTwoParts( " on ", 
+                choiceIdAndOnAndPath.right );
             
-            choiceId = choiceIdAndOnAndTarget.left;
-            choiceTarget = onAndTarget.right;
+            choiceId = choiceIdAndOnAndPath.left;
+            choicePath = onAndPath.right;
            
         } else {
            
-            let splitChoiceIdAndTarget = splitInTwoParts( " on ", 
-                choiceIdAndTarget );
+            let splitChoiceIdAndPath = splitInTwoParts( " on ", 
+                choiceIdAndPath );
             
-            choiceId = splitChoiceIdAndTarget.left;
-            choiceTarget = splitChoiceIdAndTarget.right;
+            choiceId = splitChoiceIdAndPath.left;
+            choicePath = splitChoiceIdAndPath.right;
         }
 
     }
     
     return {
         id: choiceId,
-        target: choiceTarget,
+        target: {
+            path: choicePath,
+        },
     };
 }
 
@@ -246,10 +250,10 @@ function choiceLinkFromLink( line )
 {
     // [link id: link text](target page)
     // [link text](target page)
-    let linkTextAndTarget = splitInTwoParts( "](", line );
-    let linkText = everythingAfterSubstring( "[", linkTextAndTarget.left ).trim();
-    let linkTarget = linkTextAndTarget.right.substring( 
-        0, linkTextAndTarget.right.indexOf( ")" ) ).trim();
+    let linkTextAndPath = splitInTwoParts( "](", line );
+    let linkText = everythingAfterSubstring( "[", linkTextAndPath.left ).trim();
+    let linkPath = linkTextAndPath.right.substring( 
+        0, linkTextAndPath.right.indexOf( ")" ) ).trim();
     let linkId = "";
     
     if ( linkText.includes( ":" ) ) {
@@ -261,7 +265,9 @@ function choiceLinkFromLink( line )
     return {
         id: linkId,
         text: linkText,
-        target: linkTarget,
+        target: {
+            path: linkPath,
+        }
     }
 }
 
