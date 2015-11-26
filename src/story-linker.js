@@ -1,7 +1,7 @@
 "use strict";
 
 /*
- *  Link Examples:
+ *  Target Examples:
  * 
  *     last
  *     next
@@ -35,6 +35,14 @@ function processTargets( story )
     });
     
     return story;
+}
+
+function targetAddress( chapterIndex, pageIndex )
+{
+    return {
+        chapter: chapterIndex,
+        page: pageIndex,
+    };
 }
 
 function processLinkOnPage( story, chapterIndex, pageIndex, linkIndex, link )
