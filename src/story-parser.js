@@ -123,16 +123,6 @@ function isTextEmpty( text )
     return !( text.content.length );
 }
 
-function everythingAfterSubstring( substring, line )
-{
-    return line.slice( substring.length ).trim();
-}
-
-function caseInsensitive( string )
-{
-    return string.toUpperCase();
-}
-
 function startNewChapter( story, chapterInfo )
 {
     story.currentChapter = emptyChapter();
@@ -215,7 +205,7 @@ function choiceInfoFromHeader( line )
     let choiceId = "";
     let choiceTarget = "";
     
-    if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " )  ) ) {
+    if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " ) ) ) {
         
         // Get everything after the opening keyword "Chose"
         let choiceIdAndTarget = fullChoice.substring( "Chose ".length ).trim();
@@ -291,13 +281,4 @@ function pageInfoFromHeader( line )
         time: timeAndLocation.left,
         location: timeAndLocation.right,
     }
-}
-
-function splitInTwoParts( divider, line )
-{
-    let splitString = line.split( divider );
-    let left = splitString[0].trim();
-    let right = splitString.slice( 1 ).join( divider ).trim();
-    
-    return { left: left, right: right };
 }

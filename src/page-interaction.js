@@ -23,6 +23,7 @@ const html = {
     noStoryMessage: "#no-story-message",
     storyUpdatedMessage: "#story-updated-message",
     storyContainer: "#story-container",
+    storyPage: "#story-page",
     storyText: "#story-text",
     storyLocation: "#story-location",
     storyDay: "#story-day",
@@ -119,13 +120,17 @@ function loadStory()
     // Parse the story.
     let story = parseStory( storyCode );
     
+    // Pass the story through the linker. This translates the links 
+    // into addresses and warns of any errors.
+    story = processLinks( storyCode );
+    
     // Load the initial page.
     showStoryPage( story );
     
     // Fade out the message that there's no story. Once gone, fade in the 
     // generated story.
     $( html.noStoryMessage ).fadeOut('slow', function() {
-        $( html.storyContainer ).fadeIn();
+        $( html.storyPage ).fadeIn();
     });
     
     // Show the story updated dialog.
