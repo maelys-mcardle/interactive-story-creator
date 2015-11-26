@@ -122,7 +122,7 @@ function loadStory()
     
     // Pass the story through the linker. This translates the targets 
     // into addresses and warns of any errors.
-    story = processTargets( storyCode );
+    story = parseTargets( story );
     
     // Load the initial page.
     showStoryPage( story );
