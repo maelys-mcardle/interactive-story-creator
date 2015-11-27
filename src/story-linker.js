@@ -51,7 +51,7 @@ function processChoiceOnPage( story, chapterIndex, pageIndex, textIndex, text )
         text.choice.target );
     
     // Update the text.
-    story.chapters[ chapterIndex ].pages[ pageIndex ].tests[ textIndex ] = text;
+    story.chapters[ chapterIndex ].pages[ pageIndex ].texts[ textIndex ] = text;
     
     return story;
 }
@@ -148,7 +148,10 @@ function processAbsolutePath( story, chapterIndex, pageIndex, path, skipToMatchN
     } else {
         
         // 3+ Tokens. This is unsupported right now.
-        
+        appendCodeWarning( path, 
+            "Contains 3 or more tokens (tokens are separated with '>')." +
+            "They are " + tokens.join(", ") + ". Only 1 or 2 tokens are " +
+            "supported at this time.");        
     }
     
     return target;
@@ -176,6 +179,11 @@ function getMatchIncrement( path )
         } else {
             // There's a # in a target, but no valid number that follows.
             // This should be identified as a malformed link.
+            appendCodeWarning( path, 
+                "Contains a #, but no number follows it. Instead " +
+                "it's '" + path.substring( positionOfNumberSign ) + "'." +
+                "Please remove the # or have a number follow it. Numbers " +
+                "are used to say okay, I want the 2nd, 3rd, 4th, etc. match." );
         }
     }
     

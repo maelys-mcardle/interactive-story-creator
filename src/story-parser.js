@@ -50,7 +50,7 @@ function parseStory( storyCode )
             story = endCurrentPage( story );
             story = startNewPage( story, 
                 pageInfoFromHeader( trimmedLine ) );
-            story = startNewText( story, {} );
+            story = startNewText( story, emptyChoice() );
             
         } else if ( trimmedLine.startsWith("#") ) {
             
@@ -100,11 +100,16 @@ function emptyText()
 {
     return {
         content: "",
-        choice: {
-            id: "",
-            target: {
-                path: "",
-            },
+        choice: emptyChoice(),
+    };
+}
+
+function emptyChoice()
+{
+    return {
+        id: "",
+        target: {
+            path: "",
         },
     };
 }
@@ -188,10 +193,7 @@ function trimText( text )
 {
     return {
         content: text.content.trim(),
-        choice: {
-            id: text.choice.id,
-            target: text.choice.target,
-        }
+        choice: text.choice,
     }
 }
 

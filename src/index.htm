@@ -14,11 +14,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
-        <!-- Bootstrap Dialog -->
-        
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css"></link>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
-        
         <!-- Markdown Parser -->
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
@@ -167,7 +162,9 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         <h4 class="modal-title">
                         </h4>
                     </div>
@@ -176,13 +173,15 @@
                             <div class="form-group">
                                 <label for="inputStoryTitle">Story Title</label>
                                 <input class="form-control" id="inputStoryTitle" 
-                                    data-toggle="tooltip" data-placement="bottom" title="Filling this in is optional."
+                                    data-toggle="tooltip" data-placement="bottom" 
+                                    title="Filling this in is optional."
                                     placeholder="Story title goes here...">
                             </div>
                             <div class="form-group">
                                 <label for="inputStoryAuthors">Story Author(s)</label>
                                 <input class="form-control" id="inputStoryAuthors" 
-                                    data-toggle="tooltip" data-placement="bottom" title="Filling this in is optional."
+                                    data-toggle="tooltip" data-placement="bottom" 
+                                    title="Filling this in is optional."
                                     placeholder="Author(s) for the story go here...">
                             </div>
                             <div class="form-group">
@@ -199,5 +198,34 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
+        <!-- Show code parsing warnings -->
+        
+        <div id="code-warning-dialog" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">
+                            Problems Found
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            There were problems trying to interpret the story
+                            code! Please review the following warnings.                            
+                        </p>
+                        <div id="code-warning-list">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="code-warning-edit-code-button" type="button" class="btn btn-primary">Edit Code</button>
+                        <button id="code-warning-ignore-button" type="button" class="btn btn-danger">Ignore Problems &amp; Continue</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        
     </body>
 </html>

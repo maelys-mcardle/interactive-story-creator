@@ -33,6 +33,10 @@ const html = {
     activeNavbarLink: "#navbar-links .active",
     playNavbarLink: "#play-navbar-link",
     historyNavbarLink: "#history-navbar-link",
+    codeWarningDialog: "#code-warning-dialog",
+    codeWarningList: "#code-warning-list",
+    codeWarningEditCodeButton: "#code-warning-edit-code-button",
+    codeWarningIgnoreButton: "#code-warning-ignore-button",
 };
 
 let global = {
@@ -48,7 +52,7 @@ function showCreateStoryDialog()
 
 function hideCreateStoryDialog()
 {
-    $( html.createEditStoryDialog ).modal("hide");
+    $( html.createEditStoryDialog ).modal( "hide" );
 }
 
 function showEditStoryDialog()
@@ -56,6 +60,16 @@ function showEditStoryDialog()
     $( html.createEditStoryDialogTitle ).text("Edit Story");
     $( html.createEditStoryDialogActionButton ).text("Edit Story");
     $( html.createEditStoryDialog ).modal();
+}
+
+function showCodeWarningDialog()
+{
+    $( html.codeWarningDialog ).modal();
+}
+
+function hideCodeWarningDialog()
+{
+    $( html.codeWarningDialog ).modal( "hide" );
 }
 
 function showStoryUpdatedMessage()
@@ -117,6 +131,9 @@ function loadStory()
     $( html.loadStoryNavbarButton ).text("Edit Story");
     $( html.loadStoryNavbarButton ).unbind('click').click( showEditStoryDialog );
     
+    // Clear warnings.
+    $( html.codeWarningList ).empty();
+    
     // Parse the story.
     let story = parseStory( storyCode );
     
@@ -124,6 +141,33 @@ function loadStory()
     // into addresses and warns of any errors.
     story = parseTargets( story );
     
+    // Close the dialog.
+    hideCreateStoryDialog();
+    
+    // Show the warning dialog if there were warnings.
+    // Load the story if they press the ignore button.
+    if ( ! $( html.codeWarningList ).is(':empty') ) {
+        
+        $( html.codeWarningIgnoreButton ).one( 'click', function () {
+            hideCodeWarningDialog();
+            displayLoadedStory( story );
+        });
+        
+        $( html.codeWarningEditCodeButton ).one( 'click', function () {
+            hideCodeWarningDialog();
+            showCreateStoryDialog();
+        });
+        
+        showCodeWarningDialog();
+        
+    } else {
+        displayLoadedStory( story );
+    }
+    
+}
+
+function displayLoadedStory( story )
+{
     // Load the initial page.
     showStoryPage( story );
     
@@ -135,9 +179,14 @@ function loadStory()
     
     // Show the story updated dialog.
     showStoryUpdatedMessage();
-    
-    // Close the dialog.
-    hideCreateStoryDialog();
+}
+
+function appendCodeWarning( title, message ) 
+{
+    $( html.codeWarningList ).append(
+        '<div class="alert alert-warning" role="alert">' + 
+            '<strong>' + title + '</strong>: ' + message + 
+        '</div>' );
 }
 
 // Called on start.
