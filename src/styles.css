@@ -44,3 +44,9 @@ body {
 	50% { -webkit-transform: scale(0.8); }
 	100% { -webkit-transform: scale(1.1); }
 }
+
+/* Add a scrollbar to the warnings if needed. */
+#code-warning-list {
+    max-height: 50vh;
+    overflow: auto;
+}
