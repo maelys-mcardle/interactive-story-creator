@@ -50,3 +50,8 @@ body {
     max-height: 50vh;
     overflow: auto;
 }
+
+.jumbotron-graphic {
+    height: 200px;
+    width: auto;
+}
