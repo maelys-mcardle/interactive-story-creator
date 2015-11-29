@@ -4,11 +4,8 @@ function showFirstStoryPage( story )
 {
     // Show the first page of the first chapter.
     if ( story.chapters.length ) {
-        return showStoryPage( story, [], 0, 0 );
+        showStoryPage( story, [], 0, 0 );
     }
-    
-    // Could not load first page.
-    return false;
 }
 
 function showStoryPage( story, choiceHistory, chapterIndex, pageIndex )

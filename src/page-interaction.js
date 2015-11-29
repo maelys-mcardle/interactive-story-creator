@@ -122,31 +122,8 @@ function clickNavbarHistory()
 
 function loadStory()
 {
-    // Load the story title and code.
-    let storyTitle = $( html.inputStoryTitle ).val();
-    let storyAuthors = $( html.inputStoryAuthors ).val();
+    // Load the story code.
     let storyCode = $( html.inputStoryCode ).val();
-    
-    // If the title is blank.
-    if (storyTitle == "") {
-        storyTitle = defaultStory.title;
-    }
-    
-    if (storyAuthors == "") {
-        storyAuthors = defaultStory.authors;
-    }
-    
-    // Set the page title to the new story title.
-    document.title = storyTitle;
-    $(".navbar-brand").text(storyTitle);
-    
-    // Set the footer.
-    $( html.footerAuthorCopyright ).text(
-        '"' + storyTitle + '" by ' + storyAuthors + ".");
-    
-    // Update the navbar button to edit.
-    $( html.loadStoryNavbarButton ).text("Edit Story");
-    $( html.loadStoryNavbarButton ).unbind('click').click( showEditStoryDialog );
     
     // Clear warnings.
     $( html.codeWarningList ).empty();
@@ -185,16 +162,42 @@ function loadStory()
 
 function displayLoadedStory( story )
 {
-    // Load the initial page.
-    let loadedPage = showFirstStoryPage( story );
-    
-    if ( loadedPage ) {
+    // If there's something to load, load it.
+    if ( story.chapters.length ) {
+        
+        // Load the story title and code.
+        let storyTitle = $( html.inputStoryTitle ).val();
+        let storyAuthors = $( html.inputStoryAuthors ).val();
+        
+        // If the title is blank.
+        if (storyTitle == "") {
+            storyTitle = defaultStory.title;
+        }
+        
+        if (storyAuthors == "") {
+            storyAuthors = defaultStory.authors;
+        }
+        
+        // Set the page title to the new story title.
+        document.title = storyTitle;
+        $(".navbar-brand").text(storyTitle);
+        
+        // Set the footer.
+        $( html.footerAuthorCopyright ).text(
+            '"' + storyTitle + '" by ' + storyAuthors + ".");
+        
+        // Update the navbar button to edit.
+        $( html.loadStoryNavbarButton ).text("Edit Story");
+        $( html.loadStoryNavbarButton ).unbind('click').click( showEditStoryDialog );
         
         // Fade out the message that there's no story. Once gone, fade in the 
         // generated story.
         $( html.noStoryMessage ).fadeOut('slow', function() {
             $( html.storyPage ).fadeIn();
         });
+        
+        // Show the first page.
+        showFirstStoryPage( story );
         
         // Show the story updated message.
         showStoryUpdatedMessage();
