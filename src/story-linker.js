@@ -56,7 +56,7 @@ function processChoiceOnPage( story, chapterIndex, pageIndex, textIndex, text )
     return story;
 }
 
-function processTarget( story, chapterIndex, pageIndex, target )
+function processTarget( story, currentChapterIndex, currentPageIndex, target )
 {
     /*
      *  Target Examples:
@@ -80,33 +80,53 @@ function processTarget( story, chapterIndex, pageIndex, target )
     // Find the desired target.
     if ( !path ) {
         target = createTarget( path, false );
+        
     } else if ( path === caseInsensitive( "next" ) ) {
-        target = processRelativePath( story, chapterIndex, pageIndex, path, matchIncrement );
+        target = processRelativePath( story, currentChapterIndex, 
+            currentPageIndex, path, matchIncrement );
+            
     } else if ( path === caseInsensitive( "last" ) ) {
-        target = processRelativePath( story, chapterIndex, pageIndex, path, -matchIncrement );
+        target = processRelativePath( story, currentChapterIndex, 
+            currentPageIndex, path, -matchIncrement );
+            
     } else {
-        target = processAbsolutePath( story, chapterIndex, pageIndex, path, matchIncrement );
+        
+        // Locate the first instance of the absolute path.
+        target = processAbsolutePath( story, currentChapterIndex, path );
+        
+        // Increment up and down, if need be.
+        if ( target.found && matchIncrement > 1 ) {
+            
+            target = processRelativePath( story, target.chapter, 
+                target.page, path, matchIncrement );
+        
+        }
     }
     
     return target;
 }
 
-function processRelativePath( story, chapterIndex, pageIndex, path, incrementOrDecrementBy )
+function processRelativePath( story, currentChapterIndex, currentPageIndex, path, incrementOrDecrementBy )
 {
     // For when you want to go up or down by a certain amount of pages from a
     // given chapter and page.
     
     let target = createTarget( path, false );
     
+    // If the value increments, then this is about getting what's next.
+    // If the value decrements, then this is about getting what's previous.
+    let isNext = ( incrementOrDecrementBy >= 0 ) ? true : false;
+    
+    // Get the next or previous pages by the amount specified.
     for ( let count = 0; count < Math.abs( incrementOrDecrementBy ); count++ ) {
-        target = getNextOrLastChapterAndPage( story, path, chapterIndex, 
-            pageIndex, ( incrementOrDecrementBy >= 0 ) ? true : false );
+        target = getNextOrLastChapterAndPage( story, path, currentChapterIndex, 
+            currentPageIndex, isNext );
     }
     
     return target;
 }
 
-function processAbsolutePath( story, chapterIndex, pageIndex, path, skipToMatchNo )
+function processAbsolutePath( story, currentChapterIndex, path )
 {
     // For when you want to jump to a specific page.
     
@@ -137,13 +157,60 @@ function processAbsolutePath( story, chapterIndex, pageIndex, path, skipToMatchN
     
     if ( tokens.length === 1 ) {
         
-        target = locatePage( story, path, 
-            chapterIndex, tokens[0], skipToMatchNo );
+        // Single token. Assume it's a page name.
+        let chapterIndex = currentChapterIndex;
+        let pageIndex = findPageInChapter( story, currentChapterIndex, 
+            tokens[0] );
+        
+        // Page not found. Maybe it's a chapter name.
+        if ( pageIndex === -1 ) {
+             chapterIndex = findChapter( story, tokens[0] );
+             pageIndex = 0;
+        }
+        
+        // Found as either a page or chapter name. Target found.
+        if ( chapterIndex >= 0 && pageIndex >= 0 ) {
+            target.found = true;
+            target.chapter = chapterIndex;
+            target.page = pageIndex;
+        }
+        
+        // No matches.
+        if ( !target.found ) {
+            appendCodeWarning( path, 
+                "Could not find a match for the link to '" + tokens[0] + "'. " +
+                "It should be a day, (eg. 'Monday'), time (eg. 'Morning'), " +
+                "or time & location (eg. 'Morning: Bedroom') that is found in " +
+                "your story. Make sure there are no typos." );
+        }
         
     } else if ( tokens.length === 2 ) {
         
-        target = locateChapterAndPage( story, path, 
-            tokens[0], tokens[1], skipToMatchNo );
+        // The first token must be a chapter name.
+        let chapterIndex = findChapter( story, tokens[0] );
+        
+        // Chapter found.
+        // The second token must be a page name in that chapter.
+        if ( chapterIndex >= 0 ) {
+            let pageIndex = findPageInChapter( story, chapterIndex, tokens[1] );
+            
+            if ( pageIndex >= 0 ) {
+                target.found = true;
+                target.chapter = chapterIndex;
+                target.page = pageIndex;
+            }
+        }
+        
+        // No matches.
+        if ( !target.found ) {
+            appendCodeWarning( path, 
+                "Could not find a day identified as '" + tokens[0] + "' with " +
+                "a time or time & location of '" + tokens[1] + "'. The day " +
+                "should be one in your story and something like 'Monday.' " +
+                "The time or time & location should be something like " +
+                "'Morning' (just time) or 'Morning: Bedroom' (time & location) " +
+                "that is found in your story. Make sure there are no typos." );
+        }
         
     } else {
         
@@ -151,18 +218,57 @@ function processAbsolutePath( story, chapterIndex, pageIndex, path, skipToMatchN
         appendCodeWarning( path, 
             "Contains 3 or more tokens (tokens are separated with '>')." +
             "They are " + tokens.join(", ") + ". Only 1 or 2 tokens are " +
-            "supported at this time.");        
+            "supported at this time.");    
     }
     
     return target;
 }
 
-function locatePage( story, path, chapterIndex, timeAndLocationToFind, skipToMatchNo )
+function findChapter( story, day )
 {
+    for ( let chapterIndex = 0; 
+          chapterIndex < story.chapters.length; 
+          chapterIndex++ ) {
+              
+        if ( caseInsensitive( day ) === 
+             caseInsensitive( story.chapters[ chapterIndex ].day ) ) {
+                 
+            return chapterIndex;
+        }
+    }
+    
+    // No matches found.
+    return -1;
 }
 
-function locateChapterAndPage( story, path, dayToFind, timeAndLocationToFind, skipToMatchNo )
+function findPageInChapter( story, chapterIndex, timeAndLocation )
 {
+    let splitTimeAndLocation = splitInTwoParts( ":", timeAndLocation );
+    let time = splitTimeAndLocation.left;
+    let location = splitTimeAndLocation.right;
+    let chapter = story.chapters[ chapterIndex ];
+    
+    for ( let pageIndex = 0; 
+          pageIndex < chapter.pages.length;
+          pageIndex++ ) {
+              
+        let page = chapter.pages[ pageIndex ];
+        
+        // Time is mandatory. Make the comparison.
+        // Location is optional. If specified, compare it.
+        if ( caseInsensitive( page.time ) === 
+             caseInsensitive( time ) &&
+             ( location === "" ||
+               ( caseInsensitive( page.location ) === 
+                 caseInsensitive( location ) ) ) ) {
+        
+            return pageIndex;
+        }
+              
+    }
+    
+    // No matches found.
+    return -1;
 }
 
 function getMatchIncrement( path )

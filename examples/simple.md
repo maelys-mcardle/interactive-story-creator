@@ -43,12 +43,6 @@ This paragraph shows for all.
 
 [Go back to the morning way #6](Monday > Morning: Home)
 
-[Go back to the morning way #7](simple.md)
-
-[Go back to the morning way #8](simple.md > Monday)
-
-[Go back to the morning way #9](simple.md > Monday > Morning)
-
 [Continue](next)
 
 ## Night: Hotel Room
