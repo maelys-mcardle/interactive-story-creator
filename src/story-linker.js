@@ -336,6 +336,8 @@ function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialP
 
 function doesChapterAndPageExist( story, chapterIndex, pageIndex )
 {
-    return ( ( 0 <= chapterIndex < story.chapters.length ) &&
-             ( 0 <= pageIndex < story.chapters[ chapterIndex ].pages.length ) );
+    return ( chapterIndex >= 0 && 
+             chapterIndex < story.chapters.length &&
+             pageIndex >= 0 &&
+             pageIndex < story.chapters[ chapterIndex ].pages.length );
 }
