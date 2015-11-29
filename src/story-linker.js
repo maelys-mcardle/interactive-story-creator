@@ -15,7 +15,7 @@ function parseTargets( story )
             // Process choices.
             page.texts.forEach( function( text, textIndex ) {
                 story = processChoiceOnPage( story, chapterIndex, 
-                    pageIndex, textIndex, text );
+                    pageIndex, textIndex, text.choice );
             });
         });
     });
@@ -44,14 +44,13 @@ function processLinkOnPage( story, chapterIndex, pageIndex, linkIndex, link )
     return story;
 }
 
-function processChoiceOnPage( story, chapterIndex, pageIndex, textIndex, text )
+function processChoiceOnPage( story, chapterIndex, pageIndex, textIndex, choice )
 {
     // Grab the target address.
-    text.choice.target = processTarget( story, chapterIndex, pageIndex, 
-        text.choice.target );
+    choice.target = processTarget( story, chapterIndex, pageIndex, choice.target );
     
-    // Update the text.
-    story.chapters[ chapterIndex ].pages[ pageIndex ].texts[ textIndex ] = text;
+    // Update the choice.
+    story.chapters[ chapterIndex ].pages[ pageIndex ].texts[ textIndex ].choice = choice;
     
     return story;
 }
