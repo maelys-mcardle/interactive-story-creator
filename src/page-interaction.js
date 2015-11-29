@@ -7,6 +7,7 @@ const defaultStory = {
 
 const constants = {
     updatedMessageDuration: 3000,
+    errorMessageDuration: 5000,
     activeLinkClass: "active",
 };
 
@@ -22,6 +23,7 @@ const html = {
     createEditStoryDialogActionButton: "#create-edit-story-dialog .modal-footer .btn-primary",
     noStoryMessage: "#no-story-message",
     storyUpdatedMessage: "#story-updated-message",
+    storyErrorMessage: "#story-error-message",
     storyContainer: "#story-container",
     storyPage: "#story-page",
     storyText: "#story-text",
@@ -40,7 +42,8 @@ const html = {
 };
 
 let global = {
-    showStoryTimeout: undefined,
+    showStoryUpdatedTimeout: undefined,
+    showStoryErrorTimeout: undefined,
 };
 
 function showCreateStoryDialog()
@@ -75,18 +78,32 @@ function hideCodeWarningDialog()
 function showStoryUpdatedMessage()
 {
     // Clear any previous timeout.
-    clearTimeout( global.showStoryTimeout );
+    clearTimeout( global.showStoryUpdatedTimeout );
     
     // Show the message.
     $( html.storyUpdatedMessage ).slideDown();
     
     // Have the message go away after a time.
-    global.showStoryTimeout = setTimeout( 
+    global.showStoryUpdatedTimeout = setTimeout( 
         function() {
             $( html.storyUpdatedMessage ).slideUp();
         }, constants.updatedMessageDuration );
 }
 
+function showStoryErrorMessage()
+{
+    // Clear any previous timeout.
+    clearTimeout( global.showStoryErrorTimeout );
+    
+    // Show the message.
+    $( html.storyErrorMessage ).slideDown();
+    
+    // Have the message go away after a time.
+    global.showStoryErrorTimeout = setTimeout( 
+        function() {
+            $( html.storyErrorMessage ).slideUp();
+        }, constants.errorMessageDuration );
+}
 function clickNavbarPlay()
 {
     $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
@@ -169,16 +186,25 @@ function loadStory()
 function displayLoadedStory( story )
 {
     // Load the initial page.
-    showStoryPage( story );
+    let loadedPage = showFirstStoryPage( story );
     
-    // Fade out the message that there's no story. Once gone, fade in the 
-    // generated story.
-    $( html.noStoryMessage ).fadeOut('slow', function() {
-        $( html.storyPage ).fadeIn();
-    });
+    if ( loadedPage ) {
+        
+        // Fade out the message that there's no story. Once gone, fade in the 
+        // generated story.
+        $( html.noStoryMessage ).fadeOut('slow', function() {
+            $( html.storyPage ).fadeIn();
+        });
+        
+        // Show the story updated message.
+        showStoryUpdatedMessage();
     
-    // Show the story updated dialog.
-    showStoryUpdatedMessage();
+    } else {
+        
+        // Show the story error message.
+        showStoryErrorMessage();
+        
+    }
 }
 
 function appendCodeWarning( title, message ) 
