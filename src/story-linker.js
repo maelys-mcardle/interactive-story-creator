@@ -306,7 +306,7 @@ function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialP
     for ( let chapterIndex = initialChapterIndex; 
               chapterIndex >= 0 && 
               chapterIndex < story.chapters.length; 
-              chapterIndex + incrementOrDecrementBy ) {
+              chapterIndex += incrementOrDecrementBy ) {
               
         // The initial page is, if we're on the same chapter we started with,
         // the immediate next or previous page. Otherwise, it's the first page
@@ -323,7 +323,7 @@ function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialP
         for ( let pageIndex = startPage;
                   pageIndex >= 0 &&
                   pageIndex < story.chapters[ chapterIndex ].pages.length; 
-                  pageIndex + incrementOrDecrementBy ) {
+                  pageIndex += incrementOrDecrementBy ) {
                       
             if ( doesChapterAndPageExist( story, chapterIndex, pageIndex ) ) {
                 return createTarget( path, true, chapterIndex, pageIndex );
