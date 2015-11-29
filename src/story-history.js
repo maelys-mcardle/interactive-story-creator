@@ -30,7 +30,7 @@ function addEntryToHistory( story, previousChoices, chapterIndex, pageIndex )
 
 function resetHistory()
 {
-    $( html.historyContainer ).empty();
+    $( html.historyLinks ).empty();
 }
 
 function historyLink( title, description )

@@ -199,6 +199,9 @@ function displayLoadedStory( story )
             $( html.storyPage ).fadeIn();
         });
         
+        // Reset the history.
+        resetHistory();
+        
         // Show the first page.
         showFirstStoryPage( story );
         
