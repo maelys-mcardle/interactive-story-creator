@@ -223,7 +223,7 @@ function choiceInfoFromHeader( line )
             let choiceIdAndOnAndPath = splitInTwoParts( '"', 
                 choiceIdAndPath.substring(1) );
 
-            let onAndPath = splitInTwoParts( " on ", 
+            let onAndPath = splitInTwoParts( "on ", 
                 choiceIdAndOnAndPath.right );
             
             choiceId = choiceIdAndOnAndPath.left;
