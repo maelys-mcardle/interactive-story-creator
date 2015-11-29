@@ -32,6 +32,9 @@ const html = {
     storyTime: "#story-time",
     storyChoices: "#story-choices",
     historyContainer: "#history-container",
+    historyLinks: "#history-container .list-group",
+    activeHistoryLinks: "#history-container .active",
+    emptyHistoryMessage: "#empty-history-message",
     activeNavbarLink: "#navbar-links .active",
     playNavbarLink: "#play-navbar-link",
     historyNavbarLink: "#history-navbar-link",
@@ -104,7 +107,7 @@ function showStoryErrorMessage()
             $( html.storyErrorMessage ).slideUp();
         }, constants.errorMessageDuration );
 }
-function clickNavbarPlay()
+function goToPlayPage()
 {
     $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
     $( html.playNavbarLink ).addClass( constants.activeLinkClass );
@@ -112,7 +115,7 @@ function clickNavbarPlay()
     $( html.storyContainer ).show();
 }
 
-function clickNavbarHistory()
+function goToHistoryPage()
 {
     $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
     $( html.historyNavbarLink ).addClass( constants.activeLinkClass );

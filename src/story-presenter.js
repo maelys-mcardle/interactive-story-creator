@@ -18,6 +18,8 @@ function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
     setStoryLocation( page.location );
     setStoryContent( page.texts, previousChoices );
     setStoryChoices( page.links, story, previousChoices, chapterIndex, pageIndex );
+    
+    addEntryToHistory( story, previousChoices, chapterIndex, pageIndex );
         
     return true;
 }
@@ -135,6 +137,7 @@ function addStoryChoice( link, story, previousChoices, chapterIndex, pageIndex )
                 
             showStoryPage( story, newPreviousChoices, 
                 link.target.chapter, link.target.page );
+                
         });
     
     }

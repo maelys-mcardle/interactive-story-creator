@@ -50,8 +50,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul id="navbar-links" class="nav navbar-nav">
-                        <li id="play-navbar-link" class="active"><a href="javascript:clickNavbarPlay()">Play</a></li>
-                        <li id="history-navbar-link"><a href="javascript:clickNavbarHistory()">History</a></li>
+                        <li id="play-navbar-link" class="active"><a href="javascript:goToPlayPage()">Play</a></li>
+                        <li id="history-navbar-link"><a href="javascript:goToHistoryPage()">History</a></li>
                     </ul>
                     <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right"></button>
                 </div>
@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="list-group">
-                    <a href="#" class="list-group-item disabled">
+                    <a id="empty-history-message" ""href="#" class="list-group-item disabled">
                         <h4 class="list-group-item-heading">
                             Empty History
                         </h4>
