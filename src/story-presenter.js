@@ -44,7 +44,7 @@ function setStoryChoices( links )
     if ( links.length === 0 ) {
         links = [{ 
             id: "", 
-            text: "No choices available", 
+            text: "No choices available.",
             target: { 
                 path: "", 
             },},];

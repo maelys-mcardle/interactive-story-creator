@@ -163,7 +163,7 @@ function loadStory()
 function displayLoadedStory( story )
 {
     // If there's something to load, load it.
-    if ( story.chapters.length ) {
+    if ( story.chapters.length && story.chapters[ 0 ].pages.length ) {
         
         // Load the story title and code.
         let storyTitle = $( html.inputStoryTitle ).val();
