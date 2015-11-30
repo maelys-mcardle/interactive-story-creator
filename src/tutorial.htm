@@ -157,7 +157,10 @@ paragraph of text.
 
 <p>
     Text can be made <strong>bold</strong>, <em>italicized</em>, or
-    be <s>struck through</s>.
+    be <s>struck through</s> by enclosing them with the right symbols.
+    Text inside two <code>**</code> indicates it will be bold. Text inside
+    two <code>*</code> means it is italicized. Text contained inside two
+    <code>~~</code> means it will be struck through. For instance:
 </p>
 
 <pre><code class="markdown">
@@ -171,13 +174,16 @@ This text ~~will have a line run through it~~
 <h4>Quotes</h4>
 
 <p>
-    Text can also be quoted. For instance to have something look
-    like the following:
+    Quotes can also be inserted into the page content. Starting the line
+    with a <code>&gt;</code> indicates that what follows is a quote. 
+    For instance, to have something look like the following:
 </p>
 
-<blockquote>
-    This is a quote.
-</blockquote>
+<div class="well">
+    <blockquote>
+        This is a quote.
+    </blockquote>
+</div>
 
 <p>
     Would require the following code:
@@ -189,3 +195,54 @@ This text ~~will have a line run through it~~
 </code></pre>
 
 <h4>Lists</h4>
+
+<p>
+    To make unordered lists, having lines start with a single <code>-</code>
+    or <code>*</code> will identify that it's part of a list.
+    For instance, to have something look like the following:
+</p>
+
+<div class="well">
+    <ul>
+        <li>This is a list item</li>
+        <li>This is another list item</li>
+        <li>This is a third list item</li>
+    </ul>
+</div>
+
+<p>
+    Would require the following code:
+</p>
+
+<pre><code class="markdown">
+* This is a list item
+* This is another list item
+* This is a third list item
+
+</code></pre>
+
+<p>
+    To make numbered lists, having lines start with a number and a 
+    period like <code>1.</code> will identify that it's part of a list.
+    For instance, to have something look like the following:
+</p>
+
+<div class="well">
+    <ol>
+        <li>This is a list item</li>
+        <li>This is another list item</li>
+        <li>This is a third list item</li>
+    </ol>
+</div>
+
+<p>
+    Would require the following code:
+</p>
+
+<pre><code class="markdown">
+1. This is a list item
+2. This is another list item
+3. This is a third list item
+
+</code></pre>
+
