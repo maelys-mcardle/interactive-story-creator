@@ -54,28 +54,34 @@ You look to your watch. So it was.
 <h2>Structure</h2>
 
 <p>
-    The stories are structured at the highest level by the day (days 
-    are like chapters), and then by the time/location (which make the
-    individual pages.)
+    The stories are structured into chapters and then pages, where
+    a day in the story (as in Monday, Tuesday, etc.) makes up the
+    chapters, and the individual pages are each identified by a 
+    time &amp; location. Many pages can share the same time &amp;
+    location.
 </p>
 <p>
-    Within these pages, there is some text, and there can be links.
-    These links bring the reader to another page, and they can also
-    represent choices. More on that later.
+    Each page is composed of text and an optional set of choices. 
+    Choices act as links, bringing readers to another page. Different
+    choices can bring the reader to different pages. What choice
+    the reader selected is also tracked.
 </p>
 <p>
-    Some text can be made optional, only to show when the reader has
-    made a specific choice.
+    Tracking the reader's choice brings us to a feature for this
+    story creator, which is that paragraphs of text on a given page
+    can be made to appear only if the reader selected for a given 
+    choice. More on this later.
 </p>
 
 <h3>Days</h3>
 
 <p>
-    The stories are structured by the day. A single <code>#</code> sign
-    is used to identify that what follows is a day. For instance:
+    A story is split up into multiple days, each acting as a sort
+    of chapter. A single <code>#</code> sign is used to signal that 
+    what follows is a day. For instance:
 </p>
 
-<pre>
+<pre><code class="markdown">
 # Monday
 
 ...
@@ -84,6 +90,35 @@ You look to your watch. So it was.
 
 ...
 
-</pre>
+</code></pre>
 
 <h3>Time &amp; Location</h3>
+
+<p>
+    Within each chapter are one or more pages. These are each identified
+    by a time &amp; location. Multiple pages can share the same time
+    &amp; location. A double <code>##</code> signals that what follows
+    is the time &amp; location, and follows the format 
+    <code>## Time: Location</code>. For instance:
+</p>
+
+<pre><code class="markdown">
+# Monday
+
+## Morning: Bedroom
+
+...
+
+## Afternoon: School
+
+...
+
+## Afternoon: School
+
+...
+
+# Tuesday
+
+...
+
+</code></pre>
