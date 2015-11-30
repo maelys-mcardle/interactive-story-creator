@@ -224,6 +224,9 @@ function displayLoadedStory( story )
         // Reset the history.
         resetHistory();
         
+        // Go to the play page.
+        goToPlayPage();
+        
         // Show the first page.
         showFirstStoryPage( story );
         
