@@ -17,7 +17,7 @@ const NEWLINE_CHARACTER = "\n";
  
 function parseStory( storyCode )
 {
-    let story = {
+    var story = {
         chapters: [],
         currentChapter: emptyChapter(), 
         currentPage: emptyPage(),        
@@ -27,7 +27,7 @@ function parseStory( storyCode )
     // Go line by line.  
     storyCode.split( NEWLINE_CHARACTER ).forEach( function ( line ) {
         
-        let trimmedLine = line.trim();
+        var trimmedLine = line.trim();
         
         if ( trimmedLine.startsWith("[") ) {
             
@@ -205,14 +205,14 @@ function addChoiceLink( story, link )
 
 function choiceInfoFromHeader( line )
 {
-    let fullChoice = everythingAfterSubstring( "###", line );
-    let choiceId = "";
-    let choicePath = "";
+    var fullChoice = everythingAfterSubstring( "###", line );
+    var choiceId = "";
+    var choicePath = "";
     
     if ( caseInsensitive( fullChoice ).startsWith( caseInsensitive( "Chose " ) ) ) {
         
         // Get everything after the opening keyword "Chose"
-        let choiceIdAndPath = fullChoice.substring( "Chose ".length ).trim();
+        var choiceIdAndPath = fullChoice.substring( "Chose ".length ).trim();
        
         // Choice ID either is:
         // 1. contained in bunny quotes, OR
@@ -220,10 +220,10 @@ function choiceInfoFromHeader( line )
         // 3. all text.
         if ( choiceIdAndPath.startsWith( '"' ) ) {
 
-            let choiceIdAndOnAndPath = splitInTwoParts( '"', 
+            var choiceIdAndOnAndPath = splitInTwoParts( '"', 
                 choiceIdAndPath.substring(1) );
 
-            let onAndPath = splitInTwoParts( "on ", 
+            var onAndPath = splitInTwoParts( "on ", 
                 choiceIdAndOnAndPath.right );
             
             choiceId = choiceIdAndOnAndPath.left;
@@ -231,7 +231,7 @@ function choiceInfoFromHeader( line )
            
         } else {
            
-            let splitChoiceIdAndPath = splitInTwoParts( " on ", 
+            var splitChoiceIdAndPath = splitInTwoParts( " on ", 
                 choiceIdAndPath );
             
             choiceId = splitChoiceIdAndPath.left;
@@ -252,14 +252,14 @@ function choiceLinkFromLink( line )
 {
     // [link id: link text](target page)
     // [link text](target page)
-    let linkTextAndPath = splitInTwoParts( "](", line );
-    let linkText = everythingAfterSubstring( "[", linkTextAndPath.left ).trim();
-    let linkPath = linkTextAndPath.right.substring( 
+    var linkTextAndPath = splitInTwoParts( "](", line );
+    var linkText = everythingAfterSubstring( "[", linkTextAndPath.left ).trim();
+    var linkPath = linkTextAndPath.right.substring( 
         0, linkTextAndPath.right.indexOf( ")" ) ).trim();
-    let linkId = "";
+    var linkId = "";
     
     if ( linkText.includes( ":" ) ) {
-        let linkIdAndText = splitInTwoParts( ":", linkText );
+        var linkIdAndText = splitInTwoParts( ":", linkText );
         linkId = linkIdAndText.left.trim();
         linkText = linkIdAndText.right.trim();
     }
@@ -282,8 +282,8 @@ function chapterInfoFromHeader( line )
 
 function pageInfoFromHeader( line )
 {
-    let pageTitle = everythingAfterSubstring( "##", line );
-    let timeAndLocation = splitInTwoParts( ":", pageTitle );
+    var pageTitle = everythingAfterSubstring( "##", line );
+    var timeAndLocation = splitInTwoParts( ":", pageTitle );
     
     return { 
         time: timeAndLocation.left,

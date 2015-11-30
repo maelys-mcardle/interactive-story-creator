@@ -73,8 +73,8 @@ function processTarget( story, currentChapterIndex, currentPageIndex, target )
      */
      
     // Make path case insensitive.
-    let path = caseInsensitive( target.path );
-    let matchIncrement = getMatchIncrement( path );
+    var path = caseInsensitive( target.path );
+    var matchIncrement = getMatchIncrement( path );
 
     // Find the desired target.
     if ( !path ) {
@@ -110,14 +110,14 @@ function processRelativePath( story, currentChapterIndex, currentPageIndex, path
     // For when you want to go up or down by a certain amount of pages from a
     // given chapter and page.
     
-    let target = createTarget( path, false );
+    var target = createTarget( path, false );
     
     // If the value increments, then this is about getting what's next.
     // If the value decrements, then this is about getting what's previous.
-    let isNext = ( incrementOrDecrementBy >= 0 ) ? true : false;
+    var isNext = ( incrementOrDecrementBy >= 0 ) ? true : false;
     
     // Get the next or previous pages by the amount specified.
-    for ( let count = 0; count < Math.abs( incrementOrDecrementBy ); count++ ) {
+    for ( var count = 0; count < Math.abs( incrementOrDecrementBy ); count++ ) {
         target = getNextOrLastChapterAndPage( story, path, currentChapterIndex, 
             currentPageIndex, isNext );
     }
@@ -130,18 +130,18 @@ function processAbsolutePath( story, currentChapterIndex, path )
     // For when you want to jump to a specific page.
     
     // Default target.
-    let target = createTarget( path, false );
+    var target = createTarget( path, false );
     
     // Get the tokens.
-    let tokens = path.split( ">" );
+    var tokens = path.split( ">" );
     
     // For each token, trim.
     tokens = tokens.map( function( token ) { return token.trim() });
     
     // Remove the match increment from the last token.
     if ( tokens.length > 0 ) {
-        let lastToken = tokens[ tokens.length - 1 ];
-        let positionOfNumberSign = lastToken.lastIndexOf( "#" );
+        var lastToken = tokens[ tokens.length - 1 ];
+        var positionOfNumberSign = lastToken.lastIndexOf( "#" );
         if ( positionOfNumberSign >= 0 ) {
             tokens[ tokens.length - 1 ] = 
                 lastToken.substring( 0, positionOfNumberSign );
@@ -157,8 +157,8 @@ function processAbsolutePath( story, currentChapterIndex, path )
     if ( tokens.length === 1 ) {
         
         // Single token. Assume it's a page name.
-        let chapterIndex = currentChapterIndex;
-        let pageIndex = findPageInChapter( story, currentChapterIndex, 
+        var chapterIndex = currentChapterIndex;
+        var pageIndex = findPageInChapter( story, currentChapterIndex, 
             tokens[0] );
         
         // Page not found. Maybe it's a chapter name.
@@ -186,12 +186,12 @@ function processAbsolutePath( story, currentChapterIndex, path )
     } else if ( tokens.length === 2 ) {
         
         // The first token must be a chapter name.
-        let chapterIndex = findChapter( story, tokens[0] );
+        var chapterIndex = findChapter( story, tokens[0] );
         
         // Chapter found.
         // The second token must be a page name in that chapter.
         if ( chapterIndex >= 0 ) {
-            let pageIndex = findPageInChapter( story, chapterIndex, tokens[1] );
+            var pageIndex = findPageInChapter( story, chapterIndex, tokens[1] );
             
             if ( pageIndex >= 0 ) {
                 target.found = true;
@@ -225,7 +225,7 @@ function processAbsolutePath( story, currentChapterIndex, path )
 
 function findChapter( story, day )
 {
-    for ( let chapterIndex = 0; 
+    for ( var chapterIndex = 0; 
           chapterIndex < story.chapters.length; 
           chapterIndex++ ) {
               
@@ -242,16 +242,16 @@ function findChapter( story, day )
 
 function findPageInChapter( story, chapterIndex, timeAndLocation )
 {
-    let splitTimeAndLocation = splitInTwoParts( ":", timeAndLocation );
-    let time = splitTimeAndLocation.left;
-    let location = splitTimeAndLocation.right;
-    let chapter = story.chapters[ chapterIndex ];
+    var splitTimeAndLocation = splitInTwoParts( ":", timeAndLocation );
+    var time = splitTimeAndLocation.left;
+    var location = splitTimeAndLocation.right;
+    var chapter = story.chapters[ chapterIndex ];
     
-    for ( let pageIndex = 0; 
+    for ( var pageIndex = 0; 
           pageIndex < chapter.pages.length;
           pageIndex++ ) {
               
-        let page = chapter.pages[ pageIndex ];
+        var page = chapter.pages[ pageIndex ];
         
         // Time is mandatory. Make the comparison.
         // Location is optional. If specified, compare it.
@@ -275,10 +275,10 @@ function getMatchIncrement( path )
     // If the path ends with #<Number> then the match number to get is that
     // number, otherwise it's assumed to be the first match (1.)
     
-    let positionOfNumberSign = path.lastIndexOf( "#" );
+    var positionOfNumberSign = path.lastIndexOf( "#" );
     
     if ( positionOfNumberSign >= 0 ) {
-        let matchNumber = parseInt( path.slice( positionOfNumberSign + 1) );
+        var matchNumber = parseInt( path.slice( positionOfNumberSign + 1) );
         if ( Number.isInteger( matchNumber ) ) {
             return matchNumber;
         } else {
@@ -297,12 +297,12 @@ function getMatchIncrement( path )
 
 function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialPageIndex, isNext )
 {
-    let incrementOrDecrementBy = ( isNext ) ? +1 : -1;
+    var incrementOrDecrementBy = ( isNext ) ? +1 : -1;
     
     // Start at the current chapter.
     // When this chapter is exhausted, go up or down one,
     // until all chapters have been explored.
-    for ( let chapterIndex = initialChapterIndex; 
+    for ( var chapterIndex = initialChapterIndex; 
               chapterIndex >= 0 && 
               chapterIndex < story.chapters.length; 
               chapterIndex += incrementOrDecrementBy ) {
@@ -311,7 +311,7 @@ function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialP
         // the immediate next or previous page. Otherwise, it's the first page
         // of the next chapter (if we're incrementing) or the last page of the 
         // previous chapter (if we're decrementing).
-        let startPage = 
+        var startPage = 
             ( chapterIndex === initialChapterIndex ) ?
                 initialPageIndex + incrementOrDecrementBy :
                     ( isNext ? 
@@ -319,7 +319,7 @@ function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialP
                         story.chapters[ chapterIndex ].pages.length - 1 );
         
         // Go up or down a page, until all have been exhausted in this chapter.
-        for ( let pageIndex = startPage;
+        for ( var pageIndex = startPage;
                   pageIndex >= 0 &&
                   pageIndex < story.chapters[ chapterIndex ].pages.length; 
                   pageIndex += incrementOrDecrementBy ) {

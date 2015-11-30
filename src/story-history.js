@@ -2,12 +2,12 @@
 
 function addEntryToHistory( story, previousChoices, chapterIndex, pageIndex )
 {
-    let chapter = story.chapters[ chapterIndex ];
-    let page = chapter.pages[ pageIndex ];
-    let title = [ chapter.day, page.time, page.location ].join(", ");
-    let description = "Click to go back to this point in time.";
+    var chapter = story.chapters[ chapterIndex ];
+    var page = chapter.pages[ pageIndex ];
+    var title = [ chapter.day, page.time, page.location ].join(", ");
+    var description = "Click to go back to this point in time.";
     
-    let newHistoryLink = historyLink( title, description );
+    var newHistoryLink = historyLink( title, description );
     
     // Make clicking the new link bring the user to that point in
     // history. Go to the play page to show them.

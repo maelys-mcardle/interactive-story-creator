@@ -10,8 +10,8 @@ function showFirstStoryPage( story )
 
 function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
 {
-    let chapter = story.chapters[ chapterIndex ];
-    let page = chapter.pages[ pageIndex ];
+    var chapter = story.chapters[ chapterIndex ];
+    var page = chapter.pages[ pageIndex ];
     
     setStoryDay ( chapter.day );
     setStoryTime( page.time );
@@ -66,11 +66,11 @@ function choiceInPreviousChoices( choiceToFind, allChoices )
     }
     
     // Look from the most recent choices backwards.
-    for ( let choiceIndex = allChoices.length - 1;
+    for ( var choiceIndex = allChoices.length - 1;
               choiceIndex >= 0;
               choiceIndex++ ) {
     
-        let choiceToCompare = allChoices[ choiceIndex ];
+        var choiceToCompare = allChoices[ choiceIndex ];
         
         // Match found if for the given chapter/page, the right ID
         // was selected. In case the individual returned to this page
@@ -112,7 +112,7 @@ function setStoryChoices( links, story, previousChoices, chapterIndex, pageIndex
 
 function addStoryChoice( link, story, previousChoices, chapterIndex, pageIndex )
 {
-    let linkElement = $( 
+    var linkElement = $( 
         '<a href="#" class="list-group-item">' + 
         link.text + 
         '</a>' );
@@ -129,7 +129,7 @@ function addStoryChoice( link, story, previousChoices, chapterIndex, pageIndex )
             // Setup the previous choices if the link is clicked.
             // The use of slice() makes the changes to a copy,
             // not the original array.
-            let newPreviousChoices = previousChoices.slice();
+            var newPreviousChoices = previousChoices.slice();
             newPreviousChoices.push({ 
                 chapter: chapterIndex,
                 page: pageIndex,

@@ -12,9 +12,9 @@ function caseInsensitive( string )
 
 function splitInTwoParts( divider, string )
 {
-    let splitString = string.split( divider );
-    let left = splitString[0].trim();
-    let right = splitString.slice( 1 ).join( divider ).trim();
+    var splitString = string.split( divider );
+    var left = splitString[0].trim();
+    var right = splitString.slice( 1 ).join( divider ).trim();
     
     return { left: left, right: right };
 }

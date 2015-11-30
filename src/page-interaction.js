@@ -48,7 +48,7 @@ const html = {
     codeWarningIgnoreButton: "#code-warning-ignore-button",
 };
 
-let global = {
+var global = {
     showStoryUpdatedTimeout: undefined,
     showStoryErrorTimeout: undefined,
 };
@@ -155,13 +155,13 @@ function fetchTutorial()
 function loadStory()
 {
     // Load the story code.
-    let storyCode = $( html.inputStoryCode ).val();
+    var storyCode = $( html.inputStoryCode ).val();
     
     // Clear warnings.
     $( html.codeWarningList ).empty();
     
     // Parse the story.
-    let story = parseStory( storyCode );
+    var story = parseStory( storyCode );
     
     // Pass the story through the linker. This translates the targets 
     // into addresses and warns of any errors.
@@ -198,8 +198,8 @@ function displayLoadedStory( story )
     if ( story.chapters.length && story.chapters[ 0 ].pages.length ) {
         
         // Load the story title and code.
-        let storyTitle = $( html.inputStoryTitle ).val();
-        let storyAuthors = $( html.inputStoryAuthors ).val();
+        var storyTitle = $( html.inputStoryTitle ).val();
+        var storyAuthors = $( html.inputStoryAuthors ).val();
         
         // If the title is blank.
         if (storyTitle == "") {
