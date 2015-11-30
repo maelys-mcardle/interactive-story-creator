@@ -156,18 +156,29 @@ paragraph of text.
 <h4>Simple Formatting</h4>
 
 <p>
-    Text can be made <strong>bold</strong>, <em>italicized</em>, or
-    be <s>struck through</s> by enclosing them with the right symbols.
-    Text inside two <code>**</code> indicates it will be bold. Text inside
-    two <code>*</code> means it is italicized. Text contained inside two
-    <code>~~</code> means it will be struck through. For instance:
+    Text can be made <em>italicized</em> by enclosing them inside a pair of
+    <code>*</code> symbols.
+</p>
+
+<pre><code class="markdown">
+This text *is going to be italicized*
+</code></pre>
+
+<p>
+    Text can be made <strong>bold</strong> by enclosing them inside a pair of
+    <code>**</code> symbols.
 </p>
 
 <pre><code class="markdown">
 This text **is going to be bold**
+</code></pre>
 
-This text *is going to be italicized*
+<p>
+    Text can be <s>struck through</s> by enclosing them inside a pair of
+    <code>~~</code> symbols.
+</p>
 
+<pre><code class="markdown">
 This text ~~will have a line run through it~~
 </code></pre>
 
@@ -176,7 +187,17 @@ This text ~~will have a line run through it~~
 <p>
     Quotes can also be inserted into the page content. Starting the line
     with a <code>&gt;</code> indicates that what follows is a quote. 
-    For instance, to have something look like the following:
+    For instance, the following code:
+</p>
+
+
+<pre><code class="markdown">
+> This is a quote.
+
+</code></pre>
+
+<p>
+    Would produce this:
 </p>
 
 <div class="well">
@@ -185,21 +206,23 @@ This text ~~will have a line run through it~~
     </blockquote>
 </div>
 
-<p>
-    Would require the following code:
-</p>
-
-<pre><code class="markdown">
-> This is a quote.
-
-</code></pre>
-
 <h4>Lists</h4>
 
 <p>
     To make unordered lists, having lines start with a single <code>-</code>
     or <code>*</code> will identify that it's part of a list.
-    For instance, to have something look like the following:
+    For instance, the following code:
+</p>
+
+<pre><code class="markdown">
+* This is a list item
+* This is another list item
+* This is a third list item
+
+</code></pre>
+
+<p>
+    Would produce the following:
 </p>
 
 <div class="well">
@@ -211,32 +234,9 @@ This text ~~will have a line run through it~~
 </div>
 
 <p>
-    Would require the following code:
-</p>
-
-<pre><code class="markdown">
-* This is a list item
-* This is another list item
-* This is a third list item
-
-</code></pre>
-
-<p>
     To make numbered lists, having lines start with a number and a 
     period like <code>1.</code> will identify that it's part of a list.
-    For instance, to have something look like the following:
-</p>
-
-<div class="well">
-    <ol>
-        <li>This is a list item</li>
-        <li>This is another list item</li>
-        <li>This is a third list item</li>
-    </ol>
-</div>
-
-<p>
-    Would require the following code:
+    For instance, the following code:
 </p>
 
 <pre><code class="markdown">
@@ -246,3 +246,14 @@ This text ~~will have a line run through it~~
 
 </code></pre>
 
+<p>
+    Would yield the following:
+</p>
+
+<div class="well">
+    <ol>
+        <li>This is a list item</li>
+        <li>This is another list item</li>
+        <li>This is a third list item</li>
+    </ol>
+</div>
