@@ -6,9 +6,9 @@
 </p>
 
 <p>
-    The stories are coded in 
+    The stories are written using 
     <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>,
-    a simple language to format text. With the story creator, this
+    a simple text formatting language. With the story creator, this
     formatting also conveys extra meaning which is used in generating
     the interactive fiction website. 
 </p>
@@ -73,12 +73,13 @@ You look to your watch. So it was.
     choice. More on this later.
 </p>
 
-<h3>Days</h3>
+<h3>Day</h3>
 
 <p>
     A story is split up into multiple days, each acting as a sort
     of chapter. A single <code>#</code> sign is used to signal that 
-    what follows is a day. For instance:
+    what follows is a day, and follows the format <code># Monday</code>. 
+    For instance:
 </p>
 
 <pre><code class="markdown">
@@ -121,4 +122,58 @@ You look to your watch. So it was.
 
 ...
 
+</code></pre>
+
+<h3>Page Content</h3>
+
+<p>
+    Within each page can be paragraphs of text. Multiple paragraphs are
+    separated by an empty line. For instance:
+</p>
+
+<pre><code class="markdown">
+# Monday
+
+## Morning: Bedroom
+
+This sentence is part of the first
+paragraph of text.
+
+This sentence is part of the second
+paragraph of text.
+
+This sentence is part of the third
+paragraph of text.
+</code></pre>
+
+<h3>Text Formatting</h3>
+
+<p>
+    The text in the pages can be formatted using Markdown.
+</p>
+
+<p>
+    Text can be made <strong>bold</strong>, <em>italicized</em>, or
+    be <s>struck through</s>.
+</p>
+
+<pre><code class="markdown">
+This text **is going to be bold**
+
+This text *is going to be italicized*
+
+This text ~~will have a line run through it~~
+</code></pre>
+
+<p>
+    Text can also be quoted. For instance to have something look
+    like the following:
+</p>
+
+<blockquote>
+    This is a quote.
+</blockquote>
+
+<pre><code class="markdown">
+> This is a quote.
 </code></pre>

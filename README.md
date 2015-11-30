@@ -4,8 +4,8 @@
 
 This project lets you create simple menu-driven interactive stories. 
 
-These stories are written in [markdown](http://markdowntutorial.com/), a 
-formatting language that balances formatting text files in a way that 
+These stories are written in [Markdown](https://en.wikipedia.org/wiki/Markdown),
+a formatting language that balances formatting text files in a way that 
 balances being comprehensible both to a human reader and a computer.
 
 ## Running the Creator
