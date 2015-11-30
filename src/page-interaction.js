@@ -9,6 +9,7 @@ const constants = {
     updatedMessageDuration: 3000,
     errorMessageDuration: 5000,
     activeLinkClass: "active",
+    tutorialUrl: "tutorial.htm",
 };
 
 const html = {
@@ -38,6 +39,9 @@ const html = {
     activeNavbarLink: "#navbar-links .active",
     playNavbarLink: "#play-navbar-link",
     historyNavbarLink: "#history-navbar-link",
+    tutorialNavbarLink: "#tutorial-navbar-link",
+    tutorialContainer: "#tutorial-container",
+    tutorialContents: "#tutorial-contents",
     codeWarningDialog: "#code-warning-dialog",
     codeWarningList: "#code-warning-list",
     codeWarningEditCodeButton: "#code-warning-edit-code-button",
@@ -113,6 +117,7 @@ function goToPlayPage()
     $( html.playNavbarLink ).addClass( constants.activeLinkClass );
     $( html.historyContainer ).hide();
     $( html.storyContainer ).show();
+    $( html.tutorialContainer ).hide();
 }
 
 function goToHistoryPage()
@@ -121,6 +126,23 @@ function goToHistoryPage()
     $( html.historyNavbarLink ).addClass( constants.activeLinkClass );
     $( html.storyContainer ).hide();
     $( html.historyContainer ).show();
+    $( html.tutorialContainer ).hide();
+}
+
+function goToTutorialPage()
+{
+    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
+    $( html.tutorialNavbarLink ).addClass( constants.activeLinkClass );
+    $( html.storyContainer ).hide();
+    $( html.historyContainer ).hide();
+    $( html.tutorialContainer ).show();
+}
+
+function fetchTutorial()
+{
+    $.get( constants.tutorialUrl, function( data ) {
+        $( html.tutorialContents ).html( data );
+    });
 }
 
 function loadStory()
@@ -235,6 +257,9 @@ $(function() {
     $( html.loadStoryNavbarButton ).text("Create Story");
     $( html.loadStoryNavbarButton ).click( showCreateStoryDialog );
     $( html.createStoryJumbotronButton).click( showCreateStoryDialog );
+    
+    // Download the tutorial contents.
+    fetchTutorial();
     
     // Initialize tooltips.
     $('[data-toggle="tooltip"]').tooltip()

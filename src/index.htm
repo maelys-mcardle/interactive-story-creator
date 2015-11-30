@@ -52,6 +52,7 @@
                     <ul id="navbar-links" class="nav navbar-nav">
                         <li id="play-navbar-link" class="active"><a href="javascript:goToPlayPage()">Play</a></li>
                         <li id="history-navbar-link"><a href="javascript:goToHistoryPage()">History</a></li>
+                        <li id="tutorial-navbar-link"><a href="javascript:goToTutorialPage()">Tutorial</a></li>
                     </ul>
                     <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right"></button>
                 </div>
@@ -120,8 +121,8 @@
                     <h1>Write a story!</h1>
                     <p>                        
                         No story has been submitted yet! Click on the button below 
-                        to write your own, or view 
-                        <a href="https://github.com/maelys-mcardle/interactive-story-creator/tree/master/examples">examples of code here</a> 
+                        to write your own, or view the
+                        <a href="javascript:goToTutorialPage()">tutorial here</a> 
                         to learn how to put stories together.
                     </p>
                     <p>
@@ -138,7 +139,7 @@
             <div id="history-container" class="collapse">
                 
                 <div class="page-header">
-                    <h1>Story History</h1>
+                    <h1>Story Event History</h1>
                 </div>
 
                 <div class="list-group">
@@ -154,6 +155,18 @@
                 </div>
                 
             </div>
+            
+            <!-- Tutorial -->
+            
+            <div id="tutorial-container" class="collapse">
+                
+                <div class="page-header">
+                    <h1>How to Write Stories</h1>
+                </div>
+                
+                <div id="tutorial-contents"></div>
+                
+            </div>            
 
         </div>
         
