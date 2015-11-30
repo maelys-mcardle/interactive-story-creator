@@ -150,7 +150,9 @@ paragraph of text.
 <h3>Text Formatting</h3>
 
 <p>
-    The text in the pages can be formatted using Markdown.
+    The text in the pages can be formatted using Markdown. The formatting
+    only applies to the paragraphs of text, and not to the day, time &amp;
+    location, or links.
 </p>
 
 <h4>Simple Formatting</h4>
@@ -257,3 +259,42 @@ This text ~~will have a line run through it~~
         <li>This is a third list item</li>
     </ol>
 </div>
+
+<p>
+    Lists can also be nested by preceding the <code>*</code> or <code>-</code>
+    with one or more spaces. For instance, the following code:
+</p>
+
+<pre><code class="markdown">
+* Food
+  * Pizza
+  * Poutine
+* Drinks
+  * Ceasars
+  * Water
+
+</code></pre>
+
+<p>
+    Would produce the following:
+</p>
+
+<div class="well">
+    <ul>
+        <li>
+            Food
+            <ul>
+                <li>Pizza</li>
+                <li>Poutine</li>
+            </ul>
+        </li>
+        <li>
+            Drinks
+            <ul>
+                <li>Ceasars</li>
+                <li>Water</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
