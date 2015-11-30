@@ -141,7 +141,14 @@ function goToTutorialPage()
 function fetchTutorial()
 {
     $.get( constants.tutorialUrl, function( data ) {
+        
+        // Tutorial downloaded. Paste it.
         $( html.tutorialContents ).html( data );
+   
+        // Apply syntax highlighting.
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
     });
 }
 
