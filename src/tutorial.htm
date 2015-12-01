@@ -424,9 +424,9 @@ You wake up feeling exhausted.
 </code></pre>
 
 <p>
-    If it's in the same chapter, the time can also be used to identify 
-    which page to bring the reader to when clicked. When clicked, the 
-    reader will be brought to the page with the given time:
+    If it's in the same chapter as the current page, the time can 
+    be used to identify which page to bring the reader to when clicked. 
+    When clicked, the reader will be brought to the page with the given time:
 </p>
 
 <pre><code class="markdown">
@@ -443,6 +443,29 @@ You wake up feeling exhausted.
 You open your eyes and turn to the alarm clock.
 
 It's 3:00 PM.
+
+</code></pre>
+
+
+<p>
+    If it's in the same chapter as the current page, the location can 
+    be used to identify which page to bring the reader to when clicked. 
+    When clicked, the reader will be brought to the page with the given time:
+</p>
+
+<pre><code class="markdown">
+# Monday
+
+## Afternoon: Downtown
+
+You walk around downtown.
+
+[Go to the cinema](Cinema)
+
+## Afternoon: Cinema
+
+You watch a kids movie. You're the only one crying
+at the sad parts in the theater.
 
 </code></pre>
 
@@ -504,6 +527,37 @@ You open your eyes to find a unicorn standing before you.
 You see an army of corgis before you. One shouts out:
 
 > Captain Woof!
+
+</code></pre>
+
+<p>
+    If multiple pages share the same time and/or location, the use of the 
+    <code>#</code> followed by a number is used to state that the 
+    <em>n</em><sup>th</sup> match is desired. In other words, adding a 
+    <code>#2</code> to a link would indicate that the second page with the
+    given time and/pr location.
+</p>
+
+
+<pre><code class="markdown">
+# Friday
+
+## Morning: School
+
+You arrive at the school.
+
+[Skip the first class](Day: School)
+[Go to the first class](Day: School #2)
+
+## Day: School
+
+You're in math class, the first class of the day.
+
+[Go to the next class](next)
+
+## Day: School
+
+You're in English, the second class of the day.
 
 </code></pre>
 
