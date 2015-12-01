@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1>How to Write Stories</h1>
+    <h1>How to Write Stories <small>A Brief Tutorial</small></h1>
 </div>
 
 <p>
@@ -194,8 +194,8 @@ paragraph of text.
 </p>
 
 <pre><code class="markdown">
-[eat breakfast: Eat breakfast before school](Monday > Morning: Kitchen)
-[skip breakfast: Skip breakfast and go to school](Monday > Morning: School)
+[eat breakfast: Eat breakfast before school](Monday: Morning: Kitchen)
+[skip breakfast: Skip breakfast and go to school](Monday: Morning: School)
 
 </code></pre>
 
@@ -240,7 +240,7 @@ You look at yourself in the mirror.
 
 You sit down in the waiting room.
 
-### Chose "brush teeth" on Tuesday > Morning: Bathroom
+### Chose "brush teeth" on Tuesday: Morning: Bathroom
 
 You pass your tongue over your teeth. They feel clean.
 
@@ -420,6 +420,90 @@ You wake up feeling exhausted.
 ## Morning: Bedroom
 
 ...
+
+</code></pre>
+
+<p>
+    If it's in the same chapter, the time can also be used to identify 
+    which page to bring the reader to when clicked. When clicked, the 
+    reader will be brought to the page with the given time:
+</p>
+
+<pre><code class="markdown">
+# Monday
+
+## Morning: Bedroom
+
+You wake up feeling exhausted.
+
+[Sleep all day](Afternoon)
+
+## Afternoon: Bedroom
+
+You open your eyes and turn to the alarm clock.
+
+It's 3:00 PM.
+
+</code></pre>
+
+<p>
+    If it's in the same chapter, the time &amp; location can be used
+    together to identify which page to bring the reader to when clicked. 
+    When clicked, the reader will be brought to the page with the given time
+    and location:
+</p>
+
+<pre><code class="markdown">
+# Monday
+
+## Night: Bedroom
+
+You fall asleep.
+
+[Dream about unicorns](Night: Unicorn Land)
+[Dream about corgis](Night: Puppy Station)
+
+## Night: Unicorn Land
+
+You open your eyes to find a unicorn standing before you.
+
+## Night: Puppy station
+
+You see an army of corgis before you. One shouts out:
+
+> Captain Woof!
+
+</code></pre>
+
+<p>
+    If it's in a different chapter, the day, time &amp; location can be used
+    together to identify which page to bring the reader to when clicked. A
+    <code>:</code> is used to differentiate between the chapter from the
+    time and location. When clicked, the reader will be brought to the page 
+    with the given time and location:
+</p>
+
+<pre><code class="markdown">
+# Monday
+
+## Night: Bedroom
+
+You fall asleep.
+
+[Dream about unicorns](Tuesday: Early Hours: Unicorn Land)
+[Dream about corgis](Tuesday: Early Hours: Puppy Station)
+
+# Tuesday 
+
+## Early Hours: Unicorn Land
+
+You open your eyes to find a unicorn standing before you.
+
+## Early Hours: Puppy station
+
+You see an army of corgis before you. One shouts out:
+
+> Captain Woof!
 
 </code></pre>
 

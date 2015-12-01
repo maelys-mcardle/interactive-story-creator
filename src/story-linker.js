@@ -66,9 +66,9 @@ function processTarget( story, currentChapterIndex, currentPageIndex, target )
      *     [Day]
      *     [Time]
      *     [Time] #2
-     *     [Day] > [Time]
-     *     [Day] > [Time] : [Location]
-     *     [Day] > [Time] : [Location] #2
+     *     [Day] : [Time]
+     *     [Day] : [Time] : [Location]
+     *     [Day] : [Time] : [Location] #2
      *
      */
      
@@ -133,7 +133,7 @@ function processAbsolutePath( story, currentChapterIndex, path )
     var target = createTarget( path, false );
     
     // Get the tokens.
-    var tokens = path.split( ">" );
+    var tokens = path.split( ":" );
     
     // For each token, trim.
     tokens = tokens.map( function( token ) { return token.trim() });
@@ -148,18 +148,34 @@ function processAbsolutePath( story, currentChapterIndex, path )
         }
     }
     
-    // If there's one token, then it can be a chapter name or a page in the
-    // current chapter. Look at the pages in the current chapter first, then
-    // look at chapter names. If there's two tokens, then the first is a chapter
-    // name and the second is a page name. Page names can be split in 
-    // time: location, or just time.
+    // One token:
+    //  - Chapter Day
+    //  - Page Time
+    //  - Page Location
+    //
+    // Two tokens:
+    //  - Page Location & Page Time
+    //  - Chapter Day & Page Location
+    //
+    // Three tokens:
+    //  - Chapter Day, Page Location & Page Time
+    //
+
+    var chapterIndex = -1;
+    var pageIndex = -1;
     
     if ( tokens.length === 1 ) {
         
-        // Single token. Assume it's a page name.
-        var chapterIndex = currentChapterIndex;
-        var pageIndex = findPageInChapter( story, currentChapterIndex, 
-            tokens[0] );
+        // Single token. Assume it's a page time.
+        chapterIndex = currentChapterIndex;
+        pageIndex = findPageInChapter( story, currentChapterIndex, 
+            tokens[0], "" );
+        
+        // Page not found. Maybe it's a location.
+        if ( pageIndex === -1 ) {
+            pageIndex = findPageInChapter( story, currentChapterIndex, "",
+                tokens[0] );
+        }
         
         // Page not found. Maybe it's a chapter name.
         if ( pageIndex === -1 ) {
@@ -167,57 +183,52 @@ function processAbsolutePath( story, currentChapterIndex, path )
              pageIndex = 0;
         }
         
-        // Found as either a page or chapter name. Target found.
-        if ( chapterIndex >= 0 && pageIndex >= 0 ) {
-            target.found = true;
-            target.chapter = chapterIndex;
-            target.page = pageIndex;
-        }
-        
-        // No matches.
-        if ( !target.found ) {
-            appendCodeWarning( path, 
-                "Could not find a match for the link to '" + tokens[0] + "'. " +
-                "It should be a day, (eg. 'Monday'), time (eg. 'Morning'), " +
-                "or time & location (eg. 'Morning: Bedroom') that is found in " +
-                "your story. Make sure there are no typos." );
-        }
-        
     } else if ( tokens.length === 2 ) {
         
-        // The first token must be a chapter name.
-        var chapterIndex = findChapter( story, tokens[0] );
-        
-        // Chapter found.
-        // The second token must be a page name in that chapter.
-        if ( chapterIndex >= 0 ) {
-            var pageIndex = findPageInChapter( story, chapterIndex, tokens[1] );
+        // Assume it's a page time and location.
+        chapterIndex = currentChapterIndex;
+        pageIndex = findPageInChapter( story, currentChapterIndex, 
+            tokens[0], tokens[1] );
             
-            if ( pageIndex >= 0 ) {
-                target.found = true;
-                target.chapter = chapterIndex;
-                target.page = pageIndex;
+        // Not found. 
+        if ( pageIndex === -1 ) {
+            
+            // The first token must be a chapter name.
+            chapterIndex = findChapter( story, tokens[0] );
+            
+            // Chapter found.
+            // The second token must be a page name in that chapter.
+            if ( chapterIndex >= 0 ) {
+                pageIndex = findPageInChapter( story, chapterIndex, 
+                    tokens[1], "" );
             }
         }
         
-        // No matches.
-        if ( !target.found ) {
-            appendCodeWarning( path, 
-                "Could not find a day identified as '" + tokens[0] + "' with " +
-                "a time or time & location of '" + tokens[1] + "'. The day " +
-                "should be one in your story and something like 'Monday.' " +
-                "The time or time & location should be something like " +
-                "'Morning' (just time) or 'Morning: Bedroom' (time & location) " +
-                "that is found in your story. Make sure there are no typos." );
-        }
+    } else if ( tokens.length === 3 ) {
         
+        // The first token must be a chapter name.
+        chapterIndex = findChapter( story, tokens[0] );
+        
+        // Chapter found.
+        // The second token must be a page time, and the third a page location.
+        if ( chapterIndex >= 0 ) {
+            pageIndex = findPageInChapter( story, chapterIndex, 
+                tokens[1], tokens[2] );
+        }
+    }
+    
+    // Found as either a page or chapter name. Target found.
+    if ( chapterIndex >= 0 && pageIndex >= 0 ) {
+        target.found = true;
+        target.chapter = chapterIndex;
+        target.page = pageIndex;
+    
     } else {
         
-        // 3+ Tokens. This is unsupported right now.
         appendCodeWarning( path, 
-            "Contains 3 or more tokens (tokens are separated with '>')." +
-            "They are " + tokens.join(", ") + ". Only 1 or 2 tokens are " +
-            "supported at this time.");    
+            "Could not find a match for the target provided. The tokens " +
+            "detected were " + tokens.join(", ") + " and they did not match " + 
+            "up to days, time, or location." );    
     }
     
     return target;
@@ -240,23 +251,23 @@ function findChapter( story, day )
     return -1;
 }
 
-function findPageInChapter( story, chapterIndex, timeAndLocation )
+function findPageInChapter( story, chapterIndex, time, location )
 {
-    var splitTimeAndLocation = splitInTwoParts( ":", timeAndLocation );
-    var time = splitTimeAndLocation.left;
-    var location = splitTimeAndLocation.right;
     var chapter = story.chapters[ chapterIndex ];
     
+    // Go through each page in a given chapter.
+    // Only bother if time or location is specified.
     for ( var pageIndex = 0; 
-          pageIndex < chapter.pages.length;
+          pageIndex < chapter.pages.length &&
+          ( time !== "" || location !== "" );
           pageIndex++ ) {
               
         var page = chapter.pages[ pageIndex ];
         
-        // Time is mandatory. Make the comparison.
-        // Location is optional. If specified, compare it.
-        if ( caseInsensitive( page.time ) === 
-             caseInsensitive( time ) &&
+        // Compare only if the value is specified.
+        if ( ( time === "" ||
+               ( caseInsensitive( page.time ) === 
+                 caseInsensitive( time ) ) ) &&
              ( location === "" ||
                ( caseInsensitive( page.location ) === 
                  caseInsensitive( location ) ) ) ) {
