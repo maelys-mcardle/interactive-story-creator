@@ -149,6 +149,106 @@ paragraph of text.
 
 <h3>Page Choices</h3>
 
+<p>
+    In addition to text, each page can provide one or more choices
+    to determine what happens next in the story. These show up as 
+    links to be clicked on that appear beneath the paragraphs of text.
+</p>
+<p>
+    At their most basic, these choices consist of two parts: the text
+    that appears on the page, and what page the reader is to be taken
+    to once the link is pressed. Links follow the format 
+    <code>[Text to appear in the link](Page to bring the reader to)</code> where
+    the text for the link is between the <code>[]</code> and the page between
+    the <code>()</code>. For instance, the following code:
+</p>
+
+<pre><code class="markdown">
+
+[Go to the next page](next)
+
+</code></pre>
+
+<p>
+    Would produce the following:
+</p>
+
+<div class="well">
+    <div class="list-group">
+        <a href="#" class="list-group-item">Go to the next page</a>
+    </div>
+</div>
+
+<p>
+    That said, specifying a page is optional. When no target page is
+    indicated, the link becomes unclickable. And so this code:
+</p>
+
+<pre><code class="markdown">
+
+[You cannot click on this]()
+
+</code></pre>
+
+<p>
+    Would produce the following:
+</p>
+
+<div class="well">
+    <div class="list-group">
+        <a href="#" class="list-group-item">You cannot click on this</a>
+    </div>
+</div>
+
+<p>
+    The target page can be specified by putting down <code>next</code> or 
+    <code>last</code>, to indicate the next or last page in the story code.
+    Remember that each page is identified by a time &amp; location. For 
+    example:
+</p>
+
+<pre><code class="markdown">
+
+[Go to the previous page](last)
+[Go to the next page](next)
+
+</code></pre>
+
+<p>
+    Adding a <code>#</code> followed by a number indicates that the desired
+    page is that many previous or following. For instance:
+</p>
+
+<pre><code class="markdown">
+
+[Go two pages back](last #2)
+[Go three pages down](next #3)
+
+</code></pre>
+
+<p>
+    Furthermore, chapter names (days) can be used to identify which 
+    page to bring the reader to when clicked. When clicked, the reader
+    will be brought to the first page in that day:
+</p>
+
+<pre><code class="markdown">
+# Monday
+
+## Morning: Bedroom
+
+You wake up feeling exhausted.
+
+[Sleep all day](Tuesday)
+
+# Tuesday
+
+## Morning: Bedroom
+
+...
+
+</code></pre>
+
 <h3>Optional Page Text</h3>
 
 <h3>Text Formatting</h3>
