@@ -57,6 +57,7 @@ body {
 }
 
 /* Remove bottom spacing from list groups in tutorial. */
-#tutorial-contents .list-group {
+#tutorial-contents .list-group, 
+#tutorial-contents blockquote {
     margin-bottom: 0;
 }
