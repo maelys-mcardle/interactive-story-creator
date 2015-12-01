@@ -530,12 +530,14 @@ You see an army of corgis before you. One shouts out:
 
 </code></pre>
 
+<h3>Going to the n<sup>th</sup> match</h3>
+
 <p>
     If multiple pages share the same time and/or location, the use of the 
     <code>#</code> followed by a number is used to state that the 
     <em>n</em><sup>th</sup> match is desired. In other words, adding a 
     <code>#2</code> to a link would indicate that the second page with the
-    given time and/pr location.
+    given time and/or location.
 </p>
 
 
@@ -561,6 +563,33 @@ You're in English, the second class of the day.
 
 </code></pre>
 
+<p>
+    This also works for next/last links:
+</p>
+
+<pre><code class="markdown">
+# Friday
+
+## Morning: School
+
+You arrive at the school.
+
+[Skip the first class](next)
+[Go to the first class](next #2)
+
+## Day: School
+
+You're in math class, the first class of the day.
+
+[Go to the next class](next)
+
+## Day: School
+
+You're in English, the second class of the day.
+
+[Time travel back to the morning](last #2)
+
+</code></pre>
 <div id="how-to-format-text" class="page-header">
     <h1>How to Format Text</h1>
 </div>
