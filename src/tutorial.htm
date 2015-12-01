@@ -99,7 +99,7 @@ You look to your watch. So it was.
 
 <h2>Pages</h2>
 
-<h2>Title (Time &amp; Location)</h2>
+<h3>Title (Time &amp; Location)</h3>
 
 <p>
     Within each chapter are one or more pages. These are each identified
@@ -130,7 +130,7 @@ You look to your watch. So it was.
 
 </code></pre>
 
-<h2>Text</h2>
+<h3>Text</h3>
 
 <p>
     Within each page can be paragraphs of text. Multiple paragraphs are
@@ -158,7 +158,7 @@ paragraph of text.
     <a href="#how-to-format-text">How to Format Text</a> for more details.
 </p>
 
-<h2>Links (Choices)</h2>
+<h3>Links (Choices)</h3>
 
 <p>
     In addition to text, each page can provide one or more choices
@@ -210,7 +210,68 @@ paragraph of text.
     for more details.
 </p>
 
-<h2>Optional Paragraphs</h2>
+<h3>Optional Paragraphs</h3>
+
+<p>
+    Some paragraphs of text can be made to appear only when a specific
+    choice was made on an earlier page. These special paragraphs are preceded
+    by a line that mentions what page the choice was made on, and what link
+    was selected. These are of the format <code>### Chose "identifier" on
+    <em>page</em></code>. An empty <code>###</code> marks the end of this
+    optional text. For instance:
+</p>
+
+<pre><code class="markdown">
+# Tuesday
+
+## Morning: Bathroom
+
+You look at yourself in the mirror.
+
+[brush teeth: Brush your teeth](next)
+[Skip brushing your teeth](next)
+
+## Afternoon: Dentist Office
+
+You sit down in the waiting room.
+
+### Chose "brush teeth" on Tuesday > Morning: Bathroom
+
+You pass your tongue over your teeth. They feel clean.
+
+###
+
+You look around and pick up a magazine.
+
+</code></pre>
+
+<p>
+    In the previous example, the sentences "You pass your tongue over your 
+    teeth. They feel clean." would only appear for readers that had clicked on
+    the choice to brush their teeth.
+</p>
+
+<p>
+    Whene multiple choices are together, the terminating <code>###</code>
+    can be skipped for all but the last choice. For instance:
+</p>
+
+<pre><code class="markdown">
+# Saturday
+
+## Day: Living Room
+
+### Chose "red" on Friday > Afternoon: Paint Store
+
+You paint the wall red.
+
+### Chose "blue" on Friday > Afternoon: Paint Store
+
+You paint the wall blue.
+
+###
+
+</code></pre>
 
 <div id="how-to-make-links" class="page-header">
     <h1>How To Make Links</h1>
