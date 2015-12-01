@@ -55,3 +55,8 @@ body {
     height: 200px;
     width: auto;
 }
+
+/* Remove bottom spacing from list groups in tutorial. */
+#tutorial-contents .list-group {
+    margin-bottom: 0;
+}
