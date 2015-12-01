@@ -151,6 +151,11 @@ paragraph of text.
 
 </code></pre>
 
+<p>
+    The text in the paragraphs can also be formatted. See the section on
+    <a href="#how-to-format-text">How to Format Text</a> for more details.
+</p>
+
 <h2>Page Choices</h2>
 
 <p>
@@ -166,10 +171,35 @@ paragraph of text.
     clicked. The third is an identifier, which is optional, which is used to 
     keep track of what choices were picked down the line.
 </p>
+<p>
+    The format is:
+</p>
 
-<h3>Optional Page Text</h3>
+<pre><code class="markdown">
+[link text]()
+[link text](page)
+[identifier: link text](page)
 
-<div class="page-header">
+</code></pre>
+
+<p>
+    So that actual links can look like the following:
+</p>
+
+<pre><code class="markdown">
+[eat breakfast: Eat breakfast before school](Monday > Morning: Kitchen)
+[skip breakfast: Skip breakfast and go to school](Monday > Morning: School)
+
+</code></pre>
+
+<p>
+    See the section on <a href="#how-to-make-links">How to Make Links</a> 
+    for more details.
+</p>
+
+<h2>Choice-Based Page Text</h2>
+
+<div id="how-to-make-links" class="page-header">
     <h1>How To Make Links</h1>
 </div>
 
@@ -270,8 +300,8 @@ You wake up feeling exhausted.
 
 </code></pre>
 
-<div class="page-header">
-    <h1>Formatting Text on Pages</h1>
+<div id="how-to-format-text" class="page-header">
+    <h1>How to Format Text</h1>
 </div>
 
 <p>
