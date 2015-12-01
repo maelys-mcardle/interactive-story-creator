@@ -51,6 +51,7 @@ body {
     overflow: auto;
 }
 
+/* Limit the size of the graphic in the jumbotron. */
 .jumbotron-graphic {
     height: 200px;
     width: auto;
