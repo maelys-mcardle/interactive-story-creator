@@ -215,7 +215,7 @@ paragraph of text.
     for more details.
 </p>
 
-<h3>Optional Paragraphs</h3>
+<h3 id="optional-paragraphs">Optional Paragraphs</h3>
 
 <p>
     Some paragraphs of text can be made to appear only when a specific
@@ -251,9 +251,9 @@ You look around and pick up a magazine.
 </code></pre>
 
 <p>
-    In the previous example, the sentences "You pass your tongue over your 
-    teeth. They feel clean." would only appear for readers that had clicked on
-    the choice to brush their teeth.
+    In the previous example, the sentences "<em>You pass your tongue over your 
+    teeth. They feel clean.</em>" would only appear for readers that had 
+    clicked on the choice to brush their teeth.
 </p>
 
 <p>
@@ -282,15 +282,27 @@ You paint the wall blue.
     <h1>How To Make Links</h1>
 </div>
 
+<p>
+    Links are used to bring readers from one page to another. They're presented
+    as one or more choices for the user to click on. These choices can be
+    remembered, and different content on a given page can be shown accordingly
+    (see <a href="#optional-paragraphs">Optional Paragraphs</a>.)
+</p>
+
 <h3>Basic Links</h3>
 
 <p>
-    At their most basic, these choices consist of two parts: the text
-    that appears on the page, and what page the reader is to be taken
-    to once the link is pressed. Links follow the format 
-    <code>[Text to appear in the link](Page to bring the reader to)</code> where
-    the text for the link is between the <code>[]</code> and the page between
-    the <code>()</code>. For instance, the following code:
+    At their most basic, these links are made up of three parts, but only
+    one is mandatory.
+</p>
+
+<p>
+    The first two parts is the text that appears in the link, and the
+    page that the reader is brought to when the link is clicked on. 
+    Links follow the format <code>[Text to appear in the link](Page 
+    to bring the reader to)</code> where the text for the link is 
+    between the <code>[]</code> and the page between the <code>()</code>. 
+    For instance, the following code:
 </p>
 
 <pre><code class="markdown">
@@ -328,6 +340,38 @@ You paint the wall blue.
     </div>
 </div>
 
+<h3>Identifiers</h3>
+
+<p>
+    The third part of a link are identifiers, which are keywords used to
+    identify what link was clicked when presenting 
+    <a href="#optional-paragraphs">Optional Paragraphs</a>. These do not 
+    show up in the text of the link. 
+</p>
+
+<p>
+    The format of links with identifiers is <code>[identifier: Text to appear 
+    in the link](Page to bring the reader to)</code> where the identifier is 
+    before the <code>:</code> inside the <code>[]</code>. For example:
+</p>
+
+<pre><code class="markdown">
+[pizza: I decide to eat pizza](Night: Pizza Parlour)
+[shawarma: I decide to eat shawarma](Night: Lebanese Joint)
+
+</code></pre>
+
+<p>
+    Which would produce the following:
+</p>
+
+<div class="well">
+    <div class="list-group">
+        <a href="#" class="list-group-item">I decide to eat pizza</a>
+        <a href="#" class="list-group-item">I decide to eat shawarma</a>
+    </div>
+</div>
+
 <h3>Go Back/Forward Pages</h3>
 
 <p>
@@ -354,7 +398,7 @@ You paint the wall blue.
 
 </code></pre>
 
-<h3>Using Day, Time, and/or Time &amp; Location</h3>
+<h3>Using Day, Time, and/or Location</h3>
 
 <p>
     Chapter names (days) can be used to identify which page to bring the 
