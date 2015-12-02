@@ -147,13 +147,13 @@ function goToTutorialPage()
 
 function fetchTutorial()
 {
-    var tutorialElement = $( html.tutorialContents )[0];
-    var loadingAnimation = new Spinner().spin( tutorialElement );
+    var tutorialContentsElement = $( html.tutorialContents )[0];
+    var loadingAnimation = new Spinner().spin( tutorialContentsElement );
     
     $.get( constants.tutorialUrl, function( data ) {
         
         // Tutorial downloaded. Paste it.
-        tutorialElement.html( data );
+        $( html.tutorialContents ).html( data );
    
         // Apply syntax highlighting.
         $('pre code').each(function(i, block) {
