@@ -754,7 +754,8 @@ This text ~~will have a line run through it~~
 <p>
     Code can be inserted into the page content. Starting the line
     with four spaces or a tab indicates that what follows is code. 
-    For instance, the following code:
+    For instance, the following text (note the four spaces before
+    each line):
 </p>
 
 
@@ -784,11 +785,23 @@ main()
 </div>
 
 <p>
-    Text can be <code>stylized as code</code> by enclosing them inside a
-    pair of <code>`</code> symbols:
+    Text can be stylized as code by enclosing them inside a
+    pair of <code>`</code> symbols. For example, the following:
 </p>
 
 <pre><code class="markdown">
-This text `contains code`
+The corgi looked at the monitor. She looked to the
+monitor and saw the message `PUPPY ERROR 404`.
 
 </code></pre>
+
+<p>
+    Would produce the following:
+</p>
+
+<div class="well">
+    <p>
+        The corgi looked at the monitor. She looked to the
+        monitor and saw the message <code>PUPPY ERROR 404</code>.
+    </p>
+</div>
