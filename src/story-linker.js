@@ -64,9 +64,12 @@ function processTarget( story, currentChapterIndex, currentPageIndex, target )
      *     next
      *     next #2
      *     [Chapter Title]
+     *     [Location]
+     *     [Location] #2
      *     [Time]
      *     [Time] #2
      *     [Chapter Title] : [Time]
+     *     [Chapter Title] : [Location]
      *     [Chapter Title] : [Time] : [Location]
      *     [Chapter Title] : [Time] : [Location] #2
      *
@@ -190,10 +193,17 @@ function processAbsolutePath( story, currentChapterIndex, path, matchNumber )
             chapterIndex = findChapter( story, tokens[0] );
             
             // Chapter found.
-            // The second token must be a page name in that chapter.
+            // The second token must be a page time in that chapter.
             if ( chapterIndex >= 0 ) {
                 pageIndices = findPagesInChapter( story, chapterIndex, 
                     tokens[1], "" );
+            }
+            
+            // Page not found.
+            // The second token must be a page location in that chapter.
+            if ( pageIndices.length === 0 ) {
+                pageIndices = findPagesInChapter( story, chapterIndex, 
+                    "", tokens[1] );
             }
         }
         

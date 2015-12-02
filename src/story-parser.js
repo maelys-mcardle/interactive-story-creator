@@ -5,12 +5,12 @@ const NEWLINE_CHARACTER = "\n";
 /*
  * # Level 1 Headers are Chapters (they get title pages)
  * 
- * ## Level 2 Headers represent pages ("Time: Location")
- * 
- * [ID: Text](path) at the end represent choices
+ * ## Level 2 Headers represent pages ("Location" or "Time: Location")
  * 
  * ### Level 3 Headers are optional paragraphs, that show depending on choices
  * and terminated by an empty level 3 header (###)
+ * 
+ * [ID: Text](path) at the end represent choices
  * 
  * Standard markdown formatting otherwise applies.
  */
