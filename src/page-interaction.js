@@ -147,7 +147,7 @@ function goToTutorialPage()
 
 function fetchTutorial()
 {
-    var tutorialElement = $( html.tutorialContents )[0]/.id;
+    var tutorialElement = $( html.tutorialContents )[0].id;
     var loadingAnimation = new Spinner().spin( tutorialElement );
     
     $.get( constants.tutorialUrl, function( data ) {
