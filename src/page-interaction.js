@@ -132,7 +132,7 @@ function goToHistoryPage()
 
 function goToTutorialPage()
 {
-    // If there's no tutorial, load it.
+    // Download tutorial contents if they haven't been already.
     if ( $( html.tutorialContents ).text() === "" ) {
         fetchTutorial();
     }
@@ -277,9 +277,6 @@ $(function() {
     $( html.loadStoryNavbarButton ).text("Create Story");
     $( html.loadStoryNavbarButton ).click( showCreateStoryDialog );
     $( html.createStoryJumbotronButton).click( showCreateStoryDialog );
-    
-    // Download the tutorial contents.
-    fetchTutorial();
     
     // Initialize tooltips.
     $('[data-toggle="tooltip"]').tooltip()
