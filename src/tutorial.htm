@@ -82,8 +82,9 @@ You look to your watch. So it was.
 <p>
     A story is split up into multiple days, each acting as a sort
     of chapter. A single <code>#</code> sign is used to signal that 
-    what follows is a day, and follows the format <code># Monday</code>. 
-    For instance:
+    what follows is a day, and follows the format <code># Monday</code>.
+    Chapter names must be unique (there can't be two 'Tuesdays' for
+    example.) For instance:
 </p>
 
 <pre><code class="markdown">
@@ -548,8 +549,8 @@ You see an army of corgis before you. One shouts out:
 
 You arrive at the school.
 
-[Skip the first class](Day: School)
-[Go to the first class](Day: School #2)
+[Go to the first class](Day: School)
+[Skip the first class](Day: School #2)
 
 ## Day: School
 
@@ -560,6 +561,8 @@ You're in math class, the first class of the day.
 ## Day: School
 
 You're in English, the second class of the day.
+
+[Time travel back to the morning](Morning)
 
 </code></pre>
 
@@ -574,8 +577,8 @@ You're in English, the second class of the day.
 
 You arrive at the school.
 
-[Skip the first class](next)
-[Go to the first class](next #2)
+[Go to the first class](next)
+[Skip the first class](next #2)
 
 ## Day: School
 

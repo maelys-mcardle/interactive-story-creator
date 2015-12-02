@@ -73,33 +73,28 @@ function processTarget( story, currentChapterIndex, currentPageIndex, target )
      */
      
     // Make path case insensitive.
-    var path = caseInsensitive( target.path );
-    var matchIncrement = getMatchIncrement( path );
-
+    var path = caseInsensitive( target.path );    
+    var matchIncrementDetails = parseMatchIncrement( path );
+    var pathWithoutIncrement = matchIncrementDetails.pathWithoutNumber;
+    var matchIncrement = matchIncrementDetails.matchNumber;
+    
     // Find the desired target.
     if ( !path ) {
         target = createTarget( path, false );
         
-    } else if ( path === caseInsensitive( "next" ) ) {
+    } else if ( pathWithoutIncrement === caseInsensitive( "next" ) ) {
         target = processRelativePath( story, currentChapterIndex, 
-            currentPageIndex, path, matchIncrement );
+            currentPageIndex, pathWithoutIncrement, matchIncrement );
             
-    } else if ( path === caseInsensitive( "last" ) ) {
+    } else if ( pathWithoutIncrement === caseInsensitive( "last" ) ) {
         target = processRelativePath( story, currentChapterIndex, 
-            currentPageIndex, path, -matchIncrement );
+            currentPageIndex, pathWithoutIncrement, -matchIncrement );
             
     } else {
         
-        // Locate the first instance of the absolute path.
-        target = processAbsolutePath( story, currentChapterIndex, path );
-        
-        // Increment up and down, if need be.
-        if ( target.found && matchIncrement > 1 ) {
-            
-            target = processRelativePath( story, target.chapter, 
-                target.page, path, matchIncrement );
-        
-        }
+        // Locate the specified instance of the absolute path.
+        target = processAbsolutePath( story, currentChapterIndex, 
+            pathWithoutIncrement, matchIncrement );
     }
     
     return target;
@@ -115,17 +110,25 @@ function processRelativePath( story, currentChapterIndex, currentPageIndex, path
     // If the value increments, then this is about getting what's next.
     // If the value decrements, then this is about getting what's previous.
     var isNext = ( incrementOrDecrementBy >= 0 ) ? true : false;
-    
+
     // Get the next or previous pages by the amount specified.
     for ( var count = 0; count < Math.abs( incrementOrDecrementBy ); count++ ) {
+        
         target = getNextOrLastChapterAndPage( story, path, currentChapterIndex, 
             currentPageIndex, isNext );
+            
+        if ( target.found ) {
+            currentChapterIndex = target.chapter;
+            currentPageIndex = target.page;
+        } else {
+            break;
+        }
     }
     
     return target;
 }
 
-function processAbsolutePath( story, currentChapterIndex, path )
+function processAbsolutePath( story, currentChapterIndex, path, matchNumber )
 {
     // For when you want to jump to a specific page.
     
@@ -137,16 +140,6 @@ function processAbsolutePath( story, currentChapterIndex, path )
     
     // For each token, trim.
     tokens = tokens.map( function( token ) { return token.trim() });
-    
-    // Remove the match increment from the last token.
-    if ( tokens.length > 0 ) {
-        var lastToken = tokens[ tokens.length - 1 ];
-        var positionOfNumberSign = lastToken.lastIndexOf( "#" );
-        if ( positionOfNumberSign >= 0 ) {
-            tokens[ tokens.length - 1 ] = 
-                lastToken.substring( 0, positionOfNumberSign );
-        }
-    }
     
     // One token:
     //  - Chapter Day
@@ -162,36 +155,36 @@ function processAbsolutePath( story, currentChapterIndex, path )
     //
 
     var chapterIndex = -1;
-    var pageIndex = -1;
+    var pageIndices = [];
     
     if ( tokens.length === 1 ) {
         
         // Single token. Assume it's a page time.
         chapterIndex = currentChapterIndex;
-        pageIndex = findPageInChapter( story, currentChapterIndex, 
+        pageIndices = findPagesInChapter( story, currentChapterIndex, 
             tokens[0], "" );
         
         // Page not found. Maybe it's a location.
-        if ( pageIndex === -1 ) {
-            pageIndex = findPageInChapter( story, currentChapterIndex, "",
+        if ( pageIndices.length === 0 ) {
+            pageIndices = findPagesInChapter( story, currentChapterIndex, "",
                 tokens[0] );
         }
         
         // Page not found. Maybe it's a chapter name.
-        if ( pageIndex === -1 ) {
+        if ( pageIndices.length === 0 ) {
              chapterIndex = findChapter( story, tokens[0] );
-             pageIndex = 0;
+             pageIndices = [0];
         }
         
     } else if ( tokens.length === 2 ) {
         
         // Assume it's a page time and location.
         chapterIndex = currentChapterIndex;
-        pageIndex = findPageInChapter( story, currentChapterIndex, 
+        pageIndices = findPagesInChapter( story, currentChapterIndex, 
             tokens[0], tokens[1] );
             
         // Not found. 
-        if ( pageIndex === -1 ) {
+        if ( pageIndices.length === 0 ) {
             
             // The first token must be a chapter name.
             chapterIndex = findChapter( story, tokens[0] );
@@ -199,7 +192,7 @@ function processAbsolutePath( story, currentChapterIndex, path )
             // Chapter found.
             // The second token must be a page name in that chapter.
             if ( chapterIndex >= 0 ) {
-                pageIndex = findPageInChapter( story, chapterIndex, 
+                pageIndices = findPagesInChapter( story, chapterIndex, 
                     tokens[1], "" );
             }
         }
@@ -212,22 +205,23 @@ function processAbsolutePath( story, currentChapterIndex, path )
         // Chapter found.
         // The second token must be a page time, and the third a page location.
         if ( chapterIndex >= 0 ) {
-            pageIndex = findPageInChapter( story, chapterIndex, 
+            pageIndices = findPagesInChapter( story, chapterIndex, 
                 tokens[1], tokens[2] );
         }
     }
     
     // Found as either a page or chapter name. Target found.
-    if ( chapterIndex >= 0 && pageIndex >= 0 ) {
+    if ( chapterIndex >= 0 && matchNumber - 1 < pageIndices.length ) {
         target.found = true;
         target.chapter = chapterIndex;
-        target.page = pageIndex;
+        target.page = pageIndices[ matchNumber - 1 ];
     
     } else {
         
         appendCodeWarning( path, 
-            "Could not find a match for the target provided. The tokens " +
-            "detected were " + tokens.join(", ") + " and they did not match " + 
+            "Could not find the #" + matchNumber + " match for the " +
+            "target provided. The tokens detected were " + 
+            tokens.join(", ") + " and they did not match " + 
             "up to days, time, or location." );    
     }
     
@@ -251,9 +245,10 @@ function findChapter( story, day )
     return -1;
 }
 
-function findPageInChapter( story, chapterIndex, time, location )
+function findPagesInChapter( story, chapterIndex, time, location )
 {
     var chapter = story.chapters[ chapterIndex ];
+    var pageIndices = [];
     
     // Go through each page in a given chapter.
     // Only bother if time or location is specified.
@@ -272,26 +267,29 @@ function findPageInChapter( story, chapterIndex, time, location )
                ( caseInsensitive( page.location ) === 
                  caseInsensitive( location ) ) ) ) {
         
-            return pageIndex;
+            pageIndices.push ( pageIndex );
         }
               
     }
     
-    // No matches found.
-    return -1;
+    // Return list of matches.
+    return pageIndices;
 }
 
-function getMatchIncrement( path )
+function parseMatchIncrement( path )
 {
-    // If the path ends with #<Number> then the match number to get is that
-    // number, otherwise it's assumed to be the first match (1.)
+    // If the path ends with #<Number> then the match number to get is
+    // that number, otherwise it's assumed to be the first match (1.)
     
     var positionOfNumberSign = path.lastIndexOf( "#" );
     
     if ( positionOfNumberSign >= 0 ) {
-        var matchNumber = parseInt( path.slice( positionOfNumberSign + 1) );
+        var matchNumber = parseInt( path.substring( positionOfNumberSign + 1) );
         if ( Number.isInteger( matchNumber ) ) {
-            return matchNumber;
+            return {
+                pathWithoutNumber: path.substring( 0, positionOfNumberSign ).trim(),
+                matchNumber: matchNumber,
+            }
         } else {
             // There's a # in a target, but no valid number that follows.
             // This should be identified as a malformed link.
@@ -303,7 +301,10 @@ function getMatchIncrement( path )
         }
     }
     
-    return 1;
+    return {
+        pathWithoutNumber: path,
+        matchNumber: 1
+    };
 }
 
 function getNextOrLastChapterAndPage( story, path, initialChapterIndex, initialPageIndex, isNext )
