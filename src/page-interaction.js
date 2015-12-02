@@ -132,6 +132,12 @@ function goToHistoryPage()
 
 function goToTutorialPage()
 {
+    // If there's no tutorial, load it.
+    if ( $( html.tutorialContents ).text() === "" ) {
+        fetchTutorial();
+    }
+    
+    // Show the tutorial.
     $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
     $( html.tutorialNavbarLink ).addClass( constants.activeLinkClass );
     $( html.storyContainer ).hide();
@@ -141,10 +147,13 @@ function goToTutorialPage()
 
 function fetchTutorial()
 {
+    var tutorialElement = $( html.tutorialContents )[0]/.id;
+    var loadingAnimation = new Spinner().spin( tutorialElement );
+    
     $.get( constants.tutorialUrl, function( data ) {
         
         // Tutorial downloaded. Paste it.
-        $( html.tutorialContents ).html( data );
+        tutorialElement.html( data );
    
         // Apply syntax highlighting.
         $('pre code').each(function(i, block) {
