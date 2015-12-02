@@ -48,23 +48,34 @@
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <button type="button" class="navbar-toggle collapsed" 
+                            data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" 
+                            aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="javascript:goToPlayPage()">Story Creator</a>
+                    <a class="navbar-brand" href="javascript:goToPlayPage()">
+                        Story Creator
+                    </a>
                 </div>
                 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul id="navbar-links" class="nav navbar-nav">
-                        <li id="play-navbar-link" class="active"><a href="javascript:goToPlayPage()">Play</a></li>
-                        <li id="history-navbar-link"><a href="javascript:goToHistoryPage()">History</a></li>
-                        <li id="tutorial-navbar-link"><a href="javascript:goToTutorialPage()">Tutorial</a></li>
+                        <li id="play-navbar-link" class="active">
+                            <a href="javascript:goToPlayPage()">Play</a>
+                        </li>
+                        <li id="history-navbar-link">
+                            <a href="javascript:goToHistoryPage()">History</a>
+                        </li>
+                        <li id="tutorial-navbar-link">
+                            <a href="javascript:goToTutorialPage()">Tutorial</a>
+                        </li>
                     </ul>
-                    <button type="button" id="loadStoryNavbarButton" class="btn btn-danger navbar-btn navbar-right"></button>
+                    <button type="button" id="loadStoryNavbarButton" 
+                            class="btn btn-danger navbar-btn navbar-right"></button>
                 </div>
             </div>
         </nav>
@@ -141,7 +152,8 @@
                         to learn how to put stories together.
                     </p>
                     <p>
-                        <a id="createStoryJumbotronButton" class="btn btn-primary btn-lg" href="#" role="button">
+                        <a id="createStoryJumbotronButton" class="btn btn-primary btn-lg" 
+                           href="#" role="button">
                             Create Story
                         </a>
                     </p>
@@ -255,8 +267,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="code-warning-ignore-button" type="button" class="btn btn-danger">Ignore Problems &amp; Continue</button>
-                        <button id="code-warning-edit-code-button" type="button" class="btn btn-primary">Edit Story Code</button>
+                        <button id="code-warning-ignore-button" type="button" class="btn btn-danger">
+                            Ignore Problems &amp; Continue
+                        </button>
+                        <button id="code-warning-edit-code-button" type="button" class="btn btn-primary">
+                            Edit Story Code
+                        </button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
