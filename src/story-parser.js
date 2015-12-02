@@ -283,10 +283,20 @@ function chapterInfoFromHeader( line )
 function pageInfoFromHeader( line )
 {
     var pageTitle = everythingAfterSubstring( "##", line );
-    var timeAndLocation = splitInTwoParts( ":", pageTitle );
+    
+    // Default: title only specifies location.
+    var location = pageTitle;
+    var time = "";
+    
+    // Contains time and location.
+    if ( pageTitle.indexOf( ":" ) >= 0 ) {
+        var timeAndLocation = splitInTwoParts( ":", pageTitle );
+        time = timeAndLocation.left;
+        location = timeAndLocation.right;
+    }
     
     return { 
-        time: timeAndLocation.left,
-        location: timeAndLocation.right,
+        time: time,
+        location: location,
     }
 }
