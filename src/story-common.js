@@ -18,3 +18,16 @@ function splitInTwoParts( divider, string )
     
     return { left: left, right: right };
 }
+
+function rightTrim( string )
+{
+    for ( var i = string.length - 1; i >= 0; i-- ) {
+        if ( string[ i ] !== " " &&
+             string[ i ] !== "\t" &&
+             string[ i ] !== "\n" ) {
+            return string.substring( 0, i + 1 );
+        }
+    }
+    
+    return "";
+}

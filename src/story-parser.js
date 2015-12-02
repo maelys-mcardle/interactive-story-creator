@@ -27,7 +27,7 @@ function parseStory( storyCode )
     // Go line by line.  
     storyCode.split( NEWLINE_CHARACTER ).forEach( function ( line ) {
         
-        var trimmedLine = line.trim();
+        var trimmedLine = rightTrim( line );
         
         if ( trimmedLine.startsWith("[") ) {
             
@@ -192,7 +192,7 @@ function endCurrentText( story )
 function trimText( text )
 {
     return {
-        content: text.content.trim(),
+        content: rightTrim( text.content ),
         choice: text.choice,
     }
 }
