@@ -61,6 +61,7 @@ body {
 #tutorial-contents .well .list-group:last-child, 
 #tutorial-contents .well blockquote:last-child,
 #tutorial-contents .well p:last-child,
-#tutorial-contents .well ul:last-child {
+#tutorial-contents .well ul:last-child,
+#tutorial-contents .well ol:last-child  {
     margin-bottom: 0;
 }
