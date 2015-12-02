@@ -31,7 +31,17 @@ function setStoryChapterTitle( title )
 
 function setStoryTime( time )
 {
-    $( html.storyTime ).text( time );
+    if ( time === "" ) {
+        
+        // No time specified. Don't show it.
+        $( html.storyTimeContainer ).hide();
+        
+    } else {
+        
+        // Time specified. Show what it is.
+        $( html.storyTime ).text( time );
+        $( html.storyTimeContainer ).show();
+    }
 }
 
 function setStoryLocation( location )

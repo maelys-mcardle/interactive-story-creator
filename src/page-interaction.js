@@ -31,6 +31,7 @@ const html = {
     storyLocation: "#story-location",
     storyChapterTitle: "#story-chapter-title",
     storyTime: "#story-time",
+    storyTimeContainer: "#story-time-container",
     storyChoices: "#story-choices",
     historyContainer: "#history-container",
     historyLinks: "#history-container .list-group",

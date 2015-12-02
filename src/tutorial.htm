@@ -82,11 +82,10 @@ You look to your watch. So it was.
 <h2>Chapters</h2>
 
 <p>
-    A story is split up into multiple days, each acting as a sort
-    of chapter. A single <code>#</code> sign is used to signal that 
-    what follows is a day, and follows the format <code># Monday</code>.
-    Chapter names must be unique (there can't be two 'Tuesdays' for
-    example.) For instance:
+    A story is split up into multiple chapters. A single <code>#</code> sign 
+    is used to signal that what follows is a chapter title, and follows the 
+    format <code># Chapter Name</code>. Chapter names must be unique (there 
+    can't be two chapters called 'Tuesdays' for example.) For instance:
 </p>
 
 <pre><code class="markdown">
@@ -95,6 +94,21 @@ You look to your watch. So it was.
 ...
 
 # Tuesday
+
+...
+
+</code></pre>
+
+<p>
+    ...or:
+</p>
+
+<pre><code class="markdown">
+# Ottawa
+
+...
+
+# Orbiting Alien Ship
 
 ...
 
@@ -111,28 +125,38 @@ You look to your watch. So it was.
 
 <p>
     Within each chapter are one or more pages. These are each identified
-    by a time &amp; location. Multiple pages can share the same time
-    &amp; location. A double <code>##</code> signals that what follows
-    is the time &amp; location, and follows the format 
-    <code>## Time: Location</code>. For instance:
+    by a location, or a time &amp; location. Multiple pages can share the same 
+    time &amp; location. A double <code>##</code> signals that what follows
+    is the location or the time &amp; location, and follows the format 
+    <code>## Location</code> or <code>## Time: Location</code>. For instance:
 </p>
 
 <pre><code class="markdown">
 # Monday
 
-## Morning: Bedroom
+## Home
 
 ...
 
-## Afternoon: School
+## School
 
 ...
 
-## Afternoon: School
+### Home
 
 ...
 
 # Tuesday
+
+## Morning: Home
+
+...
+
+## Afternoon: School
+
+...
+
+## Afternoon: School
 
 ...
 
