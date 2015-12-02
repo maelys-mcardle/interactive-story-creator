@@ -700,41 +700,6 @@ This text ~~will have a line run through it~~
     </blockquote>
 </div>
 
-
-<h2>Horizontal Rule</h2>
-
-<p>
-    Horizontal lines can also be inserted into the page to visually break 
-    content. Starting the line with a <code>- - -</code> indicates that this is
-    a horizontal rule. For instance, the following code:
-</p>
-
-
-<pre><code class="markdown">
-This is on top of the line.
-
-- - - 
-
-This is below the line.
-
-</code></pre>
-
-<p>
-    Would produce the following:
-</p>
-
-<div class="well">
-    <p>
-        This is on top of the line.
-    </p>
-    
-    <hr>
-    
-    <p>
-        This is below the line.
-    </p>
-</div>
-
 <h2>Lists</h2>
 
 <p>
@@ -825,6 +790,40 @@ This is below the line.
     </ul>
 </div>
 
+<h2>Horizontal Rule</h2>
+
+<p>
+    Horizontal lines can also be inserted into the page to visually break 
+    content. Starting the line with a <code>- - -</code> indicates that this is
+    a horizontal rule. For instance, the following code:
+</p>
+
+
+<pre><code class="markdown">
+This is on top of the line.
+
+- - - 
+
+This is below the line.
+
+</code></pre>
+
+<p>
+    Would produce the following:
+</p>
+
+<div class="well">
+    <p>
+        This is on top of the line.
+    </p>
+    
+    <hr>
+    
+    <p>
+        This is below the line.
+    </p>
+</div>
+
 <h2>Code</h2>
 
 <p>
@@ -888,3 +887,39 @@ monitor and saw the message `PUPPY ERROR 404`.
         monitor and saw the message <code>PUPPY ERROR 404</code>.
     </p>
 </div>
+
+<h2>Using Special Characters in Text</h2>
+
+<p>
+    Some characters, such as <code>#</code> and <code>[</code> convey
+    special meaning when they're at the start of a line. For instance,
+    the <code>#</code> is used to identify a chapter title, while the
+    <code>[</code> is used inside a link.
+</p>
+
+<p>
+    Ordinarily, this would mean that these characters couldn't be used
+    in the paragraphs of text of a page, because then it would be misinterpreted
+    as signalling a new chapter, page, link, etc.
+</p>
+
+<p>
+    However, there is a way to use these characters anyways. That's by
+    escaping them with a <code>\</code>. For instance, <code>\#</code>
+    could be used to display a number sign in the text. For example:
+</p>
+
+<pre><code class="markdown">
+# South Africa
+
+## Erinys Military Training Camp, Johannesburg
+
+You see a number on the door:
+
+\#200
+
+This is the room. You walk in.
+</code></pre>
+
+
+
