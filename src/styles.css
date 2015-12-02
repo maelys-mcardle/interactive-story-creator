@@ -65,3 +65,8 @@ body {
 #tutorial-contents .well ol:last-child  {
     margin-bottom: 0;
 }
+
+/* Horizontal rules don't show up well in a well. */
+#tutorial-contents .well hr {
+    border-color:DarkGray;
+}
