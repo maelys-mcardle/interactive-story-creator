@@ -13,7 +13,7 @@ function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
     var chapter = story.chapters[ chapterIndex ];
     var page = chapter.pages[ pageIndex ];
     
-    setStoryDay ( chapter.day );
+    setStoryChapterTitle( chapter.title );
     setStoryTime( page.time );
     setStoryLocation( page.location );
     setStoryContent( page.texts, previousChoices );
@@ -24,9 +24,9 @@ function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
     return true;
 }
 
-function setStoryDay( day )
+function setStoryChapterTitle( title )
 {
-    $( html.storyDay ).text( day );
+    $( html.storyChapterTitle ).text( title );
 }
 
 function setStoryTime( time )

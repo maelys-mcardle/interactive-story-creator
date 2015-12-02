@@ -4,7 +4,7 @@ function addEntryToHistory( story, previousChoices, chapterIndex, pageIndex )
 {
     var chapter = story.chapters[ chapterIndex ];
     var page = chapter.pages[ pageIndex ];
-    var title = [ chapter.day, page.time, page.location ].join(", ");
+    var title = [ chapter.title, page.time, page.location ].join(", ");
     var description = "Click to go back to this point in time.";
     
     var newHistoryLink = historyLink( title, description );

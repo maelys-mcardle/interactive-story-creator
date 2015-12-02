@@ -5,7 +5,7 @@ const NEWLINE_CHARACTER = "\n";
 /*
  * # Level 1 Headers are Chapters (they get title pages)
  * 
- * ## Level 2 Headers represent pages ("Time Of Day: Location")
+ * ## Level 2 Headers represent pages ("Time: Location")
  * 
  * [ID: Text](path) at the end represent choices
  * 
@@ -81,7 +81,7 @@ function parseStory( storyCode )
 function emptyChapter()
 {
     return {
-        day: "",
+        title: "",
         pages: [],
     };
 }
@@ -116,7 +116,7 @@ function emptyChoice()
 
 function isChapterEmpty( chapter )
 {
-    return !( chapter.pages.length || chapter.day.length );
+    return !( chapter.pages.length || chapter.title.length );
 }
 
 function isPageEmpty( page )
@@ -133,7 +133,7 @@ function isTextEmpty( text )
 function startNewChapter( story, chapterInfo )
 {
     story.currentChapter = emptyChapter();
-    story.currentChapter.day = chapterInfo.day;
+    story.currentChapter.title = chapterInfo.title;
     return story;
 }
 
@@ -276,7 +276,7 @@ function choiceLinkFromLink( line )
 function chapterInfoFromHeader( line )
 {
     return { 
-        day: everythingAfterSubstring( "#", line ) 
+        title: everythingAfterSubstring( "#", line ) 
     }; 
 }
 

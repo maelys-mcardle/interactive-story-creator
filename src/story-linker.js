@@ -63,12 +63,12 @@ function processTarget( story, currentChapterIndex, currentPageIndex, target )
      *     last
      *     next
      *     next #2
-     *     [Day]
+     *     [Chapter Title]
      *     [Time]
      *     [Time] #2
-     *     [Day] : [Time]
-     *     [Day] : [Time] : [Location]
-     *     [Day] : [Time] : [Location] #2
+     *     [Chapter Title] : [Time]
+     *     [Chapter Title] : [Time] : [Location]
+     *     [Chapter Title] : [Time] : [Location] #2
      *
      */
      
@@ -142,16 +142,16 @@ function processAbsolutePath( story, currentChapterIndex, path, matchNumber )
     tokens = tokens.map( function( token ) { return token.trim() });
     
     // One token:
-    //  - Chapter Day
+    //  - Chapter Title
     //  - Page Time
     //  - Page Location
     //
     // Two tokens:
     //  - Page Location & Page Time
-    //  - Chapter Day & Page Location
+    //  - Chapter Title & Page Location
     //
     // Three tokens:
-    //  - Chapter Day, Page Location & Page Time
+    //  - Chapter Title, Page Location & Page Time
     //
 
     var chapterIndex = -1;
@@ -222,20 +222,20 @@ function processAbsolutePath( story, currentChapterIndex, path, matchNumber )
             "Could not find the #" + matchNumber + " match for the " +
             "target provided. The tokens detected were " + 
             tokens.join(", ") + " and they did not match " + 
-            "up to days, time, or location." );    
+            "up to chapter titles, or time or location on pages." );    
     }
     
     return target;
 }
 
-function findChapter( story, day )
+function findChapter( story, title )
 {
     for ( var chapterIndex = 0; 
           chapterIndex < story.chapters.length; 
           chapterIndex++ ) {
               
-        if ( caseInsensitive( day ) === 
-             caseInsensitive( story.chapters[ chapterIndex ].day ) ) {
+        if ( caseInsensitive( title ) === 
+             caseInsensitive( story.chapters[ chapterIndex ].title ) ) {
                  
             return chapterIndex;
         }

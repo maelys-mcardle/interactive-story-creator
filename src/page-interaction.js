@@ -29,7 +29,7 @@ const html = {
     storyPage: "#story-page",
     storyText: "#story-text",
     storyLocation: "#story-location",
-    storyDay: "#story-day",
+    storyChapterTitle: "#story-chapter-title",
     storyTime: "#story-time",
     storyChoices: "#story-choices",
     historyContainer: "#history-container",
