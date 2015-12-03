@@ -70,3 +70,11 @@ body {
 #tutorial-contents .well hr {
     border-color:DarkGray;
 }
+
+/* Put images to the right. */
+#story-page img,
+#tutorial-contents .well img {
+    max-width: 30%;
+    height: auto;
+    float: right;
+}

@@ -856,6 +856,37 @@ This text ~~will have a line run through it~~
     </ul>
 </div>
 
+<h2 id="tutorial-images">
+    Images
+</h2>
+
+<p>
+    Graphics can also be included in a story. The 
+    <code>![description](image url)</code> syntax is used to load them in.
+    Images are always placed on the right side of the text, and are resized
+    as to not take up the whole space. As an example:
+</p>
+
+<pre><code class="markdown">
+![Image of a pencil](pen.svg)
+
+Pens are wonderful instruments.
+</code></pre>
+
+<p>
+    Would produce the following:
+</p>
+
+<div class="well">
+    
+    <img alt="Image of a pencil" src="pen.svg">
+    
+    <p>
+        Pens are wonderful instruments.
+    </p>
+    
+</div>
+
 <h2 id="tutorial-horizontal-rule">
     Horizontal Rule
 </h2>
@@ -865,7 +896,6 @@ This text ~~will have a line run through it~~
     content. Starting the line with a <code>- - -</code> indicates that this is
     a horizontal rule. For instance, the following code:
 </p>
-
 
 <pre><code class="markdown">
 This is on top of the line.
