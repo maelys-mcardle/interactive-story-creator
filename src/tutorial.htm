@@ -863,26 +863,38 @@ This text ~~will have a line run through it~~
 <p>
     Graphics can also be included in a story. The 
     <code>![description](image url)</code> syntax is used to load them in.
-    Images are always placed on the right side of the text, and are resized
-    as to not take up the whole space. As an example:
+    Images are always placed on the right side of the text, and are limited
+    in width as to not take up the whole content. As an example:
 </p>
 
 <pre><code class="markdown">
 ![Image of a pencil](pen.svg)
 
 Pens are wonderful instruments.
+
+I think they're fantastic.
+
+Pens, pens, pens.
 </code></pre>
 
 <p>
     Would produce the following:
 </p>
 
-<div class="well">
+<div class="well clearfix">
     
     <img alt="Image of a pencil" src="pen.svg">
     
     <p>
         Pens are wonderful instruments.
+    </p>
+    
+    <p>
+        I think they're fantastic.
+    </p>
+    
+    <p>
+        Pens, pens, pens.
     </p>
     
 </div>
