@@ -1,8 +1,5 @@
 "use strict";
 
-const CHAPTER_TITLE_PAGE = 1;
-const STORY_PAGE = 2;
-
 function showStoryBeginning( story )
 {
     // Show the first page of the first chapter.
@@ -17,8 +14,13 @@ function showStoryChapterTitlePage( story, previousChoices, chapterIndex, pageIn
     var chapter = story.chapters[ chapterIndex ];
     
     // Show Chapter title page.
-    displayChapterTitleOrStoryPage( CHAPTER_TITLE_PAGE, function() {
+    fadeInChapterTitlePage( function() {
+        
+        // What to change while all content is temporarily invisible.
         $( html.chapterTitlePageName ).text( chapter.title );
+        
+        // Add history entry.
+        addChapterTitlePageToHistory( story, previousChoices, chapterIndex, pageIndex );
         
         // Pressing the continue button loads the page.
         $( html.chapterTitlePageButton ).unbind( "click" ).click( function() {
@@ -33,44 +35,50 @@ function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
     var page = chapter.pages[ pageIndex ];
  
     // Show story page.
-    displayChapterTitleOrStoryPage( STORY_PAGE, function() { 
+    fadeInStoryPage( function() {
+        
+        // What to change while all content is temporarily invisible.
         setStoryChapterTitle( chapter.title );
         setStoryTime( page.time );
         setStoryLocation( page.location );
         setStoryContent( page.texts, previousChoices );
         setStoryChoices( page.links, story, previousChoices, chapterIndex, pageIndex );
-        addEntryToHistory( story, previousChoices, chapterIndex, pageIndex );
+        addStoryPageToHistory( story, previousChoices, chapterIndex, pageIndex );
     });
 }
 
-function isVisible( selector )
+
+function fadeInStoryPage( changesToDoWhenContentInvisible )
 {
-    return $( selector ).is(":visible");
+    fadeInPage( html.storyPage, changesToDoWhenContentInvisible );
 }
 
-function displayChapterTitleOrStoryPage( pageType, changeVisibleContentCall )
+function fadeInChapterTitlePage( changesToDoWhenContentInvisible )
 {
-    // First the fade in function.
-    var fadeInFunction = function() {
-        
-        // This is the point when visible content is changed. When nothing
-        // is displayed.
-        changeVisibleContentCall();
-        
-        // Fade the story/chapter title in.
-        if ( pageType === STORY_PAGE ) {
-            $( html.storyPage ).fadeIn();
-        } else if ( pageType === CHAPTER_TITLE_PAGE ) {
-            $( html.chapterTitlePage ).fadeIn();
-        }
-    };
+    fadeInPage( html.chapterTitlePage, changesToDoWhenContentInvisible );
+}
     
+function fadeInPage( selectorToFadeIn, changesToDoWhenContentInvisible )
+{    
+    var fadeInFunction = function() {
+        changesToDoWhenContentInvisible();
+        $( selectorToFadeIn ).fadeIn();
+    };
+        
+    // Fade out the visible chapter title or story page, then fade 
+    // in the appropriate page.
     if ( isVisible( html.chapterTitlePage ) ) {
-        $( html.chapterTitlePage ).fadeOut( "fast", fadeInFunction );
+        
+        $( html.chapterTitlePage ).fadeOut( "fast",  fadeInFunction );
+        
     } else if ( isVisible( html.storyPage ) ) {
+        
         $( html.storyPage ).fadeOut( "fast", fadeInFunction );
+        
     } else {
+        
         fadeInFunction();
+        
     }
 }
 
@@ -208,3 +216,9 @@ function addStoryChoice( link, story, previousChoices, chapterIndex, pageIndex )
     // Add the element to the page.
     $( html.storyChoices ).append( linkElement );
 }
+
+function isVisible( selector )
+{
+    return $( selector ).is(":visible");
+}
+

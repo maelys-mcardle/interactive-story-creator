@@ -1,22 +1,42 @@
 "use strict";
 
-function addEntryToHistory( story, previousChoices, chapterIndex, pageIndex )
+function addStoryPageToHistory( story, previousChoices, chapterIndex, pageIndex )
 {
     var chapter = story.chapters[ chapterIndex ];
     var page = chapter.pages[ pageIndex ];
     
-    // Determine the title & description.
     var title = chapter.title + 
-                (( page.time !== "" ) ? ", " + page.time : "" ) +
-                ", " + page.location;
+                    (( page.time !== "" ) ? ", " + page.time : "" ) +
+                    ", " + page.location;
     var description = "Click to go back to this point in time.";
+    var buttonCallback = function() {
+        showStoryPage( story, previousChoices, chapterIndex, pageIndex );
+    }; 
     
-    var newHistoryLink = historyLink( title, description );
+    addEntryToHistory( title, description, buttonCallback );        
+}
+
+function addChapterTitlePageToHistory( story, previousChoices, chapterIndex, pageIndex )
+{
+    var chapter = story.chapters[ chapterIndex ];
+    var page = chapter.pages[ pageIndex ];
     
+    var title = chapter.title.toUpperCase();
+    var description = "Chapter title page.";
+    var buttonCallback = function() {
+        showStoryChapterTitlePage( story, previousChoices, chapterIndex, pageIndex );
+    };
+    
+    addEntryToHistory( title, description, buttonCallback );
+}
+
+function addEntryToHistory( title, description, buttonCallback )
+{    
     // Make clicking the new link bring the user to that point in
     // history. Go to the play page to show them.
+    var newHistoryLink = historyLink( title, description );
     newHistoryLink.click( function () {
-        showStoryPage( story, previousChoices, chapterIndex, pageIndex );
+        buttonCallback();
         goToPlayPage();
     });
     
@@ -29,7 +49,6 @@ function addEntryToHistory( story, previousChoices, chapterIndex, pageIndex )
     
     // Add the new link.
     $( html.historyLinks ).append( newHistoryLink );
-    
 }
 
 function resetHistory()
