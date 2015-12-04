@@ -50,6 +50,7 @@ const html = {
     chapterTitlePage: "#chapter-title-page",
     chapterTitlePageName: "#chapter-title-page-name",
     chapterTitlePageButton: "#chapter-title-page-button",
+    contentBody: "#content-body",
 };
 
 var global = {
@@ -84,26 +85,6 @@ function showCodeWarningDialog()
 function hideCodeWarningDialog()
 {
     $( html.codeWarningDialog ).modal( "hide" );
-}
-
-function showChapterTitlePage()
-{
-    $( html.chapterTitlePage ).show();
-}
-
-function hideChapterTitlePage()
-{
-    $( html.chapterTitlePage ).hide();
-}
-
-function showStoryPage()
-{
-    $( html.storyPage ).show();
-}
-
-function hideStoryPage()
-{
-    $( html.storyPage ).hide();
 }
 
 function showStoryUpdatedMessage()
@@ -255,20 +236,20 @@ function displayLoadedStory( story )
         $( html.loadStoryNavbarButton ).text("Edit Story");
         $( html.loadStoryNavbarButton ).unbind('click').click( showEditStoryDialog );
         
-        // Fade out the message that there's no story. Once gone, fade in the 
-        // generated story.
-        $( html.noStoryMessage ).fadeOut('slow', function() {
-            $( html.storyPage ).fadeIn();
-        });
-        
         // Reset the history.
         resetHistory();
         
+        // Fade out the message that there's no story. Once gone, fade in the 
+        // generated story.
+        $( html.noStoryMessage ).fadeOut('fast', function() {
+            
+            // Show the beginning of the story.
+            showStoryBeginning( story );
+        
+        });
+        
         // Go to the play page.
         goToPlayPage();
-        
-        // Show the first page.
-        showFirstStoryPage( story );
         
         // Show the story updated message.
         showStoryUpdatedMessage();

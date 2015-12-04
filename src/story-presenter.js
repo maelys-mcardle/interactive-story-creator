@@ -1,6 +1,9 @@
 "use strict";
 
-function showFirstStoryPage( story )
+const CHAPTER_TITLE_PAGE = 1;
+const STORY_PAGE = 2;
+
+function showStoryBeginning( story )
 {
     // Show the first page of the first chapter.
     if ( story.chapters.length ) {
@@ -12,35 +15,63 @@ function showStoryChapterTitlePage( story, previousChoices, chapterIndex, pageIn
 {
     // Set the chapter title.
     var chapter = story.chapters[ chapterIndex ];
-    $( html.chapterTitlePageName ).text( chapter.title );
     
-    // Pressing the continue button loads the page.
-    $( html.chapterTitlePageButton ).unbind( "click" ).click( function() {
-        hideChapterTitlePage();
-        showStoryPage( story, previousChoices, chapterIndex, pageIndex );
+    // Show Chapter title page.
+    displayChapterTitleOrStoryPage( CHAPTER_TITLE_PAGE, function() {
+        $( html.chapterTitlePageName ).text( chapter.title );
+        
+        // Pressing the continue button loads the page.
+        $( html.chapterTitlePageButton ).unbind( "click" ).click( function() {
+            showStoryPage( story, previousChoices, chapterIndex, pageIndex );
+        });
     });
-    
-    // Hide the story and show the chapter title.
-    hideStoryPage();
-    showChapterTitlePage();
 }
 
 function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
 {
     var chapter = story.chapters[ chapterIndex ];
     var page = chapter.pages[ pageIndex ];
-    
-    setStoryChapterTitle( chapter.title );
-    setStoryTime( page.time );
-    setStoryLocation( page.location );
-    setStoryContent( page.texts, previousChoices );
-    setStoryChoices( page.links, story, previousChoices, chapterIndex, pageIndex );
-    
-    addEntryToHistory( story, previousChoices, chapterIndex, pageIndex );
+ 
+    // Show story page.
+    displayChapterTitleOrStoryPage( STORY_PAGE, function() { 
+        setStoryChapterTitle( chapter.title );
+        setStoryTime( page.time );
+        setStoryLocation( page.location );
+        setStoryContent( page.texts, previousChoices );
+        setStoryChoices( page.links, story, previousChoices, chapterIndex, pageIndex );
+        addEntryToHistory( story, previousChoices, chapterIndex, pageIndex );
+    });
+}
+
+function isVisible( selector )
+{
+    return $( selector ).is(":visible");
+}
+
+function displayChapterTitleOrStoryPage( pageType, changeVisibleContentCall )
+{
+    // First the fade in function.
+    var fadeInFunction = function() {
         
-    // Hide chapter title, show story page.
-    hideChapterTitlePage();
-    showStoryPage();
+        // This is the point when visible content is changed. When nothing
+        // is displayed.
+        changeVisibleContentCall();
+        
+        // Fade the story/chapter title in.
+        if ( pageType === STORY_PAGE ) {
+            $( html.storyPage ).fadeIn();
+        } else if ( pageType === CHAPTER_TITLE_PAGE ) {
+            $( html.chapterTitlePage ).fadeIn();
+        }
+    };
+    
+    if ( isVisible( html.chapterTitlePage ) ) {
+        $( html.chapterTitlePage ).fadeOut( "fast", fadeInFunction );
+    } else if ( isVisible( html.storyPage ) ) {
+        $( html.storyPage ).fadeOut( "fast", fadeInFunction );
+    } else {
+        fadeInFunction();
+    }
 }
 
 function setStoryChapterTitle( title )
