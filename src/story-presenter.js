@@ -77,6 +77,9 @@ function fadeInPage( selectorToFadeIn, changesToDoWhenContentInvisible )
         
     } else {
         
+        // Nothing is visible. Must be on another page.
+        $( html.chapterTitlePage ).hide();
+        $( html.storyPage ).hide();
         fadeInFunction();
         
     }

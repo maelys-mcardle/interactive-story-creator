@@ -22,7 +22,7 @@ function addChapterTitlePageToHistory( story, previousChoices, chapterIndex, pag
     var page = chapter.pages[ pageIndex ];
     
     var title = chapter.title.toUpperCase();
-    var description = "Chapter title page.";
+    var description = "Click to go back to this point in time.";
     var buttonCallback = function() {
         showStoryChapterTitlePage( story, previousChoices, chapterIndex, pageIndex );
     };
