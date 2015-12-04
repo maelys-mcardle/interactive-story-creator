@@ -50,6 +50,7 @@ const html = {
     chapterTitlePage: "#chapter-title-page",
     chapterTitlePageName: "#chapter-title-page-name",
     chapterTitlePageButton: "#chapter-title-page-button",
+    chapterTitlePageCredits: "#chapter-title-page-credits",
     contentBody: "#content-body",
 };
 
@@ -228,9 +229,10 @@ function displayLoadedStory( story )
         document.title = storyTitle;
         $(".navbar-brand").text(storyTitle);
         
-        // Set the footer.
-        $( html.footerAuthorCopyright ).text(
-            '"' + storyTitle + '" by ' + storyAuthors + ".");
+        // Set the story credits.
+        var storyCredits = '"' + storyTitle + '" by ' + storyAuthors + ".";
+        $( html.chapterTitlePageCredits ).text( storyCredits );
+        $( html.footerAuthorCopyright ).text( storyCredits );
         
         // Update the navbar button to edit.
         $( html.loadStoryNavbarButton ).text("Edit Story");
