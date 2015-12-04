@@ -1052,6 +1052,13 @@ This is the room. You walk in.
     Art Gallery
 </h2>
 
+<p>
+    This example demonstrates the use of chapters ("Art Gallery" and "Downtown"
+    in the example below), and defining pages by location ("Entrance", 
+    "Monet Exhibit", etc.) It also demonstrates the use of links (choices) to
+    navigate between the pages.
+</p>
+
 <pre><code class="markdown">
 # Art Gallery
 
@@ -1096,6 +1103,76 @@ You see beautiful self-portraits.
 You are in front of the art gallery.
 
 [Walk into the art gallery](Art Gallery)
+
+</code></pre>
+
+
+<h2 id="tutorial-baking-example">
+    Baking
+</h2>
+
+<p>
+    This example demonstrates the use of choices to show some paragraphs
+    of text, as well as relative links ("last", "next".)
+</p>
+
+<pre><code class="markdown">
+# Home
+
+## Kitchen
+
+You are baking doughnuts for a potluck.
+
+The recipe calls for &frac34; cup of flour.
+
+[measure flour: Measure the flour carefully and pour it into the bowl](next)
+[wing flour: Wing it! Put as much flour as feels right](next)
+
+## Kitchen
+
+You continue baking the doughnuts.
+
+The recipe calls for one egg.
+
+[no egg: Ignore the recipe - don't put any eggs in](next)
+[one egg: Put one egg in the batter](next)
+
+## Kitchen
+
+You're ready to bake the doughnuts!
+
+The recipe calls for setting the oven to 350&deg;F
+
+[350F: Set the oven to 350&deg;F.](next)
+[450F: Go faster! Set the oven to 450&def;F and put in the doughnuts.](next) 
+
+## Kitchen
+
+You pull the doughnuts out.
+
+### Chose "450F"
+
+The fire alarm goes off with the smoke that bellows out of the oven.
+
+The doughnuts look burnt.
+
+You turn off the fire alarm and inspect the doughnuts more closely.
+
+### Chose "no egg"
+
+The doughnuts look powdery still. Not enough liquid in the batter.
+
+Or maybe too much flour.
+
+### Chose "egg"
+
+The doughnuts are moist. This is definitively edible.
+
+###
+
+You bite into the doughnut.
+
+[Try again!](Kitchen #1)
 
 </code></pre>
 
