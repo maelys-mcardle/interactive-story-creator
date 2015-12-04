@@ -85,17 +85,14 @@ function choiceInPreviousChoices( choiceToFind, allChoices )
         // Match found if for the given chapter/page, the right ID
         // was selected. In case the individual returned to this page
         // many times, we only take the most recent choice.
-        if ( choiceToFind.target.chapter === choiceToCompare.chapter &&
-             choiceToFind.target.page === choiceToCompare.page ) {
+        if ( ( choiceToFind.target.chapter === choiceToCompare.chapter &&
+               choiceToFind.target.page    === choiceToCompare.page ) ||
+             ( choiceToFind.target.path    === "" ) ) {
         
             if ( caseInsensitive( choiceToFind.id ) === 
                  caseInsensitive( choiceToCompare.id ) ) {
              
                 return true;
-            
-            } else {
-            
-                return false;
             
             }
         }
