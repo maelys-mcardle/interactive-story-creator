@@ -70,24 +70,20 @@ function addStoryText( text, previousChoices )
 
 function choiceInPreviousChoices( choiceToFind, allChoices )
 {
-    // If the choice to find has no target, there's nothing to look for.
-    if ( !choiceToFind.target.found ) {
-        return false;
-    }
-    
     // Look from the most recent choices backwards.
     for ( var choiceIndex = allChoices.length - 1;
               choiceIndex >= 0;
-              choiceIndex++ ) {
+              choiceIndex-- ) {
     
         var choiceToCompare = allChoices[ choiceIndex ];
         
         // Match found if for the given chapter/page, the right ID
         // was selected. In case the individual returned to this page
         // many times, we only take the most recent choice.
-        if ( ( choiceToFind.target.chapter === choiceToCompare.chapter &&
-               choiceToFind.target.page    === choiceToCompare.page ) ||
-             ( choiceToFind.target.path    === "" ) ) {
+        if ( ( choiceToFind.target.path    === "" ) || 
+             ( choiceToFind.target.found   === true &&
+               choiceToFind.target.chapter === choiceToCompare.chapter &&
+               choiceToFind.target.page    === choiceToCompare.page ) ) {
         
             if ( caseInsensitive( choiceToFind.id ) === 
                  caseInsensitive( choiceToCompare.id ) ) {
