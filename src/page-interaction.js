@@ -13,12 +13,12 @@ const constants = {
 };
 
 const html = {
-    footerAuthorCopyright: "#footerAuthorCopyright",
-    loadStoryNavbarButton: "#loadStoryNavbarButton",
-    createStoryJumbotronButton: "#createStoryJumbotronButton",
-    inputStoryTitle: "#inputStoryTitle",
-    inputStoryAuthors: "#inputStoryAuthors",
-    inputStoryCode: "#inputStoryCode",
+    footerAuthorCopyright: "#footer-author-copyright",
+    loadStoryNavbarButton: "#load-story-navbar-button",
+    createStoryJumbotronButton: "#create-story-jumbotron-button",
+    inputStoryTitle: "#input-story-title",
+    inputStoryAuthors: "#input-story-authors",
+    inputStoryCode: "#input-story-code",
     createEditStoryDialog: "#create-edit-story-dialog",
     createEditStoryDialogTitle: "#create-edit-story-dialog .modal-title",
     createEditStoryDialogActionButton: "#create-edit-story-dialog .modal-footer .btn-primary",
@@ -47,6 +47,9 @@ const html = {
     codeWarningList: "#code-warning-list",
     codeWarningEditCodeButton: "#code-warning-edit-code-button",
     codeWarningIgnoreButton: "#code-warning-ignore-button",
+    chapterTitlePage: "#chapter-title-page",
+    chapterTitlePageName: "#chapter-title-page-name",
+    chapterTitlePageButton: "#chapter-title-page-button",
 };
 
 var global = {
@@ -81,6 +84,26 @@ function showCodeWarningDialog()
 function hideCodeWarningDialog()
 {
     $( html.codeWarningDialog ).modal( "hide" );
+}
+
+function showChapterTitlePage()
+{
+    $( html.chapterTitlePage ).show();
+}
+
+function hideChapterTitlePage()
+{
+    $( html.chapterTitlePage ).hide();
+}
+
+function showStoryPage()
+{
+    $( html.storyPage ).show();
+}
+
+function hideStoryPage()
+{
+    $( html.storyPage ).hide();
 }
 
 function showStoryUpdatedMessage()

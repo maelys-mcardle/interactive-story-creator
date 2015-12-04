@@ -74,7 +74,7 @@
                             <a href="javascript:goToTutorialPage()">Tutorial</a>
                         </li>
                     </ul>
-                    <button type="button" id="loadStoryNavbarButton" 
+                    <button type="button" id="load-story-navbar-button" 
                             class="btn btn-danger navbar-btn navbar-right"></button>
                 </div>
             </div>
@@ -138,6 +138,23 @@
                     </div>
                 </div>
                 
+                <!-- Chapter Title Page -->
+                
+                <div id="chapter-title-page" class="jumbotron collapse">
+
+                    <h1 id="chapter-title-page-name">
+                        Chapter Title
+                    </h1>
+                    
+                    <p>
+                        <a id="chapter-title-page-button" 
+                           class="btn btn-primary btn-lg" 
+                           href="#" role="button">
+                            Continue
+                        </a>
+                    </p>
+                </div>
+            
                 <!-- Message when there's no story -->
                 
                 <div id="no-story-message" class="jumbotron">
@@ -152,7 +169,7 @@
                         to learn how to put stories together.
                     </p>
                     <p>
-                        <a id="createStoryJumbotronButton" class="btn btn-primary btn-lg" 
+                        <a id="create-story-jumbotron-button" class="btn btn-primary btn-lg" 
                            href="#" role="button">
                             Create Story
                         </a>
@@ -196,7 +213,7 @@
         <footer class="footer">
             <div class="container">
                 <p class="text-muted">
-                    <span id="footerAuthorCopyright"></span>
+                    <span id="footer-author-copyright"></span>
                     Code by Maëlys.
                 </p>
             </div>
@@ -217,22 +234,22 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
-                                <label for="inputStoryTitle">Story Title</label>
-                                <input class="form-control" id="inputStoryTitle" 
+                                <label for="input-story-title">Story Title</label>
+                                <input class="form-control" id="input-story-title" 
                                     data-toggle="tooltip" data-placement="bottom" 
                                     title="Filling this in is optional."
                                     placeholder="Story title goes here...">
                             </div>
                             <div class="form-group">
-                                <label for="inputStoryAuthors">Story Author(s)</label>
-                                <input class="form-control" id="inputStoryAuthors" 
+                                <label for="input-story-authors">Story Author(s)</label>
+                                <input class="form-control" id="input-story-authors" 
                                     data-toggle="tooltip" data-placement="bottom" 
                                     title="Filling this in is optional."
                                     placeholder="Author(s) for the story go here...">
                             </div>
                             <div class="form-group">
-                                <label for="inputStoryCode">Story Code</label>
-                                <textarea class="form-control" id="inputStoryCode" rows="8" 
+                                <label for="input-story-code">Story Code</label>
+                                <textarea class="form-control" id="input-story-code" rows="8" 
                                     placeholder="Paste the code for the story here..."></textarea>
                             </div>
                         </form>

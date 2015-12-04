@@ -4,8 +4,25 @@ function showFirstStoryPage( story )
 {
     // Show the first page of the first chapter.
     if ( story.chapters.length ) {
-        showStoryPage( story, [], 0, 0 );
+        showStoryChapterTitlePage( story, [], 0, 0 );
     }
+}
+
+function showStoryChapterTitlePage( story, previousChoices, chapterIndex, pageIndex )
+{
+    // Set the chapter title.
+    var chapter = story.chapters[ chapterIndex ];
+    $( html.chapterTitlePageName ).text( chapter.title );
+    
+    // Pressing the continue button loads the page.
+    $( html.chapterTitlePageButton ).unbind( "click" ).click( function() {
+        hideChapterTitlePage();
+        showStoryPage( story, previousChoices, chapterIndex, pageIndex );
+    });
+    
+    // Hide the story and show the chapter title.
+    hideStoryPage();
+    showChapterTitlePage();
 }
 
 function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
@@ -21,7 +38,9 @@ function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
     
     addEntryToHistory( story, previousChoices, chapterIndex, pageIndex );
         
-    return true;
+    // Hide chapter title, show story page.
+    hideChapterTitlePage();
+    showStoryPage();
 }
 
 function setStoryChapterTitle( title )
@@ -138,8 +157,18 @@ function addStoryChoice( link, story, previousChoices, chapterIndex, pageIndex )
                 page: pageIndex,
                 id: link.id });
                 
-            showStoryPage( story, newPreviousChoices, 
-                link.target.chapter, link.target.page );
+            if ( link.target.chapter !== chapterIndex ) {
+                
+                // If the target is in a different chapter, load 
+                // chapter title page.
+                showStoryChapterTitlePage( story, newPreviousChoices, 
+                    link.target.chapter, link.target.page );
+            } else {
+                
+                // If the target is in the same chapter, just load the page.
+                showStoryPage( story, newPreviousChoices, 
+                    link.target.chapter, link.target.page );
+            }
                 
         });
     
