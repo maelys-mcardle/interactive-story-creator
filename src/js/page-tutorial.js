@@ -31,35 +31,35 @@ function downloadTutorial()
 
 function generateTutorialTableOfContents()
 {
-    var parsedTableOfContents = 
-        parseHtmlHeaders( html.tutorialContents, [ "h1", "h2", "h3" ] );
+    var parsedTableOfContents = parseHtmlHeaders( html.tutorialContents );
         
     var tableOfContentsHtml = 
         tableOfContentsHtmlFromData( parsedTableOfContents, false );
-        
-    $( html.utorialTableOfContents ).html( tableOfContentsHtml );
+    
+    $( html.tutorialTableOfContents ).html( tableOfContentsHtml );
     
     $('body').scrollspy({ target: html.tutorialTableOfContents })
 }
 
-function parseHtmlHeaders( root, childLevels ) 
+function parseHtmlHeaders( root ) 
 {
+    var headers = $( root ).find( "h1, h2, h3" );
     var tableOfContentsEntry = [];
     
-    if ( childLevels.length > 0 ) {
-        $( root ).find( childLevels[0] ).each( function( childLevel ) {
-            
-            var title = $( childLevel ).text();
-            var id = $( childLevel ).attr( "id" );
-            var children = tableOfContentsLevel( this, childLevels.slice( 1 ) );
-            
+    headers.forEach( function( header ) {
+       
+        var level = $( header ).tagName;
+        var title = $( header ).text();
+        var id = $( header ).attr( "id" );
+       
+        if ( level === "h1" ) {
             tableOfContentsEntry.push({
-                title: title,
-                id: id,
-                children: children,
+                    title: title,
+                    id: id,
+                    children: [],
             });
-        });
-    }
+        }
+    });
     
     return tableOfContentsEntry;
 }
