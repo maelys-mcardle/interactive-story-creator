@@ -25,11 +25,35 @@ function downloadTutorial()
         });
         
         // Load the table of contents.
-        loadTutorialTableOfContents();
+        generateTutorialTableOfContents();
     });
 }
 
-function loadTutorialTableOfContents()
+function generateTutorialTableOfContents()
 {
-    
+    var parsedTableOfContents = 
+        parseHtmlHeaders( html.tutorialContents, [ "h1", "h2", "h3" ] );
 }
+
+function parseHtmlHeaders( root, childLevels ) 
+{
+    var tableOfContentsEntry = [];
+    
+    if ( levels.length > 0 ) {
+        $( root ).children( childLevels[0] ).each( function( level ) {
+            
+            var title = $( level ).text();
+            var id = $( level ).attr( "id" );
+            var children = tableOfContentsLevel( this, childLevels.slice( 1 ) );
+            
+            tableOfContentsEntry.push({
+                title: title,
+                id: id,
+                children: children,
+            });
+        }
+    }
+    
+    return tableOfContentsEntry;
+}
+
