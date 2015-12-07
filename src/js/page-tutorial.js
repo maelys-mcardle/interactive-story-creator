@@ -47,11 +47,11 @@ function parseHtmlHeaders( root )
     
     $( root ).find( "h1, h2, h3" ).each( function( index, header ) {
        
-        var level = $( header ).tagName;
+        var level = $( header ).prop( "tagName" );
         var title = $( header ).text();
         var id = $( header ).attr( "id" );
        
-        if ( level === "h1" ) {
+        if ( level === "H1" ) {
             tableOfContentsEntry.push({
                     title: title,
                     id: id,
