@@ -58,7 +58,7 @@ function parseHtmlHeaders( root, childLevels )
                 id: id,
                 children: children,
             });
-        }
+        });
     }
     
     return tableOfContentsEntry;
