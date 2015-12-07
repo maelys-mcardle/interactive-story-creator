@@ -47,7 +47,7 @@ function parseHtmlHeaders( root, childLevels )
     var tableOfContentsEntry = [];
     
     if ( childLevels.length > 0 ) {
-        $( root ).children( childLevels[0] ).each( function( childLevel ) {
+        $( root ).find( childLevels[0] ).each( function( childLevel ) {
             
             var title = $( childLevel ).text();
             var id = $( childLevel ).attr( "id" );
