@@ -46,11 +46,11 @@ function parseHtmlHeaders( root, childLevels )
 {
     var tableOfContentsEntry = [];
     
-    if ( levels.length > 0 ) {
-        $( root ).children( childLevels[0] ).each( function( level ) {
+    if ( childLevels.length > 0 ) {
+        $( root ).children( childLevels[0] ).each( function( childLevel ) {
             
-            var title = $( level ).text();
-            var id = $( level ).attr( "id" );
+            var title = $( childLevel ).text();
+            var id = $( childLevel ).attr( "id" );
             var children = tableOfContentsLevel( this, childLevels.slice( 1 ) );
             
             tableOfContentsEntry.push({
