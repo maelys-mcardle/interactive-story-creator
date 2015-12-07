@@ -137,10 +137,8 @@ function goToHistoryPage()
 
 function goToTutorialPage()
 {
-    // Download tutorial contents if they haven't been already.
-    if ( $( html.tutorialContents ).text() === "" ) {
-        fetchTutorial();
-    }
+    // Load tutorial contents if they haven't been already.
+    loadTutorial();
     
     // Show the tutorial.
     $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
@@ -148,23 +146,6 @@ function goToTutorialPage()
     $( html.storyContainer ).hide();
     $( html.historyContainer ).hide();
     $( html.tutorialContainer ).show();
-}
-
-function fetchTutorial()
-{
-    var tutorialContentsElement = $( html.tutorialContents )[0];
-    var loadingAnimation = new Spinner().spin( tutorialContentsElement );
-    
-    $.get( constants.tutorialUrl, function( data ) {
-        
-        // Tutorial downloaded. Paste it.
-        $( html.tutorialContents ).html( data );
-   
-        // Apply syntax highlighting.
-        $('pre code').each(function(i, block) {
-            hljs.highlightBlock(block);
-        });
-    });
 }
 
 function loadStory()
