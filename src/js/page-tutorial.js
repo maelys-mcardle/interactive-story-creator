@@ -43,10 +43,9 @@ function generateTutorialTableOfContents()
 
 function parseHtmlHeaders( root ) 
 {
-    var headers = $( root ).find( "h1, h2, h3" );
     var tableOfContentsEntry = [];
     
-    headers.forEach( function( header ) {
+    $( root ).find( "h1, h2, h3" ).each( function( index, header ) {
        
         var level = $( header ).tagName;
         var title = $( header ).text();
