@@ -33,6 +33,13 @@ function generateTutorialTableOfContents()
 {
     var parsedTableOfContents = 
         parseHtmlHeaders( html.tutorialContents, [ "h1", "h2", "h3" ] );
+        
+    var tableOfContentsHtml = 
+        tableOfContentsHtmlFromData( parsedTableOfContents, false );
+        
+    $( html.utorialTableOfContents ).html( tableOfContentsHtml );
+    
+    $('body').scrollspy({ target: html.tutorialTableOfContents })
 }
 
 function parseHtmlHeaders( root, childLevels ) 
@@ -57,3 +64,23 @@ function parseHtmlHeaders( root, childLevels )
     return tableOfContentsEntry;
 }
 
+function tableOfContentsHtmlFromData( tableOfContents, isFixed )
+{
+    var listItems = tableOfContents.map( function( entry ) {
+        return '<li>' + 
+               '<a href="#' + entry.id + '">' + 
+                entry.title +
+                tableOfContentsHtmlFromData( entry.children, true ) + 
+               '</a>' + 
+               '</li>';
+    });
+    
+    if ( listItems.length > 0 ) {
+        var fixedClass = ( isFixed ) ? "fixed" : "";
+        return '<ul class="nav nav-stacked ' + fixedClass + '">' + 
+                listItems.join() + 
+                '</ul>';
+    }
+    
+    return "";
+}

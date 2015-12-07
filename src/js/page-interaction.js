@@ -43,6 +43,7 @@ const html = {
     tutorialNavbarLink: "#tutorial-navbar-link",
     tutorialContainer: "#tutorial-container",
     tutorialContents: "#tutorial-contents",
+    tutorialTableOfContents: "#tutorial-table-of-contents",
     codeWarningDialog: "#code-warning-dialog",
     codeWarningList: "#code-warning-list",
     codeWarningEditCodeButton: "#code-warning-edit-code-button",
