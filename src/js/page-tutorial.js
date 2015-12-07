@@ -20,7 +20,7 @@ function downloadTutorial()
    
         // Apply syntax highlighting. 
         // But not for things inside the well, which is used for examples.
-        $(':not(well) pre code').each(function(i, block) {
+        $(':not(.well) pre code').each(function(i, block) {
             hljs.highlightBlock(block);
         });
         
