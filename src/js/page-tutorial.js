@@ -59,7 +59,8 @@ function parseHtmlHeaders( root )
         
         // Assign ID if none exists.
         if ( !id ) {
-            $( header ).attr( "id", "tutorial-header-" + index );
+            id = "tutorial-header-" + index;
+            $( header ).attr( "id", id );
         }
        
         // Populate the tree.
