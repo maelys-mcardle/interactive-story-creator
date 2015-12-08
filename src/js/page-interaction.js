@@ -1,8 +1,8 @@
 "use strict";
 
 const defaultStory = {
-    title: "One Week",
-    authors: "Eliot, Ollie & Maëlys",
+    title: "Untitled Story",
+    authors: "Anonymous",
 };
 
 const constants = {
