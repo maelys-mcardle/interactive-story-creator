@@ -43,11 +43,7 @@ function generateTutorialTableOfContents()
         offset: 40
     });
     
-    $( html.tutorialTableOfContentsList ).affix({
-        offset: { 
-            top: 10
-        }
-    });
+    $( html.tutorialTableOfContentsList ).affix();
 }
 
 function parseHtmlHeaders( root ) 
