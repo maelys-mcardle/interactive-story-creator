@@ -10,10 +10,13 @@ function loadTutorial()
 
 function downloadTutorial()
 {
-    var tutorialContentsElement = $( html.tutorialContents )[0];
-    var loadingAnimation = new Spinner().spin( tutorialContentsElement );
+    var tutorialContainerElement = $( html.tutorialContainer )[0];
+    var loadingAnimation = new Spinner().spin( tutorialContainerElement );
     
     $.get( constants.tutorialUrl, function( data ) {
+        
+        // Remove the loading animation.
+        loadingAnimation.remove();
         
         // Tutorial downloaded. Paste it.
         $( html.tutorialContents ).html( data );
