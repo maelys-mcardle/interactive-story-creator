@@ -43,7 +43,7 @@ function generateTutorialTableOfContents()
 
 function parseHtmlHeaders( root ) 
 {
-    var tableOfContentsEntry = [];
+    var tableOfContentsEntries = [];
     
     $( root ).find( "h1, h2, h3" ).each( function( index, header ) {
        
@@ -52,15 +52,33 @@ function parseHtmlHeaders( root )
         var id = $( header ).attr( "id" );
        
         if ( level === "H1" ) {
-            tableOfContentsEntry.push({
-                    title: title,
-                    id: id,
-                    children: [],
-            });
+            tableOfContentsEntries.push(
+                tableOfContentsEntry( title, id, [] ) );
+        } else if ( level === "H2" ) {
+            var latestEntryH1 = tableOfContentsEntries.pop();
+            latestEntryH1.children.push( 
+                tableOfContentsEntry( title, id, [] ) );
+            tableOfContentsEntries.push( latestEntryH1 );
+        } else if ( level === "H3" ) {
+            var latestEntryH1 = tableOfContentsEntries.pop();
+            var latestEntryH2 = latestEntryH1.children.pop();
+            latestEntryH2.children.push( 
+                tableOfContentsEntry( title, id, [] ) );
+            latestEntryH1.children.push( latestEntryH2 );
+            tableOfContentsEntries.push( latestEntryH1 );
         }
     });
     
-    return tableOfContentsEntry;
+    return tableOfContentsEntries;
+}
+
+function tableOfContentsEntry( title, id, children )
+{
+    return {
+        title: title,
+        id: id,
+        children: children,
+    };
 }
 
 function tableOfContentsHtmlFromData( tableOfContents, isFixed )
