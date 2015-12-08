@@ -38,7 +38,16 @@ function generateTutorialTableOfContents()
     
     $( html.tutorialTableOfContents ).html( tableOfContentsHtml );
     
-    $('body').scrollspy({ target: html.tutorialTableOfContents })
+    $('body').scrollspy({
+        target: '.bs-docs-sidebar',
+        offset: 40
+    });
+    
+    $( html.tutorialTableOfContents + " > ul" ).affix({
+        offset: { 
+            top: 60
+        }
+    });
 }
 
 function parseHtmlHeaders( root ) 
@@ -59,13 +68,6 @@ function parseHtmlHeaders( root )
             latestEntryH1.children.push( 
                 tableOfContentsEntry( title, id, [] ) );
             tableOfContentsEntries.push( latestEntryH1 );
-        } else if ( level === "H3" ) {
-            var latestEntryH1 = tableOfContentsEntries.pop();
-            var latestEntryH2 = latestEntryH1.children.pop();
-            latestEntryH2.children.push( 
-                tableOfContentsEntry( title, id, [] ) );
-            latestEntryH1.children.push( latestEntryH2 );
-            tableOfContentsEntries.push( latestEntryH1 );
         }
     });
     
@@ -81,20 +83,19 @@ function tableOfContentsEntry( title, id, children )
     };
 }
 
-function tableOfContentsHtmlFromData( tableOfContents, isFixed )
+function tableOfContentsHtmlFromData( tableOfContents )
 {
     var listItems = tableOfContents.map( function( entry ) {
         return '<li>' + 
                '<a href="#' + entry.id + '">' + 
                 entry.title +
-                tableOfContentsHtmlFromData( entry.children, true ) + 
+                tableOfContentsHtmlFromData( entry.children ) + 
                '</a>' + 
                '</li>';
     });
     
     if ( listItems.length > 0 ) {
-        var fixedClass = ( isFixed ) ? "fixed" : "";
-        return '<ul class="nav nav-stacked ' + fixedClass + '">' + 
+        return '<ul class="nav nav-stacked">' + 
                 listItems.join( constants.newlineCharacter ) + 
                 '</ul>';
     }
