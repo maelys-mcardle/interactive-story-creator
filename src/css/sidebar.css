@@ -60,12 +60,6 @@
     display: block;           
 }
 
-@media screen and (max-width: 500px){
-    .bs-docs-sidebar {
-        display:none
-    }
-}
-
 .affix {
     top: 20px;
 }
