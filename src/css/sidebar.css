@@ -65,3 +65,7 @@
         display:none
     }
 }
+
+.affix {
+    top: 20px;
+}

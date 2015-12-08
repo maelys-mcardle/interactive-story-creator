@@ -50,12 +50,19 @@ function parseHtmlHeaders( root )
 {
     var tableOfContentsEntries = [];
     
-    $( root ).find( "h1, h2, h3" ).each( function( index, header ) {
+    $( root ).find( "h1, h2" ).each( function( index, header ) {
        
+        // Get the header properties.
         var level = $( header ).prop( "tagName" );
         var title = $( header ).text();
         var id = $( header ).attr( "id" );
+        
+        // Assign ID if none exists.
+        if ( !id ) {
+            $( header ).attr( "id", "tutorial-header-" + index );
+        }
        
+        // Populate the tree.
         if ( level === "H1" ) {
             tableOfContentsEntries.push(
                 tableOfContentsEntry( title, id, [] ) );
