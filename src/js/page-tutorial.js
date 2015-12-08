@@ -43,7 +43,7 @@ function generateTutorialTableOfContents()
     
     $( 'body' ).scrollspy({
         target: html.sidebarClass,
-        offset: 40
+        offset: 100
     });
     
     $( html.tutorialTableOfContentsList ).affix({
