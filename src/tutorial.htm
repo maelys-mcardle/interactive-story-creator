@@ -274,87 +274,6 @@ paragraph of text.
     for more details.
 </p>
 
-<h2 id="tutorial-optional-paragraphs">
-    Optional Paragraphs
-</h2>
-
-<p>
-    Some paragraphs of text can be made to appear only when a specific
-    choice was made on an earlier page. These special paragraphs are preceded
-    by a line that mentions what page the choice was made on, and what link
-    was selected. These are of the format <code>### Chose "identifier"</code> or
-    <code>### Chose "identifier" on <em>page</em></code>. An empty 
-    <code>###</code> marks the end of this optional text. For instance:
-</p>
-
-<pre><code class="markdown">
-# Tuesday
-
-## Morning: Bathroom
-
-You look at yourself in the mirror.
-
-[brush teeth: Brush your teeth](next)
-[skip brushing: Skip brushing your teeth](next)
-
-## Afternoon: Dentist Office
-
-You sit down in the waiting room.
-
-### Chose "brush teeth"
-
-You pass your tongue over your teeth. They feel clean.
-
-### Chose "skip brushing"
-
-You pass your tongue over your teeth. There's something caught 
-in between a pair of them. You try to remove it covertly with
-your tongue.
-
-###
-
-You look around and pick up a magazine.
-
-</code></pre>
-
-<p>
-    In the previous example, the sentences "<em>You pass your tongue over your 
-    teeth. They feel clean.</em>" would only appear for readers that had 
-    clicked on the choice to brush their teeth.
-</p>
-
-<p>
-    Whene multiple choices are together, the terminating <code>###</code>
-    can be skipped for all but the last choice. Here's another example, this
-    time also specifying the page on which the colour was chosen.
-</p>
-
-<pre><code class="markdown">
-# Friday
-
-## Afternoon: Paint Store
-
-You're trying to decide on a colour to paint the living room.
-
-[red: Pick red paint](Saturday: Living Room)
-[blue: Pick blue paint](Saturday: Living Room)
-
-# Saturday
-
-## Day: Living Room
-
-### Chose "red" on Friday : Afternoon : Paint Store
-
-You paint the wall red.
-
-### Chose "blue" on Friday : Afternoon : Paint Store
-
-You paint the wall blue.
-
-###
-
-</code></pre>
-
 <div class="page-header">
     <h1 id="tutorial-links">
         Links
@@ -658,7 +577,6 @@ The airplane lands at JFK. It's sunny out.
     given time and/or location.
 </p>
 
-
 <pre><code class="markdown">
 # Friday
 
@@ -710,6 +628,90 @@ You're in English, the second class of the day.
 [Time travel back to the morning](last #2)
 
 </code></pre>
+
+<div class="page-header">
+    <h2 id="tutorial-optional-paragraphs">
+        Optional Paragraphs
+    </h2>
+</div>
+
+<p>
+    Some paragraphs of text can be made to appear only when a specific
+    choice was made on an earlier page. These special paragraphs are preceded
+    by a line that mentions what page the choice was made on, and what link
+    was selected. These are of the format <code>### Chose "identifier"</code> or
+    <code>### Chose "identifier" on <em>page</em></code>. An empty 
+    <code>###</code> marks the end of this optional text. For instance:
+</p>
+
+<pre><code class="markdown">
+# Tuesday
+
+## Morning: Bathroom
+
+You look at yourself in the mirror.
+
+[brush teeth: Brush your teeth](next)
+[skip brushing: Skip brushing your teeth](next)
+
+## Afternoon: Dentist Office
+
+You sit down in the waiting room.
+
+### Chose "brush teeth"
+
+You pass your tongue over your teeth. They feel clean.
+
+### Chose "skip brushing"
+
+You pass your tongue over your teeth. There's something caught 
+in between a pair of them. You try to remove it covertly with
+your tongue.
+
+###
+
+You look around and pick up a magazine.
+
+</code></pre>
+
+<p>
+    In the previous example, the sentences "<em>You pass your tongue over your 
+    teeth. They feel clean.</em>" would only appear for readers that had 
+    clicked on the choice to brush their teeth.
+</p>
+
+<p>
+    Whene multiple choices are together, the terminating <code>###</code>
+    can be skipped for all but the last choice. Here's another example, this
+    time also specifying the page on which the colour was chosen.
+</p>
+
+<pre><code class="markdown">
+# Friday
+
+## Afternoon: Paint Store
+
+You're trying to decide on a colour to paint the living room.
+
+[red: Pick red paint](Saturday: Living Room)
+[blue: Pick blue paint](Saturday: Living Room)
+
+# Saturday
+
+## Day: Living Room
+
+### Chose "red" on Friday : Afternoon : Paint Store
+
+You paint the wall red.
+
+### Chose "blue" on Friday : Afternoon : Paint Store
+
+You paint the wall blue.
+
+###
+
+</code></pre>
+
 <div class="page-header">
     <h1 id="tutorial-format-text">
         Formatting Text
