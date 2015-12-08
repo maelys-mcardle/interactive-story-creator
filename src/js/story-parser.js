@@ -1,7 +1,5 @@
 "use strict";
 
-const NEWLINE_CHARACTER = "\n";
-
 /*
  * # Level 1 Headers are Chapters (they get title pages)
  * 
@@ -25,7 +23,7 @@ function parseStory( storyCode )
     };
     
     // Go line by line.  
-    storyCode.split( NEWLINE_CHARACTER ).forEach( function ( line ) {
+    storyCode.split( constants.newlineCharacter ).forEach( function ( line ) {
         
         var trimmedLine = rightTrim( line );
         
@@ -175,7 +173,7 @@ function startNewText( story, textInfo )
 
 function appendCurrentText( story, line )
 {
-    story.currentText.content += line + NEWLINE_CHARACTER;
+    story.currentText.content += line + constants.newlineCharacter;
     return story;
 }
 

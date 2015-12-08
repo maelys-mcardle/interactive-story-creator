@@ -95,7 +95,7 @@ function tableOfContentsHtmlFromData( tableOfContents, isFixed )
     if ( listItems.length > 0 ) {
         var fixedClass = ( isFixed ) ? "fixed" : "";
         return '<ul class="nav nav-stacked ' + fixedClass + '">' + 
-                listItems.join() + 
+                listItems.join( constants.newlineCharacter ) + 
                 '</ul>';
     }
     

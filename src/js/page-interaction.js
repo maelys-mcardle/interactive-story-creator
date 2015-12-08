@@ -6,6 +6,7 @@ const defaultStory = {
 };
 
 const constants = {
+    newlineCharacter: "\n",
     updatedMessageDuration: 3000,
     errorMessageDuration: 5000,
     activeLinkClass: "active",
