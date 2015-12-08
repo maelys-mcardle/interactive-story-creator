@@ -38,14 +38,14 @@ function generateTutorialTableOfContents()
     
     $( html.tutorialTableOfContents ).html( tableOfContentsHtml );
     
-    $('body').scrollspy({
-        target: '.bs-docs-sidebar',
+    $( 'body' ).scrollspy({
+        target: html.sidebarClass,
         offset: 40
     });
     
-    $( html.tutorialTableOfContents + " > ul" ).affix({
+    $( html.tutorialTableOfContentsList ).affix({
         offset: { 
-            top: 60
+            top: 10
         }
     });
 }

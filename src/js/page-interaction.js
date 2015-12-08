@@ -45,6 +45,7 @@ const html = {
     tutorialContainer: "#tutorial-container",
     tutorialContents: "#tutorial-contents",
     tutorialTableOfContents: "#tutorial-table-of-contents",
+    tutorialTableOfContentsList: "#tutorial-table-of-contents > ul",
     codeWarningDialog: "#code-warning-dialog",
     codeWarningList: "#code-warning-list",
     codeWarningEditCodeButton: "#code-warning-edit-code-button",
@@ -54,6 +55,7 @@ const html = {
     chapterTitlePageButton: "#chapter-title-page-button",
     chapterTitlePageCredits: "#chapter-title-page-credits",
     contentBody: "#content-body",
+    sidebarClass: ".bs-docs-sidebar",
 };
 
 var global = {
