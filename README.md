@@ -1,4 +1,4 @@
-# Interactive Story Creator
+# Story Creator
 
 ## Description
 
@@ -27,5 +27,5 @@ requests to local resources.
 
 ## Writing Interactive Fiction
 
-See the `Tutorial` link on the creator for instructions on how to
+See the `Documentation` link on the creator for instructions on how to
 write interactive fiction with this tool.
