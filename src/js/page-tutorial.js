@@ -16,7 +16,7 @@ function downloadTutorial()
     $.get( constants.tutorialUrl, function( data ) {
         
         // Remove the loading animation.
-        loadingAnimation.remove();
+        loadingAnimation.stop();
         
         // Tutorial downloaded. Paste it.
         $( html.tutorialContents ).html( data );
