@@ -31,7 +31,7 @@
         <!-- JS & CSS for Story Creator -->
 
         <script src="js/page-interaction.js"></script>
-        <script src="js/page-tutorial.js"></script>
+        <script src="js/page-documentation.js"></script>
         <script src="js/story-common.js"></script>
         <script src="js/story-history.js"></script>
         <script src="js/story-linker.js"></script>
@@ -72,8 +72,8 @@
                         <li id="history-navbar-link">
                             <a href="javascript:goToHistoryPage()">History</a>
                         </li>
-                        <li id="tutorial-navbar-link">
-                            <a href="javascript:goToTutorialPage()">Tutorial</a>
+                        <li id="documentation-navbar-link">
+                            <a href="javascript:goToDocumentationPage()">Documentation</a>
                         </li>
                     </ul>
                     <button type="button" id="load-story-navbar-button" 
@@ -175,7 +175,7 @@
                     <p>                        
                         No story has been submitted yet! Click on the button below 
                         to write your own, or view the
-                        <a href="javascript:goToTutorialPage()">tutorial here</a> 
+                        <a href="javascript:goToDocumentationPage()">documentation here</a> 
                         to learn how to put stories together.
                     </p>
                     <p>
@@ -210,11 +210,11 @@
                 
             </div>
             
-            <!-- Tutorial -->
+            <!-- Documentation -->
             
-            <div id="tutorial-container" class="row collapse">
-                <div id="tutorial-contents" class="col-xs-12 col-sm-9"></div>
-                <nav id="tutorial-table-of-contents" class="hidden-xs col-sm-3 bs-docs-sidebar"></nav>
+            <div id="documentation-container" class="row collapse">
+                <div id="documentation-contents" class="col-xs-12 col-sm-9"></div>
+                <nav id="documentation-table-of-contents" class="hidden-xs col-sm-3 bs-docs-sidebar"></nav>
             </div>            
 
         </div>

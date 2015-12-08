@@ -1,25 +1,25 @@
 "use strict";
 
-function loadTutorial()
+function loadDocumentation()
 {
-    // Only download tutorial if it hasn't been obtained already.
-    if ( $( html.tutorialContents ).text() === "" ) {
-        downloadTutorial();
+    // Only download documentation if it hasn't been obtained already.
+    if ( $( html.documentationContents ).text() === "" ) {
+        downloadDocumentation();
     }
 }
 
-function downloadTutorial()
+function downloadDocumentation()
 {
-    var tutorialContainerElement = $( html.tutorialContainer )[0];
-    var loadingAnimation = new Spinner().spin( tutorialContainerElement );
+    var documentationContainerElement = $( html.documentationContainer )[0];
+    var loadingAnimation = new Spinner().spin( documentationContainerElement );
     
-    $.get( constants.tutorialUrl, function( data ) {
+    $.get( constants.documentationUrl, function( data ) {
         
         // Remove the loading animation.
         loadingAnimation.stop();
         
-        // Tutorial downloaded. Paste it.
-        $( html.tutorialContents ).html( data );
+        // Documentation downloaded. Paste it.
+        $( html.documentationContents ).html( data );
    
         // Apply syntax highlighting. 
         // But not for things inside the well, which is used for examples.
@@ -28,25 +28,25 @@ function downloadTutorial()
         });
         
         // Load the table of contents.
-        generateTutorialTableOfContents();
+        generateDocumentationTableOfContents();
     });
 }
 
-function generateTutorialTableOfContents()
+function generateDocumentationTableOfContents()
 {
-    var parsedTableOfContents = parseHtmlHeaders( html.tutorialContents );
+    var parsedTableOfContents = parseHtmlHeaders( html.documentationContents );
         
     var tableOfContentsHtml = 
         tableOfContentsHtmlFromData( parsedTableOfContents, false );
     
-    $( html.tutorialTableOfContents ).html( tableOfContentsHtml );
+    $( html.documentationTableOfContents ).html( tableOfContentsHtml );
     
     $( 'body' ).scrollspy({
         target: html.sidebarClass,
         offset: 100
     });
     
-    $( html.tutorialTableOfContentsList ).affix({
+    $( html.documentationTableOfContentsList ).affix({
         offset: {
             top: 100,
         }
@@ -66,7 +66,7 @@ function parseHtmlHeaders( root )
         
         // Assign ID if none exists.
         if ( !id ) {
-            id = "tutorial-header-" + index;
+            id = "documentation-header-" + index;
             $( header ).attr( "id", id );
         }
        

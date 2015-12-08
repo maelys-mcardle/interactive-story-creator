@@ -4,25 +4,42 @@
     </h1>
 </div>
 
+<h2>
+    Description
+</h2>
+
 <p>
-    This tutorial will help guide you on how to write code to make 
-    interactive fiction.
+    The Story Creator is a free tool to make
+    <a href="https://en.wikipedia.org/wiki/Interactive_novel">interactive 
+    novels</a> that can be played from a web browser. It creates the online
+    equivalent of the "choose your own adventure" books.
+</p>
+
+<h2>
+    Source Code
+</h2>
+
+<p>
+    The code for the Story Creator is open-source and free to be copied,
+    tinkered with and shared to anyone. It's released under the 
+    <a href="https://opensource.org/licenses/MIT">MIT License</a>.
 </p>
 
 <p>
-    The stories are written using 
-    <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>,
-    a simple text formatting language. With the story creator, this
-    formatting also conveys extra meaning which is used in generating
-    the interactive fiction website. 
+    The source code for the Story Creator is available
+    <a href="https://github.com/maelys-mcardle/interactive-story-creator">here</a>.
 </p>
 
+<h2>
+    Writing Stories
+</h2>
+
 <p>
-    Here's what a snippet of story code looks like:
+    The interactive novels are written in "story code", which looks like this:
 </p>
 
 <pre><code class="markdown">
-# Monday
+# Saturday
 
 ## Morning: Bedroom
 
@@ -31,34 +48,77 @@ see that it's 8:00 AM.
 
 *8:00AM!!* 
 
-Your shift started at 7:00! You must have forgotten to
-set the time correctly again.
+Your shift starts in 15 minutes!
 
 [snooze: Forget it. You set the alarm to snooze.](next)
-[get up: Get up and rush to work.](next)
+[get up: Get up and rush to work.](Work)
+
+## Morning: Bedroom
+
+You look to your alarm. It's now 9:42 AM.
+
+Alright, time to get up.
+
+[Get to work](next)
 
 ## Morning: Work
 
-Your boss looks at you.
+Your boss looks to you.
 
-### Chose "snooze" on last
+### Chose "snooze"
 
-"You're' three hours late!"
+"You're fired!", he shouts.
 
-### Chose "get up" on last
+### Chose "get up"
 
-"You're an hour and a half late!'"
+"You're late!", he shouts.
+
+He continues, "I'm writing you up."
 
 ###
 
-You look to your watch. So it was.
-
-[Decide something else](last)
-
+Yeah.
 </code></pre>
 
+<p>
+    If the code seems a bit recognizeable, it's because it uses
+    <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>,
+    a simple and popular language used to format text. With the Story Creator,
+    this formatting also conveys extra meaning which is used in generating
+    the interactive fiction website.
+</p>
+
+<p>
+    How the story code language works is explained in the following sections.
+</p>
+
+<h2>
+    Story Structure
+</h2>
+
+<p>
+    Stories written for the Story Creator are structured into 
+    <a href="#documentation-chapters">chapters</a> and
+    <a href="#documentation-pages">pages</a>.
+</p>
+
+<p>
+    Each story contains one or more chapters, and each chapter contains
+    one or more pages, just like any old book. When someone plays through an
+    interactive novel made with the Story Creator, only one page is shown at a
+    time.
+</p>
+
+<p>
+    Each page contains some <a href="#documentation-text">text</a> and one or 
+    more <a href="#documentation-choices">choices</a>. Choices are links that
+    bring the reader to another page. These choices can also be remembered, so
+    that <a href="#documentation-choice-text">different text can be 
+    presented</a> depending on what choices were made.
+</p>
+
 <div class="page-header">
-    <h1>
+    <h1 id="documentation-chapters">
         Chapters
     </h1>
 </div>
@@ -122,7 +182,7 @@ You look to your watch. So it was.
 
 
 <div class="page-header">
-    <h1>
+    <h1 id="documentation-pages">
         Pages
     </h1>
 </div>
@@ -190,7 +250,7 @@ You look to your watch. So it was.
 
 </code></pre>
 
-<h2>
+<h2 id="documentation-text">
     Text
 </h2>
 
@@ -217,10 +277,10 @@ paragraph of text.
 
 <p>
     The text in the paragraphs can also be formatted. See the section on
-    <a href="#tutorial-format-text">Formatting Text</a> for more details.
+    <a href="#documentation-format-text">Formatting Text</a> for more details.
 </p>
 
-<h2>
+<h2 id="documentation-choices">
     Links (Choices)
 </h2>
 
@@ -270,12 +330,12 @@ paragraph of text.
 </div>
 
 <p>
-    See the section on <a href="tutorial-links">Links</a> 
+    See the section on <a href="documentation-links">Links</a> 
     for more details.
 </p>
 
 <div class="page-header">
-    <h1 id="tutorial-links">
+    <h1 id="documentation-links">
         Links
     </h1>
 </div>
@@ -284,7 +344,7 @@ paragraph of text.
     Links are used to bring readers from one page to another. They're presented
     as one or more choices for the user to click on. These choices can be
     remembered, and different content on a given page can be shown accordingly
-    (see <a href="#tutorial-choice-text">Choice Dependent Text</a>.)
+    (see <a href="#documentation-choice-text">Choice Dependent Text</a>.)
 </p>
 
 <h2>
@@ -347,7 +407,7 @@ paragraph of text.
 <p>
     The third part of a link are identifiers, which are keywords used to
     identify what link was clicked when presenting 
-    <a href="#tutorial-optional-paragraphs">Optional Paragraphs</a>. These 
+    <a href="#documentation-optional-paragraphs">Optional Paragraphs</a>. These 
     do not show up in the text of the link. 
 </p>
 
@@ -630,7 +690,7 @@ You're in English, the second class of the day.
 </code></pre>
 
 <div class="page-header">
-    <h1 id="tutorial-choice-text">
+    <h1 id="documentation-choice-text">
         Choice Dependent Text
     </h1>
 </div>
@@ -713,7 +773,7 @@ You paint the wall blue.
 </code></pre>
 
 <div class="page-header">
-    <h1 id="tutorial-format-text">
+    <h1 id="documentation-format-text">
         Formatting Text
     </h1>
 </div>
@@ -1062,7 +1122,7 @@ This is the room. You walk in.
 </div>
 
 <p>
-    This tutorial is fairly wordy, and sometimes that makes it hard to 
+    This documentation is fairly wordy, and sometimes that makes it hard to 
     really get what's meant until it's paired with concrete examples. The
     following is a series of examples of story code to give you an idea
     of how this all fits together in practice.

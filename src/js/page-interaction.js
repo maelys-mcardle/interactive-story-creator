@@ -10,7 +10,7 @@ const constants = {
     updatedMessageDuration: 3000,
     errorMessageDuration: 5000,
     activeLinkClass: "active",
-    tutorialUrl: "tutorial.htm",
+    documentationUrl: "documentation.htm",
 };
 
 const html = {
@@ -41,11 +41,11 @@ const html = {
     activeNavbarLink: "#navbar-links .active",
     playNavbarLink: "#play-navbar-link",
     historyNavbarLink: "#history-navbar-link",
-    tutorialNavbarLink: "#tutorial-navbar-link",
-    tutorialContainer: "#tutorial-container",
-    tutorialContents: "#tutorial-contents",
-    tutorialTableOfContents: "#tutorial-table-of-contents",
-    tutorialTableOfContentsList: "#tutorial-table-of-contents > ul",
+    documentationNavbarLink: "#documentation-navbar-link",
+    documentationContainer: "#documentation-container",
+    documentationContents: "#documentation-contents",
+    documentationTableOfContents: "#documentation-table-of-contents",
+    documentationTableOfContentsList: "#documentation-table-of-contents > ul",
     codeWarningDialog: "#code-warning-dialog",
     codeWarningList: "#code-warning-list",
     codeWarningEditCodeButton: "#code-warning-edit-code-button",
@@ -127,7 +127,7 @@ function goToPlayPage()
     $( html.playNavbarLink ).addClass( constants.activeLinkClass );
     $( html.historyContainer ).hide();
     $( html.storyContainer ).show();
-    $( html.tutorialContainer ).hide();
+    $( html.documentationContainer ).hide();
 }
 
 function goToHistoryPage()
@@ -136,20 +136,20 @@ function goToHistoryPage()
     $( html.historyNavbarLink ).addClass( constants.activeLinkClass );
     $( html.storyContainer ).hide();
     $( html.historyContainer ).show();
-    $( html.tutorialContainer ).hide();
+    $( html.documentationContainer ).hide();
 }
 
-function goToTutorialPage()
+function goToDocumentationPage()
 {
-    // Load tutorial contents if they haven't been already.
-    loadTutorial();
+    // Load documentation contents if they haven't been already.
+    loadDocumentation();
     
-    // Show the tutorial.
+    // Show the documentation.
     $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
-    $( html.tutorialNavbarLink ).addClass( constants.activeLinkClass );
+    $( html.documentationNavbarLink ).addClass( constants.activeLinkClass );
     $( html.storyContainer ).hide();
     $( html.historyContainer ).hide();
-    $( html.tutorialContainer ).show();
+    $( html.documentationContainer ).show();
 }
 
 function loadStory()
