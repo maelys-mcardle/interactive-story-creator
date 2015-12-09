@@ -220,36 +220,21 @@ paragraph of text.
 </h2>
 
 <p>
-    In addition to text, each page can provide one or more choices
-    to determine what happens next in the story. These show up as 
+    Each page can provide one or more choices for the reader to select
+    that determines what happens next in the story. These show up as 
     links to be clicked on that appear beneath the paragraphs of text.
 </p>
 
 <p>
-    Links consist of three parts, two of which are optional. The first is
-    what the text for the link will be. That's the only part that's mandatory.
-    The second is which page the reader will be brought to when the link is
-    clicked. The third is an identifier, which is optional, which is used to 
-    keep track of what choices were picked down the line.
-</p>
-<p>
-    The format is:
+    In their most common usage, links consist of two parts: the text 
+    that is to appear in the link and the page to take the reader to 
+    when the link is clicked. These are in the format 
+    <code>[link text](page)</code>:
 </p>
 
 <pre><code class="markdown">
-[link text]()
-[link text](page)
-[identifier: link text](page)
-
-</code></pre>
-
-<p>
-    So that actual links can look like the following:
-</p>
-
-<pre><code class="markdown">
-[eat breakfast: Eat breakfast before school](Kitchen)
-[skip breakfast: Skip breakfast and go to school](School)
+[Eat breakfast before school](Kitchen)
+[Skip breakfast and go to school](School)
 
 </code></pre>
 
@@ -265,8 +250,10 @@ paragraph of text.
 </div>
 
 <p>
-    See the section on <a href="documentation-links">Links</a> 
-    for more details.
+    There's also an optional third part for links, which is an
+    identifier used to recall what choices the reader made. See the 
+    section on <a href="documentation-links">Links</a> for more details
+    on these and on how to specify a page.
 </p>
 
 <div class="page-header">
