@@ -12,15 +12,6 @@ function loadStoryFromCreateStoryDialog()
     var storyTitle = $( html.inputStoryTitle ).val();
     var storyAuthors = $( html.inputStoryAuthors ).val();
     var storyCode = $( html.inputStoryCode ).val();
-        
-    // If the title is blank.
-    if (storyTitle == "") {
-        storyTitle = $( html.inputStoryTitle ).prop( "placeholder" );
-    }
-    
-    if (storyAuthors == "") {
-        storyAuthors = $( html.inputStoryAuthors ).prop( "placeholder" );
-    }
     
     // Load the story in.
     loadStory( storyTitle, storyAuthors, storyCode );
@@ -65,7 +56,16 @@ function loadStoryFromUrl()
 }
 
 function loadStory( storyTitle, storyAuthors, storyCode )
-{    
+{
+    // If the title is blank.
+    if ( !storyTitle ) {
+        storyTitle = $( html.inputStoryTitle ).prop( "placeholder" );
+    }
+    
+    if ( !storyAuthors ) {
+        storyAuthors = $( html.inputStoryAuthors ).prop( "placeholder" );
+    }
+    
     // Parse the story.
     var story = parseStory( storyCode );
     
