@@ -47,7 +47,6 @@ function showPublishStoryStep1()
     $( html.publishStorySteps ).hide();
     $( html.publishStoryStep1 ).show();
     
-    $( html.publishStoryCancelButton ).show();
     $( html.publishStoryBackButton ).hide();
     $( html.publishStoryNextButton ).show();
     $( html.publishStoryFinishButton ).hide();
@@ -84,7 +83,6 @@ function showPublishStoryStep2()
     $( html.publishStorySteps ).hide();
     $( html.publishStoryStep2 ).show();
     
-    $( html.publishStoryCancelButton ).show();
     $( html.publishStoryBackButton ).show();
     $( html.publishStoryNextButton ).hide();
     $( html.publishStoryFinishButton ).show();
@@ -99,15 +97,15 @@ function showPublishStoryStep3()
 {
     var title = encodeURIComponent( $( html.publishStoryTitle ).val() );
     var authors = encodeURIComponent( $( html.publishStoryAuthors ).val() );
-    var url = $( html.publishStoryUrl ).text();
+    var url = $( html.publishStoryUrl ).text() + 
+              "&title=" + title + "&authors=" + authors;
     
-    $( html.publishStoryUrl ).text( 
-        url + "&title=" + title + "&authors=" + authors );
+    $( html.publishStoryUrl ).text( url );
+    $( html.publishStoryUrl ).prop( "href", url );
     
     $( html.publishStorySteps ).hide();
     $( html.publishStoryStep3 ).show();
     
-    $( html.publishStoryCancelButton ).show();
     $( html.publishStoryBackButton ).show();
     $( html.publishStoryNextButton ).hide();
     $( html.publishStoryFinishButton ).hide();

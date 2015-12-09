@@ -56,7 +56,6 @@ const html = {
     publishStoryContainer: "#publish-story-container",
     publishStoryButton: "#publish-story-button",
     publishStoryDialog: "#publish-story-dialog",
-    publishStoryCancelButton: "#publish-story-cancel-button",
     publishStoryBackButton: "#publish-story-back-button",
     publishStoryNextButton: "#publish-story-next-button",
     publishStoryFinishButton: "#publish-story-finish-button",
