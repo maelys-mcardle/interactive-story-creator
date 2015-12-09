@@ -60,7 +60,7 @@ const html = {
     publishStoryBackButton: "#publish-story-back-button",
     publishStoryNextButton: "#publish-story-next-button",
     publishStoryFinishButton: "#publish-story-finish-button",
-    publishStorySteps: "#publish-story-steps",
+    publishStorySteps: ".publish-story-steps",
     publishStoryStep1: "#publish-story-step-1",
     publishStoryStep2: "#publish-story-step-2",
     publishStoryStep3: "#publish-story-step-3",
