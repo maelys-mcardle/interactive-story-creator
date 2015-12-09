@@ -58,7 +58,7 @@ function showPublishStoryStep1()
 
 function validatePastebinUrl()
 {
-    var uri = new URI( $( html.publishInputPastebinUrl ).val() );
+    var pastebinUrl = new URI( $( html.publishInputPastebinUrl ).val() );
 
     if ( uri.domain() === "pastebin.com" ) {
         
@@ -66,7 +66,7 @@ function validatePastebinUrl()
         var generatedUrl = currentUrl.protocol() + "://" + 
             currentUrl.host() + uri.filename() +
             currentUrl.directory() + "/" + currentUrl.filename() + 
-            "?pastebin=" + pastebin.filename();
+            "?pastebin=" + pastebinUrl.filename();
         
         $( html.publishStoryUrl ).text( generatedUrl );
         showPublishStoryStep2();
