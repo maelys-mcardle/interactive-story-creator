@@ -7,7 +7,6 @@ const constants = {
     activeLinkClass: "active",
     documentationUrl: "documentation.htm",
     publishStoryUrl: "publish.htm",
-    pastebinRawUrl: "pastebin.com/raw.php?i=",
 };
 
 const html = {
@@ -66,7 +65,7 @@ const html = {
     publishStoryStep3: "#publish-story-step-3",
     publishStoryTitle: "#input-publish-title",
     publishStoryAuthors: "#input-publish-authors",
-    publishInputPastebinUrl: "#input-pastebin-url",
+    publishInputStoryCodeUrl: "#input-story-code-url",
     publishStoryUrl: "#publish-story-url",
 };
 

@@ -27,37 +27,38 @@ function loadStoryFromUrl()
 {
     var currentUrl = new URI( window.location.href );
     
-    if ( currentUrl.hasQuery("pastebin") &&
+    if ( currentUrl.hasQuery("story") &&
          currentUrl.hasQuery("title") &&
          currentUrl.hasQuery("authors") ) {
-        loadStoryFromPastebinUrl( currentUrl );
-    }
-}
 
-function loadStoryFromPastebinUrl( url )
-{
-    var urlValues = url.search(true);
-    
-    // Get the parameters from the URL.
-    var pastebinToken = urlValues.pastebin;
-    var storyTitle = urlValues.title;
-    var storyAuthors = urlValues.authors;
-    
-    // Generate URL to pastebin. It uses the protocol in the current URL
-    // because the browser may not allow an AJAX connection from an HTTPS
-    // server to an unencrypted one, and vice versa.
-    var pastebinUrl = url.protocol() + "://" + 
-                      constants.pastebinRawUrl + pastebinToken;
-    
-    // Get the story code from Pastebin.
-    $.get( pastebinUrl, function( storyCode ) {
+        // Get the parameters from the URL.
+        var urlValues = url.search(true);
+        var storyCodeUrl = urlValues.story;
+        var storyTitle = urlValues.title;
+        var storyAuthors = urlValues.authors;
         
-        $( html.inputStoryTitle ).val( storyTitle );
-        $( html.inputStoryAuthors ).val( storyAuthors );
-        $( html.inputStoryCode ).val( storyCode );
-    
-        loadStory( storyTitle, storyAuthors, storyCode, false );
-    });
+        // Get the story code.
+        $.get( storyCodeUrl, function( storyCode ) {
+            
+            $( html.inputStoryTitle ).val( storyTitle );
+            $( html.inputStoryAuthors ).val( storyAuthors );
+            $( html.inputStoryCode ).val( storyCode );
+        
+            loadStory( storyTitle, storyAuthors, storyCode, false );
+            
+        }).fail(function() {
+            
+            // Show warning if code couldn't be loaded.
+            $( html.codeWarningList ).empty();
+            
+            appendCodeWarning( "Could not load URL",
+                "Unable to load the story code from '" + storyCodeUrl + "'. " +
+                "The website it's hosted on might not allow sites like this " +
+                "to access the file.");
+                
+            showCodeWarningDialog();
+        });
+    }
 }
 
 function loadStory( storyTitle, storyAuthors, storyCode, showWarnings )

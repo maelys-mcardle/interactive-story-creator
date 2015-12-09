@@ -44,7 +44,7 @@ function hidePublishStoryDialog()
 
 function showPublishStoryStep1()
 {
-    $( html.publishInputPastebinUrl ).parent().removeClass("has-error");
+    $( html.publishInputStoryCodeUrl ).parent().removeClass("has-error");
     
     $( html.publishStorySteps ).hide();
     $( html.publishStoryStep1 ).show();
@@ -54,28 +54,29 @@ function showPublishStoryStep1()
     $( html.publishStoryFinishButton ).hide();
     
     $( html.publishStoryNextButton ).unbind( "click" )
-        .click( validatePastebinUrl );
+        .click( validateStoryCodeUrl );
 }
 
-function validatePastebinUrl()
+function validateStoryCodeUrl()
 {
-    var pastebinUrl = new URI( $( html.publishInputPastebinUrl ).val() );
+    var storyCodeUrl = new URI( $( html.publishInputStoryCodeUrl ).val() );
 
-    if ( pastebinUrl.domain() === "pastebin.com" && pastebinUrl.filename() ) {
+    if ( storyCodeUrl.domain() && storyCodeUrl.filename() ) {
         
         var currentUrl = new URI( window.location.href );
         var generatedUrl = currentUrl.protocol() + "://" + 
                            currentUrl.host() + 
                            currentUrl.directory() + "/" + 
                            currentUrl.filename() + 
-                           "?pastebin=" + pastebinUrl.filename();
+                           "?story=" + 
+                           encodeURIComponent( storyCodeUrl.toString() );
         
         $( html.publishStoryUrl ).text( generatedUrl );
         showPublishStoryStep2();
         
     } else {
         
-        $( html.publishInputPastebinUrl ).parent().addClass("has-error");
+        $( html.publishInputStoryCodeUrl ).parent().addClass("has-error");
         
     }
 }
