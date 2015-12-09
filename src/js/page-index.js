@@ -11,7 +11,7 @@ const constants = {
     errorMessageDuration: 5000,
     activeLinkClass: "active",
     documentationUrl: "documentation.htm",
-    shareStoryUrl: "share.htm",
+    publishStoryUrl: "publish.htm",
 };
 
 const html = {
@@ -42,7 +42,7 @@ const html = {
     activeNavbarLink: "#navbar-links .active",
     playNavbarLink: "#play-navbar-link",
     historyNavbarLink: "#history-navbar-link",
-    shareStoryNavbarLink: "#share-story-navbar-link",
+    publishStoryNavbarLink: "#publish-story-navbar-link",
     documentationNavbarLink: "#documentation-navbar-link",
     documentationContainer: "#documentation-container",
     documentationContents: "#documentation-contents",
@@ -58,9 +58,9 @@ const html = {
     chapterTitlePageCredits: "#chapter-title-page-credits",
     contentBody: "#content-body",
     sidebarClass: ".bs-docs-sidebar",
-    shareStoryContainer: "#share-story-container",
-    shareStoryButton: "#share-story-button",
-    shareStoryDialog: "#share-story-dialog",
+    publishStoryContainer: "#publish-story-container",
+    publishStoryButton: "#publish-story-button",
+    publishStoryDialog: "#publish-story-dialog",
 };
 
 var global = {
@@ -132,7 +132,7 @@ function showPage( pageToShow, navbarLink )
     $( html.historyContainer ).hide();
     $( html.storyContainer ).hide();
     $( html.documentationContainer ).hide();
-    $( html.shareStoryContainer ).hide();
+    $( html.publishStoryContainer ).hide();
     
     $( pageToShow ).show();
     
@@ -159,13 +159,13 @@ function goToDocumentationPage()
     showPage( html.documentationContainer, html.documentationNavbarLink );
 }
 
-function goToShareStoryPage()
+function goToPublishStoryPage()
 {
     // Load page contents if they haven't been already.
-    loadShareStoryPage();
+    loadPublishStoryPage();
     
     // Show the documentation.
-    showPage( html.shareStoryContainer, html.shareStoryNavbarLink );
+    showPage( html.publishStoryContainer, html.publishStoryNavbarLink );
 }
 
 function loadStory()
@@ -284,7 +284,7 @@ $(function() {
     $( html.loadStoryNavbarButton ).text("Create Story");
     $( html.loadStoryNavbarButton ).click( showCreateStoryDialog );
     $( html.createStoryJumbotronButton).click( showCreateStoryDialog );
-    $( html.shareStoryButton ).click( showShareStoryDialog );
+    $( html.publishStoryButton ).click( showPublishStoryDialog );
     
     // Initialize tooltips.
     $('[data-toggle="tooltip"]').tooltip()
