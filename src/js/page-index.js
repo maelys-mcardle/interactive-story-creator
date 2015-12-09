@@ -199,6 +199,9 @@ function loadStoryFromCreateStoryDialog()
 
 function loadStory( storyTitle, storyAuthors, storyCode, showWarnings )
 {
+    // Empty warnings.
+    $( html.codeWarningList ).empty();
+    
     // Parse the story.
     var story = parseStory( storyCode );
     
