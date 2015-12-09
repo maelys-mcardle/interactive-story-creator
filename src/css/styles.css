@@ -57,23 +57,23 @@ body {
     width: auto;
 }
 
-/* Remove bottom spacing from list groups in tutorial. */
-#tutorial-contents .well .list-group:last-child, 
-#tutorial-contents .well blockquote:last-child,
-#tutorial-contents .well p:last-child,
-#tutorial-contents .well ul:last-child,
-#tutorial-contents .well ol:last-child  {
+/* Remove bottom spacing from list groups in documentation. */
+#documentation-contents .well .list-group:last-child, 
+#documentation-contents .well blockquote:last-child,
+#documentation-contents .well p:last-child,
+#documentation-contents .well ul:last-child,
+#documentation-contents .well ol:last-child  {
     margin-bottom: 0;
 }
 
 /* Horizontal rules don't show up well in a well. */
-#tutorial-contents .well hr {
+#documentation-contents .well hr {
     border-color:DarkGray;
 }
 
 /* Put images to the right. */
 #story-page img,
-#tutorial-contents .well img {
+#documentation-contents .well img {
     max-width: 30%;
     height: auto;
     float: right;
