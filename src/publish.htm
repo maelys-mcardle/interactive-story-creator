@@ -3,8 +3,8 @@
     <h1>Publish Your Story</h1>
     <p>                        
         The <strong>Story Creator</strong> does not save stories on the site. 
-        With the guide though, it's still possible to share your creation with
-        the world!
+        To share your creation with the world, click the button below and 
+        follow the steps!
     </p>
     <p>
         <a id="publish-story-button" class="btn btn-primary btn-lg" 
@@ -31,13 +31,10 @@
                 <div id="publish-story-step-1">
                     
                     <p>
-                        The first step is to upload your story code to the 
-                        Pastebin document sharing site.
-                    </p>
-                    
-                    <p>
-                        Click <a href="http://pastebin.com/" target="_blank">here</a>
-                        to submit your story to Pastebin, then paste the URL they
+                        First you need to upload your story code to the Pastebin
+                        document sharing site.
+                        <a href="http://pastebin.com/" target="_blank">Submit 
+                        your story to Pastebin</a> then paste the URL they
                         provide to access your document below.
                     </p>
                     
@@ -52,24 +49,35 @@
                 <div id="publish-story-step-2" class="collapse">
                     
                     <p>
-                        The second step is to paste the link that Pastebin gave you to your
-                        content in the form below.
+                        Fill in information about the story.
                     </p>
                     
                     <div class="form-group">
-                        <label for="input-pastebin-url">Pastebin URL</label>
-                        <input class="form-control" id="input-pastebin-url" 
-                               placeholder="http://pastebin.com/SFJeD5wn">
+                        <label for="input-publish-title">Story Title</label>
+                        <input class="form-control" id="input-publish-title" 
+                            placeholder="Untitled Story">
                     </div>
-                    
+                    <div class="form-group">
+                        <label for="input-publish-authors">Story Author(s)</label>
+                        <input class="form-control" id="input-publish-authors" 
+                            placeholder="Anonymous">
+                    </div>
                 </div>
                 
                 <div id="publish-story-step-3" class="collapse">
-                    <!-- Fill in author & title -->
-                </div>
-                
-                <div id="publish-story-step-4" class="collapse">
-                    <!-- Finished: Get link to try out (in new window) -->
+                    <p>
+                        That's it! You can now hand out the link below to share
+                        your story.
+                    </p>
+                    
+                    <div class="alert alert-success" role="alert">
+                        <h3>
+                            <a id="publish-story-url" href="#">
+                                Link Goes Here...
+                            </a>
+                        </h3>
+                    </div>
+                    
                 </div>
                 
             </div>
@@ -83,9 +91,10 @@
                 <button id="publish-story-next-button" type="button" class="btn btn-primary">
                     Next
                 </button>
+                <button id="publish-story-finish-button" type="button" class="btn btn-primary collapse">
+                    Finish
+                </button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<!-- http://pastebin.com/raw.php?i=TOKEN -->

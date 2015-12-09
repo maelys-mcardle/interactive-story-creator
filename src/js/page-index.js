@@ -1,10 +1,5 @@
 "use strict";
 
-const defaultStory = {
-    title: "Untitled Story",
-    authors: "Anonymous",
-};
-
 const constants = {
     newlineCharacter: "\n",
     updatedMessageDuration: 3000,
@@ -64,6 +59,7 @@ const html = {
     publishStoryCloseButton: "#publish-story-close-button",
     publishStoryBackButton: "#publish-story-back-button",
     publishStoryNextButton: "#publish-story-next-button",
+    publishStoryFinishButton: "#publish-story-finish-button",
 };
 
 var global = {
@@ -222,11 +218,11 @@ function displayLoadedStory( story )
         
         // If the title is blank.
         if (storyTitle == "") {
-            storyTitle = defaultStory.title;
+            storyTitle = $( html.inputStoryTitle ).prop( "placeholder" );
         }
         
         if (storyAuthors == "") {
-            storyAuthors = defaultStory.authors;
+            storyAuthors = $( html.inputStoryAuthors ).prop( "placeholder" );
         }
         
         // Set the page title to the new story title.
@@ -278,10 +274,6 @@ function appendCodeWarning( title, message )
 
 // Called on start.
 $(function() {
-    
-    // Set the placeholder to be the default title.
-    $( html.inputStoryTitle ).prop("placeholder", defaultStory.title );
-    $( html.inputStoryAuthors ).prop("placeholder", defaultStory.authors );
     
     // Set the initial buttons.
     $( html.loadStoryNavbarButton ).text("Create Story");

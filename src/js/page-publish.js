@@ -34,3 +34,5 @@ function hidePublishStoryDialog()
 {
     $( html.publishStoryDialog ).modal( "hide" );
 }
+
+// http://pastebin.com/raw.php?i=TOKEN
