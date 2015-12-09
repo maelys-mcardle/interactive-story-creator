@@ -8,8 +8,8 @@ function loadPublishStoryPage()
 
 function downloadPublishStoryPage()
 {
-    var documentationContainerElement = $( html.documentationContainer )[0];
-    var loadingAnimation = new Spinner().spin( documentationContainerElement );
+    var publishStoryContainerElement = $( html.publishStoryContainer )[0];
+    var loadingAnimation = new Spinner().spin( publishStoryContainerElement );
     
     $.get( constants.publishStoryUrl, function( data ) {
         
