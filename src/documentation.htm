@@ -266,7 +266,7 @@ paragraph of text.
     Links are used to bring readers from one page to another. They're presented
     as one or more choices for the user to click on. These choices can be
     remembered, and different content on a given page can be shown accordingly
-    (see <a href="#documentation-choice-text">Choice Dependent Text</a>.)
+    (see <a href="#documentation-choice-text">Choice-Specific Text</a>.)
 </p>
 
 <h2>
@@ -617,12 +617,12 @@ You're in English, the second class of the day.
 
 <div class="page-header">
     <h1 id="documentation-choice-text">
-        Choice Dependent Text
+        Choice-Specific Text
     </h1>
 </div>
 
 <p>
-    Some paragraphs of text can be made to appear only when it was
+    Some paragraphs of text can be made to appear only when they were
     preceded by a specific choice on behalf of the reader.
 </p>
 
@@ -631,47 +631,50 @@ You're in English, the second class of the day.
 </h2>
 
 <p>
-    These special paragraphs are preceded
-    by a line that mentions what page the choice was made on, and what link
-    was selected. These are of the format <code>### Chose "identifier"</code> or
-    <code>### Chose "identifier" on <em>page</em></code>. An empty 
-    <code>###</code> marks the end of this optional text. For instance:
+    Choice-specific paragraphs must be preceded with a line that
+    indicates what choice was required for the paragraph to appear, 
+    of the format <code>### Chose "identifier"</code> where identifier 
+    is the same one that would have been put in a link. The end of the
+    choice-specific paragraphs is indicated by another line
+    that begins with <code>###</code>:
 </p>
 
 <pre><code class="markdown">
-# Tuesday
+# Paint Shop
 
-## Morning: Bathroom
+## Inside Store
 
-You look at yourself in the mirror.
+You're trying to decide on a colour to paint the living room.
 
-[brush teeth: Brush your teeth](next)
-[skip brushing: Skip brushing your teeth](next)
+[red: Pick red paint](Home: Living Room)
+[blue: Pick blue paint](Home: Living Room)
 
-## Afternoon: Dentist Office
+# Home
 
-You sit down in the waiting room.
+## Living Room
 
-### Chose "brush teeth"
+You arrive at home with the newly purchased cans of paint.
 
-You pass your tongue over your teeth. They feel clean.
+### Chose "red"
 
-### Chose "skip brushing"
+You paint the wall red.
 
-You pass your tongue over your teeth. There's something caught 
-in between a pair of them. You try to remove it covertly with
-your tongue.
+### Chose "blue"
+
+You paint the wall blue.
 
 ###
 
-You look around and pick up a magazine.
+You look at your work, satisfied with your choice.
 
 </code></pre>
 
 <p>
-    In the previous example, the sentences "<em>You pass your tongue over your 
-    teeth. They feel clean.</em>" would only appear for readers that had 
-    clicked on the choice to brush their teeth.
+    In the above example, the text "You paint the wall red" would only
+    appear if the reader selected the red paint in the store. Likewise
+    for the blue paint. The sentences "You arrive at home..." and 
+    "You look at your work..." are not choice-specific paragraphs, and
+    would appear in both cases.
 </p>
 
 <h2>
@@ -679,32 +682,53 @@ You look around and pick up a magazine.
 </h2>
 
 <p>
-    Whene multiple choices are together, the terminating <code>###</code>
-    can be skipped for all but the last choice. Here's another example, this
-    time also specifying the page on which the colour was chosen.
+    The way the Story Creator works, when a user selects a choice, 
+    the code will look at all pages to see if these choices were made. 
+    This can lead to false positives in cases where there are multiple
+    identifiers that are named the same (eg. if two pages have choices
+    with identifiers that are "yes" or "no".)
+</p>
+
+<p>
+    In those cases, it's good to be able to specify what page the 
+    choice was made on. This is possible by using the format
+    <code>### Chose "identifier" on *page*</code>:
 </p>
 
 <pre><code class="markdown">
-# Friday
+# Quiz
 
-## Afternoon: Paint Store
+## Question 1
 
-You're trying to decide on a colour to paint the living room.
+Do you like dogs?
 
-[red: Pick red paint](Saturday: Living Room)
-[blue: Pick blue paint](Saturday: Living Room)
+[yes: I like dogs](next)
+[no: I don't like dogs](next)
 
-# Saturday
+## Question 2
 
-## Day: Living Room
+Do you like cats?
 
-### Chose "red" on Friday : Afternoon : Paint Store
+[yes: I like cats](next)
+[no: I don't like cats](next)
 
-You paint the wall red.
+## Results
 
-### Chose "blue" on Friday : Afternoon : Paint Store
+### Chose "yes" on Question 1
 
-You paint the wall blue.
+You like dogs.
+
+### Chose "no" on Question 1
+
+You do not like dogs.
+
+### Chose "yes" on Question 2
+
+You like cats.
+
+### Chose "no" on Question 2
+
+You do not like cats.
 
 ###
 
