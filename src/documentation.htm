@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>
-        Overview
+        Story Creator
     </h1>
 </div>
 
@@ -31,7 +31,8 @@
 </h2>
 
 <p>
-    The interactive novels are written in "story code", which looks like this:
+    The interactive novels are written in "story code", which looks 
+    like this:
 </p>
 
 <pre><code class="markdown">
@@ -79,13 +80,9 @@ This is going to be a long day.
 <p>
     If the code seems a bit recognizeable, it's because it uses
     <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>,
-    a simple and popular language used to format text. With the Story Creator,
-    this formatting also conveys extra meaning which is used in making
-    the interactive fiction website.
-</p>
-
-<p>
-    How the story code language works is explained in the following sections.
+    a simple and popular language used to format text. With the Story 
+    Creator, this formatting also conveys extra meaning which is used 
+    in making the interactive fiction website.
 </p>
 
 <h2>
@@ -120,10 +117,10 @@ This is going to be a long day.
 </div>
 
 <p>
-    A story is split up into one or more chapters. In the story code, a single <code>#</code> sign 
-    is used to signal that what follows is a chapter title, and follows the 
-    format <code># Chapter Name</code>. Chapter names must be unique (there 
-    can't be two chapters called 'Tuesdays' for example.) For instance:
+    A story is split up into one or more chapters. In the story code, 
+    a single <code>#</code> sign is used to signal that what follows 
+    is a chapter title, and follows the format <code># Chapter 
+    Name</code>. Each chapter must have a unique name. For instance:
 </p>
 
 <pre><code class="markdown">
@@ -137,7 +134,6 @@ This is going to be a long day.
 
 </code></pre>
 
-
 <div class="page-header">
     <h1 id="documentation-pages">
         Pages
@@ -145,59 +141,48 @@ This is going to be a long day.
 </div>
 
 <p>
-    Each chapter is made up of one or more pages. Pages are made up of three parts: the title, the content (text), and one or more choices (links).
+    Each chapter is made up of one or more pages. Pages are made up of 
+    three parts: a title, some text, and an optional set of choices 
+    (links) to bring the reader to another page.
 </p>
 
 <h2>
-    Title (Time &amp; Location)
+    Title
 </h2>
 
 <p>
-    Within each chapter are one or more pages. 
-Pages are marked in the story code with a double <code>##</code>. It begins with the location of the events in the page:
+    Within each chapter are one or more pages. Pages are marked in the 
+    story code with a double <code>##</code> and are used to convey
+    the location that the events described in the page take place on
+    with the format <code>## Location</code>:
 </p>
 
 <pre><code class="markdown">
-# Monday
+# Space Station
 
-## Home
-
-...
-
-## School
+## Airlock
 
 ...
 
-## School
-
-...
-
-# Tuesday
+## Research Pod
 
 ...
 
 </code></pre>
 
 <p>
-    It can also be used to mark time and location in the format <code>## Time: Location</code>:
+    Optionally, the title can can also be used to mark time, using
+    the format <code>## Time: Location</code>:
 </p>
 
 <pre><code class="markdown">
 # Monday
 
-## Morning: Home
+## Morning: Bedroom
 
 ...
 
-## Afternoon: School
-
-...
-
-## Afternoon: School
-
-...
-
-## Tuesday
+## Lunch Time: Kitchen
 
 ...
 
@@ -208,14 +193,14 @@ Pages are marked in the story code with a double <code>##</code>. It begins with
 </h2>
 
 <p>
-    Within each page can be some text. Multiple paragraphs are
-    separated by an empty line. For instance:
+    Within each page can be some text. Paragraphs are separated by 
+    an empty line. For instance:
 </p>
 
 <pre><code class="markdown">
-# Monday
+# A Fabulous Journey
 
-## Morning: Bedroom
+## English Class
 
 This sentence is part of the first
 paragraph of text.
@@ -234,7 +219,7 @@ paragraph of text.
 </p>
 
 <h2 id="documentation-choices">
-    Links (Choices)
+    Choices (Links)
 </h2>
 
 <p>
