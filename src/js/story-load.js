@@ -32,7 +32,7 @@ function loadStoryFromUrl()
          currentUrl.hasQuery("authors") ) {
 
         // Get the parameters from the URL.
-        var urlValues = url.search(true);
+        var urlValues = currentUrl.search(true);
         var storyCodeUrl = urlValues.story;
         var storyTitle = urlValues.title;
         var storyAuthors = urlValues.authors;

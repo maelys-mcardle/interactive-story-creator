@@ -78,3 +78,8 @@ body {
     height: auto;
     float: right;
 }
+
+/* Break URLs up. */
+#publish-story-url {
+    word-break: break-all;
+}
