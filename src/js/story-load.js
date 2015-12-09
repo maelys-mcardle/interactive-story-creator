@@ -4,7 +4,10 @@ function loadStoryFromCreateStoryDialog()
 {
     // Close the dialog.
     hideCreateStoryDialog();
-    
+ 
+    // Empty warnings.
+    $( html.codeWarningList ).empty();
+       
     // Load the story code.
     var storyTitle = $( html.inputStoryTitle ).val();
     var storyAuthors = $( html.inputStoryAuthors ).val();
@@ -25,6 +28,9 @@ function loadStoryFromCreateStoryDialog()
 
 function loadStoryFromUrl()
 {
+    // Empty warnings.
+    $( html.codeWarningList ).empty();
+    
     var currentUrl = new URI( window.location.href );
     
     if ( currentUrl.hasQuery("story") &&
@@ -47,25 +53,19 @@ function loadStoryFromUrl()
             loadStory( storyTitle, storyAuthors, storyCode, false );
             
         }).fail(function() {
-            
-            // Show warning if code couldn't be loaded.
-            $( html.codeWarningList ).empty();
-            
+
             appendCodeWarning( "Could not load URL",
                 "Unable to load the story code from '" + storyCodeUrl + "'. " +
                 "The website it's hosted on might not allow sites like this " +
                 "to access the file.");
                 
-            showCodeWarningDialog();
+            loadStory( storyTitle, storyAuthors, "", false );
         });
     }
 }
 
 function loadStory( storyTitle, storyAuthors, storyCode, showWarnings )
-{
-    // Empty warnings.
-    $( html.codeWarningList ).empty();
-    
+{    
     // Parse the story.
     var story = parseStory( storyCode );
     
