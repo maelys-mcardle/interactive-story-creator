@@ -64,9 +64,10 @@ function validatePastebinUrl()
         
         var currentUrl = new URI( window.location.href );
         var generatedUrl = currentUrl.protocol() + "://" + 
-            currentUrl.host() + uri.filename() +
-            currentUrl.directory() + "/" + currentUrl.filename() + 
-            "?pastebin=" + pastebinUrl.filename();
+                           currentUrl.host() + 
+                           currentUrl.directory() + "/" + 
+                           currentUrl.filename() + 
+                           "?pastebin=" + pastebinUrl.filename();
         
         $( html.publishStoryUrl ).text( generatedUrl );
         showPublishStoryStep2();
