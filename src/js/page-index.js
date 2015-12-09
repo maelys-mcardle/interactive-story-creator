@@ -61,6 +61,9 @@ const html = {
     publishStoryContainer: "#publish-story-container",
     publishStoryButton: "#publish-story-button",
     publishStoryDialog: "#publish-story-dialog",
+    publishStoryCloseButton: "#publish-story-close-button",
+    publishStoryBackButton: "#publish-story-back-button",
+    publishStoryNextButton: "#publish-story-next-button",
 };
 
 var global = {
