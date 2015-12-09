@@ -11,6 +11,7 @@ const constants = {
     errorMessageDuration: 5000,
     activeLinkClass: "active",
     documentationUrl: "documentation.htm",
+    shareStoryUrl: "share.htm",
 };
 
 const html = {
@@ -41,6 +42,7 @@ const html = {
     activeNavbarLink: "#navbar-links .active",
     playNavbarLink: "#play-navbar-link",
     historyNavbarLink: "#history-navbar-link",
+    shareStoryNavbarLink: "#share-story-navbar-link",
     documentationNavbarLink: "#documentation-navbar-link",
     documentationContainer: "#documentation-container",
     documentationContents: "#documentation-contents",
@@ -56,6 +58,9 @@ const html = {
     chapterTitlePageCredits: "#chapter-title-page-credits",
     contentBody: "#content-body",
     sidebarClass: ".bs-docs-sidebar",
+    shareStoryContainer: "#share-story-container",
+    shareStoryButton: "#share-story-button",
+    shareStoryDialog: "#share-story-dialog",
 };
 
 var global = {
@@ -121,22 +126,28 @@ function showStoryErrorMessage()
             $( html.storyErrorMessage ).slideUp();
         }, constants.errorMessageDuration );
 }
+
+function showPage( pageToShow, navbarLink )
+{
+    $( html.historyContainer ).hide();
+    $( html.storyContainer ).hide();
+    $( html.documentationContainer ).hide();
+    $( html.shareStoryContainer ).hide();
+    
+    $( pageToShow ).show();
+    
+    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
+    $( navbarLink ).addClass( constants.activeLinkClass );
+}
+
 function goToPlayPage()
 {
-    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
-    $( html.playNavbarLink ).addClass( constants.activeLinkClass );
-    $( html.historyContainer ).hide();
-    $( html.storyContainer ).show();
-    $( html.documentationContainer ).hide();
+    showPage( html.storyContainer, html.playNavbarLink );
 }
 
 function goToHistoryPage()
 {
-    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
-    $( html.historyNavbarLink ).addClass( constants.activeLinkClass );
-    $( html.storyContainer ).hide();
-    $( html.historyContainer ).show();
-    $( html.documentationContainer ).hide();
+    showPage( html.historyContainer, html.historyNavbarLink );
 }
 
 function goToDocumentationPage()
@@ -145,11 +156,16 @@ function goToDocumentationPage()
     loadDocumentation();
     
     // Show the documentation.
-    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
-    $( html.documentationNavbarLink ).addClass( constants.activeLinkClass );
-    $( html.storyContainer ).hide();
-    $( html.historyContainer ).hide();
-    $( html.documentationContainer ).show();
+    showPage( html.documentationContainer, html.documentationNavbarLink );
+}
+
+function goToShareStoryPage()
+{
+    // Load page contents if they haven't been already.
+    loadShareStoryPage();
+    
+    // Show the documentation.
+    showPage( html.shareStoryContainer, html.shareStoryNavbarLink );
 }
 
 function loadStory()
@@ -268,6 +284,7 @@ $(function() {
     $( html.loadStoryNavbarButton ).text("Create Story");
     $( html.loadStoryNavbarButton ).click( showCreateStoryDialog );
     $( html.createStoryJumbotronButton).click( showCreateStoryDialog );
+    $( html.shareStoryButton ).click( showShareStoryDialog );
     
     // Initialize tooltips.
     $('[data-toggle="tooltip"]').tooltip()
