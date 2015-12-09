@@ -1,3 +1,5 @@
+"use strict";
+
 function loadPublishStoryPage()
 {
     // Only download page if it hasn't been obtained already.
@@ -113,5 +115,3 @@ function showPublishStoryStep3()
     $( html.publishStoryBackButton ).unbind( "click" )
         .click( showPublishStoryStep2 );
 }
-
-// http://pastebin.com/raw.php?i=TOKEN
