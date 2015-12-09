@@ -60,7 +60,7 @@ function validatePastebinUrl()
 {
     var pastebinUrl = new URI( $( html.publishInputPastebinUrl ).val() );
 
-    if ( uri.domain() === "pastebin.com" ) {
+    if ( pastebinUrl.domain() === "pastebin.com" ) {
         
         var currentUrl = new URI( window.location.href );
         var generatedUrl = currentUrl.protocol() + "://" + 
