@@ -27,12 +27,92 @@ function downloadPublishStoryPage()
 
 function showPublishStoryDialog()
 {
+    // Populate values.
+    $( html.publishStoryTitle ).val( $( html.inputStoryTitle ).text() );
+    $( html.publishStoryAuthors ).val( $( html.inputStoryAuthors ).text() );
+    showPublishStoryStep1();
+       
     $( html.publishStoryDialog ).modal();
 }
 
 function hidePublishStoryDialog()
 {
     $( html.publishStoryDialog ).modal( "hide" );
+}
+
+function showPublishStoryStep1()
+{
+    $( html.publishInputPastebinUrl ).parent().removeClass("has-error");
+    
+    $( html.publishStorySteps ).hide();
+    $( html.publishStoryStep1 ).show();
+    
+    $( html.publishStoryCancelButton ).show();
+    $( html.publishStoryBackButton ).hide();
+    $( html.publishStoryNextButton ).show();
+    $( html.publishStoryFinishButton ).hide();
+    
+    $( html.publishStoryNextButton ).unbind( "click" )
+        .click( validatePastebinUrl );
+}
+
+function validatePastebinUrl()
+{
+    var uri = new URI( $( html.publishInputPastebinUrl ).val() );
+
+    if ( uri.domain() === "pastebin.com" ) {
+        
+        var currentUrl = new URI( window.location.href );
+        var generatedUrl = currentUrl.protocol() + "://" + 
+            currentUrl.host() + uri.filename() +
+            currentUrl.directory() + "/" + currentUrl.filename() + 
+            "?pastebin=" + pastebin.filename();
+        
+        $( html.publishStoryUrl ).text( generatedUrl );
+        showPublishStoryStep2();
+        
+    } else {
+        
+        $( html.publishInputPastebinUrl ).parent().addClass("has-error");
+        
+    }
+}
+
+function showPublishStoryStep2()
+{
+    $( html.publishStorySteps ).hide();
+    $( html.publishStoryStep2 ).show();
+    
+    $( html.publishStoryCancelButton ).show();
+    $( html.publishStoryBackButton ).show();
+    $( html.publishStoryNextButton ).hide();
+    $( html.publishStoryFinishButton ).show();
+
+    $( html.publishStoryBackButton ).unbind( "click" )
+        .click( showPublishStoryStep1 );
+    $( html.publishStoryFinishButton ).unbind( "click" )
+        .click( showPublishStoryStep3 );
+}
+
+function showPublishStoryStep3()
+{
+    var title = encodeURIComponent( $( html.publishStoryTitle ).val() );
+    var authors = encodeURIComponent( $( html.publishStoryAuthors ).val() );
+    var url = $( html.publishStoryUrl ).text();
+    
+    $( html.publishStoryUrl ).text( 
+        url + "&title=" + title + "&authors=" + authors );
+    
+    $( html.publishStorySteps ).hide();
+    $( html.publishStoryStep3 ).show();
+    
+    $( html.publishStoryCancelButton ).show();
+    $( html.publishStoryBackButton ).show();
+    $( html.publishStoryNextButton ).hide();
+    $( html.publishStoryFinishButton ).hide();
+    
+    $( html.publishStoryBackButton ).unbind( "click" )
+        .click( showPublishStoryStep2 );
 }
 
 // http://pastebin.com/raw.php?i=TOKEN

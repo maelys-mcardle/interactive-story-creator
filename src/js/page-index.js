@@ -56,10 +56,18 @@ const html = {
     publishStoryContainer: "#publish-story-container",
     publishStoryButton: "#publish-story-button",
     publishStoryDialog: "#publish-story-dialog",
-    publishStoryCloseButton: "#publish-story-close-button",
+    publishStoryCancelButton: "#publish-story-cancel-button",
     publishStoryBackButton: "#publish-story-back-button",
     publishStoryNextButton: "#publish-story-next-button",
     publishStoryFinishButton: "#publish-story-finish-button",
+    publishStorySteps: "#publish-story-steps",
+    publishStoryStep1: "#publish-story-step-1",
+    publishStoryStep2: "#publish-story-step-2",
+    publishStoryStep3: "#publish-story-step-3",
+    publishStoryTitle: "#input-publish-title",
+    publishStoryAuthors: "#input-publish-authors",
+    publishInputPastebinUrl: "#input-pastebin-url",
+    publishStoryUrl: "#publish-story-url",
 };
 
 var global = {
