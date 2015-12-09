@@ -284,7 +284,6 @@ $(function() {
     $( html.loadStoryNavbarButton ).text("Create Story");
     $( html.loadStoryNavbarButton ).click( showCreateStoryDialog );
     $( html.createStoryJumbotronButton).click( showCreateStoryDialog );
-    $( html.publishStoryButton ).click( showPublishStoryDialog );
     
     // Initialize tooltips.
     $('[data-toggle="tooltip"]').tooltip()

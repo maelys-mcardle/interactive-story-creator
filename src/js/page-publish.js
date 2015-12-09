@@ -16,8 +16,12 @@ function downloadPublishStoryPage()
         // Remove the loading animation.
         loadingAnimation.stop();
         
-        // Documentation downloaded. Paste it.
+        // Page downloaded. Paste it.
         $( html.publishStoryContainer ).html( data );
+        
+        // Define behaviour for the buttons on the page.
+        $( html.publishStoryButton ).click( showPublishStoryDialog );
+        
     });
 }
 
