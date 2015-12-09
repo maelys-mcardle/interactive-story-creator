@@ -174,14 +174,31 @@ function goToPublishStoryPage()
     showPage( html.publishStoryContainer, html.publishStoryNavbarLink );
 }
 
-function loadStory()
+function loadStoryFromCreateStoryDialog()
 {
+    // Close the dialog.
+    hideCreateStoryDialog();
+    
     // Load the story code.
+    var storyTitle = $( html.inputStoryTitle ).val();
+    var storyAuthors = $( html.inputStoryAuthors ).val();
     var storyCode = $( html.inputStoryCode ).val();
+        
+    // If the title is blank.
+    if (storyTitle == "") {
+        storyTitle = $( html.inputStoryTitle ).prop( "placeholder" );
+    }
     
-    // Clear warnings.
-    $( html.codeWarningList ).empty();
+    if (storyAuthors == "") {
+        storyAuthors = $( html.inputStoryAuthors ).prop( "placeholder" );
+    }
     
+    // Load the story in.
+    loadStory( storyTitle, storyAuthors, storyCode, true );
+}
+
+function loadStory( storyTitle, storyAuthors, storyCode, showWarnings )
+{
     // Parse the story.
     var story = parseStory( storyCode );
     
@@ -189,12 +206,9 @@ function loadStory()
     // into addresses and warns of any errors.
     story = parseTargets( story );
     
-    // Close the dialog.
-    hideCreateStoryDialog();
-    
     // Show the warning dialog if there were warnings.
     // Load the story if they press the ignore button.
-    if ( ! $( html.codeWarningList ).is(':empty') ) {
+    if ( showWarnings && ! $( html.codeWarningList ).is(':empty') ) {
         
         $( html.codeWarningIgnoreButton ).one( 'click', function () {
             hideCodeWarningDialog();
@@ -209,28 +223,14 @@ function loadStory()
         showCodeWarningDialog();
         
     } else {
-        displayLoadedStory( story );
+        displayLoadedStory( storyTitle, storyAuthors, story );
     }
-    
 }
 
-function displayLoadedStory( story )
+function displayLoadedStory( storyTitle, storyAuthors, story )
 {
     // If there's something to load, load it.
     if ( story.chapters.length && story.chapters[ 0 ].pages.length ) {
-        
-        // Load the story title and code.
-        var storyTitle = $( html.inputStoryTitle ).val();
-        var storyAuthors = $( html.inputStoryAuthors ).val();
-        
-        // If the title is blank.
-        if (storyTitle == "") {
-            storyTitle = $( html.inputStoryTitle ).prop( "placeholder" );
-        }
-        
-        if (storyAuthors == "") {
-            storyAuthors = $( html.inputStoryAuthors ).prop( "placeholder" );
-        }
         
         // Set the page title to the new story title.
         document.title = storyTitle;
