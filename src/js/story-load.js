@@ -36,12 +36,21 @@ function loadStoryFromUrl()
 
 function loadStoryFromPastebinUrl( url )
 {
-    var urlValues = url.search(true); 
+    var urlValues = url.search(true);
+    
+    // Get the parameters from the URL.
     var pastebinToken = urlValues.pastebin;
     var storyTitle = urlValues.title;
     var storyAuthors = urlValues.authors;
     
-    $.get( constants.pastebinRawUrl + pastebinToken, function( storyCode ) {
+    // Generate URL to pastebin. It uses the protocol in the current URL
+    // because the browser may not allow an AJAX connection from an HTTPS
+    // server to an unencrypted one, and vice versa.
+    var pastebinUrl = url.protocol() + "://" + 
+                      constants.pastebinRawUrl + pastebinToken;
+    
+    // Get the story code from Pastebin.
+    $.get( pastebinUrl, function( storyCode ) {
         
         $( html.inputStoryTitle ).val( storyTitle );
         $( html.inputStoryAuthors ).val( storyAuthors );
