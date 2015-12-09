@@ -23,7 +23,7 @@ function loadStoryFromCreateStoryDialog()
     }
     
     // Load the story in.
-    loadStory( storyTitle, storyAuthors, storyCode, true );
+    loadStory( storyTitle, storyAuthors, storyCode );
 }
 
 function loadStoryFromUrl()
@@ -59,12 +59,12 @@ function loadStoryFromUrl()
                 "The website it's hosted on might not allow sites like this " +
                 "to access the file.");
                 
-            loadStory( storyTitle, storyAuthors, "", false );
+            loadStory( storyTitle, storyAuthors, "" );
         });
     }
 }
 
-function loadStory( storyTitle, storyAuthors, storyCode, showWarnings )
+function loadStory( storyTitle, storyAuthors, storyCode )
 {    
     // Parse the story.
     var story = parseStory( storyCode );
@@ -75,7 +75,7 @@ function loadStory( storyTitle, storyAuthors, storyCode, showWarnings )
     
     // Show the warning dialog if there were warnings.
     // Load the story if they press the ignore button.
-    if ( showWarnings && ! $( html.codeWarningList ).is(':empty') ) {
+    if ( ! $( html.codeWarningList ).is(':empty') ) {
         
         $( html.codeWarningIgnoreButton ).one( 'click', function () {
             hideCodeWarningDialog();
