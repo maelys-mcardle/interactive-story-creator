@@ -281,10 +281,7 @@ paragraph of text.
 <p>
     The first two parts is the text that appears in the link, and the
     page that the reader is brought to when the link is clicked on. 
-    Links follow the format <code>[Text to appear in the link](Page 
-    to bring the reader to)</code> where the text for the link is 
-    between the <code>[]</code> and the page between the <code>()</code>. 
-    For instance, the following code:
+    Links follow the format <code>[link text](page)</code>:
 </p>
 
 <pre><code class="markdown">
@@ -293,7 +290,7 @@ paragraph of text.
 </code></pre>
 
 <p>
-    Would produce the following:
+    Which would produce the following:
 </p>
 
 <div class="well">
@@ -303,7 +300,7 @@ paragraph of text.
 </div>
 
 <p>
-    That said, specifying a page is optional. When no target page is
+    That said, specifying a page is optional. When no page is
     indicated, the link becomes unclickable. And so this code:
 </p>
 
@@ -335,7 +332,7 @@ paragraph of text.
 
 <p>
     The format of links with identifiers is <code>[identifier: 
-    text](page)</code>:
+    link text](page)</code>:
 </p>
 
 <pre><code class="markdown">
@@ -412,7 +409,8 @@ You wake up feeling exhausted.
 <p>
     If it's in the same chapter as the current page, the time can 
     be used to identify which page to bring the reader to when clicked. 
-    When clicked, the reader will be brought to the page with the given time:
+    When clicked, the reader will be brought to the page with the given 
+    time:
 </p>
 
 <pre><code class="markdown">
@@ -616,8 +614,16 @@ You're in English, the second class of the day.
 </div>
 
 <p>
-    Some paragraphs of text can be made to appear only when a specific
-    choice was made on an earlier page. These special paragraphs are preceded
+    Some paragraphs of text can be made to appear only when it was
+    preceded by a specific choice on behalf of the reader.
+</p>
+
+<h2>
+    Simple Approach
+</h2>
+
+<p>
+    These special paragraphs are preceded
     by a line that mentions what page the choice was made on, and what link
     was selected. These are of the format <code>### Chose "identifier"</code> or
     <code>### Chose "identifier" on <em>page</em></code>. An empty 
@@ -660,6 +666,10 @@ You look around and pick up a magazine.
     clicked on the choice to brush their teeth.
 </p>
 
+<h2>
+    Choices on a Specific Page
+</h2>
+
 <p>
     Whene multiple choices are together, the terminating <code>###</code>
     can be skipped for all but the last choice. Here's another example, this
@@ -700,8 +710,8 @@ You paint the wall blue.
 
 <p>
     The text in the pages can be formatted using Markdown. The formatting
-    only applies to the paragraphs of text, and not to the day, time &amp;
-    location, or links.
+    only applies to the page content, and not to the chapter title, 
+    page title, or links.
 </p>
 
 <h2>
