@@ -97,7 +97,7 @@ function loadStory( storyTitle, storyAuthors, storyCode )
 function displayLoadedStory( storyTitle, storyAuthors, story )
 {
     // If there's something to load, load it.
-    if ( story.chapters.length && story.chapters[ 0 ].pages.length ) {
+    if ( story && story.chapters.length && story.chapters[ 0 ].pages.length ) {
         
         // Set the page title to the new story title.
         document.title = storyTitle;
