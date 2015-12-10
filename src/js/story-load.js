@@ -78,7 +78,12 @@ function loadStoryFromDocumentation( storyTitle, storyAuthors, storyCode )
 }
 
 function loadStory( storyTitle, storyAuthors, storyCode )
-{
+{    
+    // Populate input values with what we have.
+    $( html.inputStoryTitle ).val( storyTitle );
+    $( html.inputStoryAuthors ).val( storyAuthors );
+    $( html.inputStoryCode ).val( storyCode );
+
     // If the title and author are blank.
     if ( !storyTitle ) {
         storyTitle = $( html.inputStoryTitle ).prop( "placeholder" );
@@ -88,11 +93,6 @@ function loadStory( storyTitle, storyAuthors, storyCode )
         storyAuthors = $( html.inputStoryAuthors ).prop( "placeholder" );
     }
     
-    // Populate input values with what we have.
-    $( html.inputStoryTitle ).val( storyTitle );
-    $( html.inputStoryAuthors ).val( storyAuthors );
-    $( html.inputStoryCode ).val( storyCode );
-
     // Parse the story.
     var story = parseStory( storyCode );
     
