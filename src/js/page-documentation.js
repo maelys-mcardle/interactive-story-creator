@@ -59,20 +59,20 @@ function generateDocumentationTableOfContents()
 
 function setupDocumentationTryExampleButtons()
 {
-    $( html.documentationContents ).find( 
-        html.documentationTryExampleButtons + ", code" ).each( 
-        function( index, element, elements ) {
-
-            var tagName = $( element ).prop( "tagName" );
-            if ( tagName === "BUTTON" ) {
-                $( element ).click( function() {
-                    var storyTitle = "Example";
-                    var storyAuthors = "Story Creator";
-                    var storyCode = $( elements[index + 1] ).text();
-                    loadStory( storyTitle, storyAuthors, storyCode );
-                });
-            }
-        });
+    var allButtonsAndCode = $( html.documentationContents ).find( 
+        html.documentationTryExampleButtons + ", code" );
+        
+    allButtonsAndCode.each( function( index, element ) {
+        var tagName = $( element ).prop( "tagName" );
+        if ( tagName === "BUTTON" ) {
+            $( element ).click( function() {
+                var storyTitle = "Example";
+                var storyAuthors = "Story Creator";
+                var storyCode = $( allButtonsAndCode[index + 1] ).text();
+                loadStory( storyTitle, storyAuthors, storyCode );
+            });
+        }
+    });
 }
 
 function parseHtmlHeaders( root ) 
