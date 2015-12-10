@@ -69,6 +69,9 @@ const html = {
     publishStoryAuthors: "#input-publish-authors",
     publishInputStoryCodeUrl: "#input-story-code-url",
     publishStoryUrl: "#publish-story-url",
+    overwriteWarningDialog: "#overwrite-warning-dialog",
+    overwriteWarningCancelButton: "#overwrite-warning-cancel-button",
+    overwriteWarningOverwriteButton: "#overwrite-warning-overwrite-button",
 };
 
 var global = {

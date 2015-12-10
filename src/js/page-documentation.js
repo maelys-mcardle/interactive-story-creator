@@ -69,7 +69,7 @@ function setupDocumentationTryExampleButtons()
                 var storyTitle = "Example";
                 var storyAuthors = "Story Creator";
                 var storyCode = $( allButtonsAndCode[index + 1] ).text();
-                loadStory( storyTitle, storyAuthors, storyCode );
+                loadStoryFromDocumentation( storyTitle, storyAuthors, storyCode );
             });
         }
     });

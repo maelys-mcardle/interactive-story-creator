@@ -36,12 +36,8 @@ function loadStoryFromUrl()
         
         // Get the story code.
         $.get( storyCodeUrl, function( storyCode ) {
-            
-            $( html.inputStoryTitle ).val( storyTitle );
-            $( html.inputStoryAuthors ).val( storyAuthors );
-            $( html.inputStoryCode ).val( storyCode );
         
-            loadStory( storyTitle, storyAuthors, storyCode, false );
+            loadStory( storyTitle, storyAuthors, storyCode );
             
         }).fail(function() {
 
@@ -55,9 +51,34 @@ function loadStoryFromUrl()
     }
 }
 
+function loadStoryFromDocumentation( storyTitle, storyAuthors, storyCode )
+{
+    // Empty warnings.
+    $( html.codeWarningList ).empty();
+    
+    // Story already loaded. Show overwrite warning.
+    if ( hasStoryLoaded() ) {
+        
+        // Load the story on over-write.
+        $( html.overwriteWarningOverwriteButton ).unbind( "click" ).click( 
+            function() {
+                loadStory( storyTitle, storyAuthors, storyCode );
+            });
+
+        // Show the warning.
+        $( html.overwriteWarningDialog ).modal();
+        
+    // No loaded story. Proceed.
+    } else {
+    
+        loadStory( storyTitle, storyAuthors, storyCode );
+        
+    }
+}
+
 function loadStory( storyTitle, storyAuthors, storyCode )
 {
-    // If the title is blank.
+    // If the title and author are blank.
     if ( !storyTitle ) {
         storyTitle = $( html.inputStoryTitle ).prop( "placeholder" );
     }
@@ -66,6 +87,11 @@ function loadStory( storyTitle, storyAuthors, storyCode )
         storyAuthors = $( html.inputStoryAuthors ).prop( "placeholder" );
     }
     
+    // Populate input values with what we have.
+    $( html.inputStoryTitle ).val( storyTitle );
+    $( html.inputStoryAuthors ).val( storyAuthors );
+    $( html.inputStoryCode ).val( storyCode );
+
     // Parse the story.
     var story = parseStory( storyCode );
     
@@ -136,6 +162,11 @@ function displayLoadedStory( storyTitle, storyAuthors, story )
         showStoryErrorMessage();
         
     }
+}
+
+function hasStoryLoaded()
+{
+    return $( html.loadStoryNavbarButton ).text() === "Edit Story";
 }
 
 function appendCodeWarning( title, message ) 
