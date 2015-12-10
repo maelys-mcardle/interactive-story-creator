@@ -29,6 +29,10 @@ function downloadDocumentation()
         
         // Load the table of contents.
         generateDocumentationTableOfContents();
+        
+        // Define behaviour of the buttons to run the examples.
+        setupDocumentationTryExampleButtons();
+        
     });
 }
 
@@ -51,6 +55,24 @@ function generateDocumentationTableOfContents()
             top: 100,
         }
     });
+}
+
+function setupDocumentationTryExampleButtons()
+{
+    $( html.documentationContents ).find( 
+        html.documentationTryExampleButtons + ", code" ).each( 
+        function( index, element, elements ) {
+
+            var tagName = $( element ).prop( "tagName" );
+            if ( tagName === "BUTTON" ) {
+                $( element ).click( function() {
+                    var storyTitle = "Example";
+                    var storyAuthors = "Story Creator";
+                    var storyCode = $( elements[index + 1] ).text();
+                    loadStory( storyTitle, storyAuthors, storyCode );
+                });
+            }
+        });
 }
 
 function parseHtmlHeaders( root ) 

@@ -83,3 +83,12 @@ body {
 #publish-story-url {
     word-break: break-all;
 }
+
+/* Placing the try me button. */
+.documentation-try-example-container {
+    position: relative;
+    padding-right: 10px;
+    height: 0;
+    top: 10px;
+}
+

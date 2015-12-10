@@ -43,6 +43,7 @@ const html = {
     documentationContents: "#documentation-contents",
     documentationTableOfContents: "#documentation-table-of-contents",
     documentationTableOfContentsList: "#documentation-table-of-contents > ul",
+    documentationTryExampleButtons: ".documentation-try-example-buttons",
     codeWarningDialog: "#code-warning-dialog",
     codeWarningList: "#code-warning-list",
     codeWarningEditCodeButton: "#code-warning-edit-code-button",
