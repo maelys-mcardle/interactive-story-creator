@@ -72,12 +72,15 @@ function validateStoryCodeUrl()
         var urlFilename = ( currentUrl.filename() ) ?
                             currentUrl.filename() : constants.indexUrl;
                             
+        // Story code URL Base64 encoded because of problem with
+        // HostGator giving Error 500 if a URL includes a protocol
+        // in the parameters.
         var generatedUrl = currentUrl.protocol() + "://" + 
                            currentUrl.host() + 
                            urlDirectory + 
                            urlFilename + 
                            "?story=" + 
-                           encodeURIComponent( storyCodeUrl.toString() );
+                           encodeURIComponent( btoa( storyCodeUrl.toString() ) );
         
         $( html.publishStoryUrl ).text( generatedUrl );
         showPublishStoryStep2();

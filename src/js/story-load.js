@@ -30,7 +30,7 @@ function loadStoryFromUrl()
 
         // Get the parameters from the URL.
         var urlValues = currentUrl.search(true);
-        var storyCodeUrl = urlValues.story;
+        var storyCodeUrl = atob( urlValues.story );
         var storyTitle = urlValues.title;
         var storyAuthors = urlValues.authors;
         
