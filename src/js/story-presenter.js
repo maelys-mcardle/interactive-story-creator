@@ -149,8 +149,17 @@ function choiceInPreviousChoices( choiceToFind, allChoices )
             if ( caseInsensitive( choiceToFind.id ) === 
                  caseInsensitive( choiceToCompare.id ) ) {
              
+                // Match found.
                 return true;
             
+            }
+            
+            else if ( choiceToFind.target.found   === true &&
+                      choiceToFind.target.chapter === choiceToCompare.chapter &&
+                      choiceToFind.target.page    === choiceToCompare.page ) {
+            
+                // Page was specified, and there was no matches on it.
+                return false;
             }
         }
     }
