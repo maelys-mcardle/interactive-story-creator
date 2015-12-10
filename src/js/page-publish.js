@@ -64,10 +64,18 @@ function validateStoryCodeUrl()
     if ( storyCodeUrl.domain() && storyCodeUrl.filename() ) {
         
         var currentUrl = new URI( window.location.href );
+        
+        var urlDirectory = ( currentUrl.directory().endsWith("/") ) ? 
+                             currentUrl.directory() :
+                             currentUrl.directory() + "/";
+                             
+        var urlFilename = ( currentUrl.filename() ) ?
+                            currentUrl.filename() : constants.indexUrl;
+                            
         var generatedUrl = currentUrl.protocol() + "://" + 
                            currentUrl.host() + 
-                           currentUrl.directory() + "/" + 
-                           currentUrl.filename() + 
+                           urlDirectory + 
+                           urlFilename + 
                            "?story=" + 
                            encodeURIComponent( storyCodeUrl.toString() );
         

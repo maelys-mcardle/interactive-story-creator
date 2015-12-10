@@ -5,6 +5,7 @@ const constants = {
     updatedMessageDuration: 3000,
     errorMessageDuration: 5000,
     activeLinkClass: "active",
+    indexUrl: "index.htm",
     documentationUrl: "documentation.htm",
     publishStoryUrl: "publish.htm",
 };
