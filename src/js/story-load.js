@@ -62,6 +62,7 @@ function loadStoryFromDocumentation( storyTitle, storyAuthors, storyCode )
         // Load the story on over-write.
         $( html.overwriteWarningOverwriteButton ).unbind( "click" ).click( 
             function() {
+                $( html.overwriteWarningDialog ).modal( "hide" );
                 loadStory( storyTitle, storyAuthors, storyCode );
             });
 
