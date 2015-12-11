@@ -156,7 +156,10 @@ function displayLoadedStory( storyTitle, storyAuthors, story )
         
         // Show the story updated message.
         showStoryUpdatedMessage();
-    
+        
+        // Set warning for when user leaves page.
+        warnBrowserLeavingPage();
+        
     } else {
         
         // Show the story error message.
@@ -178,3 +181,9 @@ function appendCodeWarning( title, message )
         '</div>' );
 }
 
+function warnBrowserLeavingPage()
+{
+    $( window ).off('beforeunload').on('beforeunload', function(){
+        return "Your play progress will be lost.";
+    });
+}
