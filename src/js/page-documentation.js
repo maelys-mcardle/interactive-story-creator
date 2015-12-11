@@ -47,9 +47,9 @@ function generateDocumentationTableOfContents()
     
     $( 'body' ).scrollspy({
         target: html.sidebarClass,
-        offset: 100
+        offset: 130
     });
-    
+
     $( html.documentationTableOfContentsList ).affix({
         offset: {
             top: 100,
