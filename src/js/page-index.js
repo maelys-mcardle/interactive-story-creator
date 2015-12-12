@@ -19,6 +19,7 @@ const pages = {
 
 const html = {
     footerAuthorCopyright: "#footer-author-copyright",
+    footerStoryCreatorInfo: "#footer-story-creator-info",
     loadStoryNavbarButton: "#load-story-navbar-button",
     createStoryJumbotronButton: "#create-story-jumbotron-button",
     inputStoryTitle: "#input-story-title",
@@ -94,6 +95,7 @@ function toggleEditableControls( show )
     $( html.publishStoryNavbarLink ).toggle( show );
     $( html.documentationNavbarLink ).toggle( show );
     $( html.loadStoryNavbarButton ).toggle( show );
+    $( html.footerStoryCreatorInfo ).toggle( show );
 }
 
 function showCreateStoryDialog()
