@@ -13,7 +13,7 @@ function downloadDocumentation()
     var documentationContainerElement = $( html.documentationContainer )[0];
     var loadingAnimation = new Spinner().spin( documentationContainerElement );
     
-    $.get( constants.documentationUrl, function( data ) {
+    $.get( constants.documentationPage, function( data ) {
         
         // Remove the loading animation.
         loadingAnimation.stop();

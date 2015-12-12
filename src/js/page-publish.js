@@ -13,7 +13,7 @@ function downloadPublishStoryPage()
     var publishStoryContainerElement = $( html.publishStoryContainer )[0];
     var loadingAnimation = new Spinner().spin( publishStoryContainerElement );
     
-    $.get( constants.publishStoryUrl, function( data ) {
+    $.get( constants.publishPage, function( data ) {
         
         // Remove the loading animation.
         loadingAnimation.stop();
@@ -70,7 +70,7 @@ function validateStoryCodeUrl()
                              currentUrl.directory() + "/";
                              
         var urlFilename = ( currentUrl.filename() ) ?
-                            currentUrl.filename() : constants.indexUrl;
+                            currentUrl.filename() : constants.indexPage;
                             
         // Story code URL Base64 encoded because of problem with
         // HostGator giving Error 500 if a URL includes a protocol
@@ -82,7 +82,7 @@ function validateStoryCodeUrl()
                            "?story=" + 
                            encodeURIComponent( btoa( storyCodeUrl.toString() ) );
         
-        $( html.publishStoryUrl ).text( generatedUrl );
+        $( html.publishPage ).text( generatedUrl );
         showPublishStoryStep2();
         
     } else {
@@ -111,11 +111,11 @@ function showPublishStoryStep3()
 {
     var title = encodeURIComponent( $( html.publishStoryTitle ).val() );
     var authors = encodeURIComponent( $( html.publishStoryAuthors ).val() );
-    var url = $( html.publishStoryUrl ).text() + 
+    var url = $( html.publishPage ).text() + 
               "&title=" + title + "&authors=" + authors;
     
-    $( html.publishStoryUrl ).text( url );
-    $( html.publishStoryUrl ).prop( "href", url );
+    $( html.publishPage ).text( url );
+    $( html.publishPage ).prop( "href", url );
     
     $( html.publishStorySteps ).hide();
     $( html.publishStoryStep3 ).show();

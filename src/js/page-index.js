@@ -5,10 +5,17 @@ const constants = {
     updatedMessageDuration: 3000,
     errorMessageDuration: 5000,
     activeLinkClass: "active",
-    indexUrl: "index.htm",
-    documentationUrl: "documentation.htm",
-    publishStoryUrl: "publish.htm",
+    indexPage: "index.htm",
+    documentationPage: "documentation.htm",
+    publishPage: "publish.htm",
 };
+
+const pages = {
+    play: 0,
+    history: 1,
+    publish: 2,
+    documentation: 3,
+}
 
 const html = {
     footerAuthorCopyright: "#footer-author-copyright",
@@ -77,6 +84,8 @@ const html = {
 var global = {
     showStoryUpdatedTimeout: undefined,
     showStoryErrorTimeout: undefined,
+    lastShownPage: undefined,
+    scrollPositions: {},
 };
 
 function showCreateStoryDialog()
@@ -138,36 +147,44 @@ function showStoryErrorMessage()
         }, constants.errorMessageDuration );
 }
 
-function showPage( pageToShow, navbarLink )
+function showPage( page, navbarLink )
 {
-    $( html.historyContainer ).hide();
-    $( html.storyContainer ).hide();
-    $( html.documentationContainer ).hide();
-    $( html.publishStoryContainer ).hide();
+    // Get the scroll position of the page being moved away from.
+    global.scrollPositions[ global.lastShownPage ] = $( window ).scrollTop();
     
-    $( pageToShow ).show();
+    // Show the right pages.
+    $( html.storyContainer         ).toggle( page === pages.play );
+    $( html.historyContainer       ).toggle( page === pages.history );
+    $( html.publishStoryContainer  ).toggle( page === pages.publish );
+    $( html.documentationContainer ).toggle( page === pages.documentation );
     
-    $( html.activeNavbarLink ).removeClass( constants.activeLinkClass );
-    $( navbarLink ).addClass( constants.activeLinkClass );
+    // Show the right navbar.
+    $( html.playNavbarLink ).toggleClass( 
+        constants.activeLinkClass, page === pages.play );
+    $( html.historyNavbarLink ).toggleClass( 
+        constants.activeLinkClass, page === pages.history );
+    $( html.publishStoryNavbarLink ).toggleClass( 
+        constants.activeLinkClass, page === pages.publish );
+    $( html.documentationNavbarLink ).toggleClass( 
+        constants.activeLinkClass, page === pages.documentation );
+    
+    // Restore the scrollbar position for the page being moved into.
+    if ( global.scrollPositions[ page ] ) {
+        $( window ).scrollTop( global.scrollPositions[ page ] );
+    }
+    
+    // Update the last shown page.
+    global.lastShownPage = page;
 }
 
 function goToPlayPage()
 {
-    showPage( html.storyContainer, html.playNavbarLink );
+    showPage( pages.play );
 }
 
 function goToHistoryPage()
 {
-    showPage( html.historyContainer, html.historyNavbarLink );
-}
-
-function goToDocumentationPage()
-{
-    // Load documentation contents if they haven't been already.
-    loadDocumentation();
-    
-    // Show the documentation.
-    showPage( html.documentationContainer, html.documentationNavbarLink );
+    showPage( pages.history );
 }
 
 function goToPublishStoryPage()
@@ -176,7 +193,16 @@ function goToPublishStoryPage()
     loadPublishStoryPage();
     
     // Show the documentation.
-    showPage( html.publishStoryContainer, html.publishStoryNavbarLink );
+    showPage( pages.publish );
+}
+
+function goToDocumentationPage()
+{
+    // Load documentation contents if they haven't been already.
+    loadDocumentation();
+    
+    // Show the documentation.
+    showPage( pages.documentation );
 }
 
 function warnBrowserLeavingPage()
