@@ -66,7 +66,7 @@ function setupDocumentationTryExampleButtons()
         var tagName = $( element ).prop( "tagName" );
         if ( tagName === "BUTTON" ) {
             $( element ).click( function() {
-                var storyTitle = "Example";
+                var storyTitle = "Example Story";
                 var storyAuthors = "Story Creator";
                 var storyCode = $( allButtonsAndCode[index + 1] )
                                     .text().trim();
