@@ -57,7 +57,7 @@ function showPublishStoryStep1()
         .click( validateStoryCodeUrl );
 }
 
-function validateStoryCodeUrl()
+function pageUrlFromStoryCodeUrl()
 {
     var storyCodeUrl = new URI( $( html.publishInputStoryCodeUrl ).val() );
 
@@ -81,8 +81,19 @@ function validateStoryCodeUrl()
                            urlFilename + 
                            "?story=" + 
                            encodeURIComponent( btoa( storyCodeUrl.toString() ) );
+                           
+        return generatedUrl;        
+    }
+    
+    return "";
+}
+
+function validateStoryCodeUrl()
+{
+    var pageUrl = pageUrlFromStoryCodeUrl();
+
+    if ( pageUrl ) {
         
-        $( html.publishPage ).text( generatedUrl );
         showPublishStoryStep2();
         
     } else {
@@ -111,11 +122,16 @@ function showPublishStoryStep3()
 {
     var title = encodeURIComponent( $( html.publishStoryTitle ).val() );
     var authors = encodeURIComponent( $( html.publishStoryAuthors ).val() );
-    var url = $( html.publishPage ).text() + 
-              "&title=" + title + "&authors=" + authors;
+    var url = pageUrlFromStoryCodeUrl() +
+              "&title=" + title + 
+              "&authors=" + authors;
     
-    $( html.publishPage ).text( url );
-    $( html.publishPage ).prop( "href", url );
+    if ( $( html.publishInputStoryEditable ).is(':checked') ) {
+        url += "&editable";
+    }
+    
+    $( html.publishStoryUrl ).text( url );
+    $( html.publishStoryUrl ).prop( "href", url );
     
     $( html.publishStorySteps ).hide();
     $( html.publishStoryStep3 ).show();

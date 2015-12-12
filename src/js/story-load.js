@@ -33,11 +33,16 @@ function loadStoryFromUrl()
         var storyCodeUrl = atob( urlValues.story );
         var storyTitle = urlValues.title;
         var storyAuthors = urlValues.authors;
+        var storyEditable = currentUrl.hasQuery("editable");
         
         // Get the story code.
         $.get( storyCodeUrl, function( storyCode ) {
         
-            loadStory( storyTitle, storyAuthors, storyCode );
+            // Load story.
+            var storyLoaded = loadStory( storyTitle, storyAuthors, storyCode );
+            
+            // Hide editable controls only if requested and story loaded.
+            toggleEditableControls( !storyLoaded || storyEditable );
             
         }).fail(function() {
 
@@ -116,8 +121,11 @@ function loadStory( storyTitle, storyAuthors, storyCode )
         
         showCodeWarningDialog();
         
+        // Indicate problems loading.
+        return false;
+        
     } else {
-        displayLoadedStory( storyTitle, storyAuthors, story );
+        return displayLoadedStory( storyTitle, storyAuthors, story );
     }
 }
 
@@ -160,10 +168,16 @@ function displayLoadedStory( storyTitle, storyAuthors, story )
         // Set warning for when user leaves page.
         warnBrowserLeavingPage();
         
+        // Indicate story loaded.
+        return true;
+        
     } else {
         
         // Show the story error message.
         showStoryErrorMessage();
+        
+        // Indicate story did not load.
+        return false;
         
     }
 }

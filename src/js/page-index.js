@@ -75,6 +75,7 @@ const html = {
     publishStoryTitle: "#input-publish-title",
     publishStoryAuthors: "#input-publish-authors",
     publishInputStoryCodeUrl: "#input-story-code-url",
+    publishInputStoryEditable: "#input-story-editable",
     publishStoryUrl: "#publish-story-url",
     overwriteWarningDialog: "#overwrite-warning-dialog",
     overwriteWarningCancelButton: "#overwrite-warning-cancel-button",
@@ -87,6 +88,13 @@ var global = {
     lastShownPage: undefined,
     scrollPositions: {},
 };
+
+function toggleEditableControls( show )
+{
+    $( html.publishStoryNavbarLink ).toggle( show );
+    $( html.documentationNavbarLink ).toggle( show );
+    $( html.loadStoryNavbarButton ).toggle( show );
+}
 
 function showCreateStoryDialog()
 {
