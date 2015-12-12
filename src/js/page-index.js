@@ -169,7 +169,8 @@ function showPage( page, navbarLink )
         constants.activeLinkClass, page === pages.documentation );
     
     // Restore the scrollbar position for the page being moved into.
-    if ( global.scrollPositions[ page ] ) {
+    // Except for play page - that one has dynamic content.
+    if ( page != pages.play && global.scrollPositions[ page ] ) {
         $( window ).scrollTop( global.scrollPositions[ page ] );
     }
     
