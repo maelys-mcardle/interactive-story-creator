@@ -180,10 +180,3 @@ function appendCodeWarning( title, message )
             '<strong>' + title + '</strong>: ' + message + 
         '</div>' );
 }
-
-function warnBrowserLeavingPage()
-{
-    $( window ).off('beforeunload').on('beforeunload', function(){
-        return "Your play progress will be lost.";
-    });
-}

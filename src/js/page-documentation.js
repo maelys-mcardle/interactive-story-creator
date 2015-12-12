@@ -68,8 +68,11 @@ function setupDocumentationTryExampleButtons()
             $( element ).click( function() {
                 var storyTitle = "Example";
                 var storyAuthors = "Story Creator";
-                var storyCode = $( allButtonsAndCode[index + 1] ).text();
-                loadStoryFromDocumentation( storyTitle, storyAuthors, storyCode );
+                var storyCode = $( allButtonsAndCode[index + 1] )
+                                    .text().trim();
+                
+                loadStoryFromDocumentation( storyTitle, 
+                    storyAuthors, storyCode );
             });
         }
     });

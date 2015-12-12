@@ -179,6 +179,13 @@ function goToPublishStoryPage()
     showPage( html.publishStoryContainer, html.publishStoryNavbarLink );
 }
 
+function warnBrowserLeavingPage()
+{
+    $( window ).off('beforeunload').on('beforeunload', function(){
+        return "Your play progress will be lost.";
+    });
+}
+
 // Called on start.
 $(function() {
     
