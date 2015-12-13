@@ -123,7 +123,7 @@ This is going to be a long day.
     A story is split up into one or more chapters. In the story code,
     the start of a chapter is identified by a line that starts with 
     a single <code>#</code> followed by the chapter title in the format
-    <code># Chapter Name</code>. Chapter names can not repeat.
+    <code># Chapter Title</code>. Chapter titles can not repeat.
     For instance:
 </p>
 
@@ -417,8 +417,8 @@ You wake up feeling exhausted.
 <p>
     If it's in the same chapter as the current page, the time can 
     be used to identify which page to bring the reader to when clicked. 
-    When clicked, the reader will be brought to the page with the given 
-    time:
+    When clicked, the reader will be brought to the first page in 
+    the chapter with the given time:
 </p>
 
 <div class="documentation-try-example-container text-right">
@@ -446,9 +446,7 @@ It's 3:00 PM.
 
 <p>
     If it's in the same chapter as the current page, the location can also
-    be used to identify which page to bring the reader to when clicked. 
-    When clicked, the reader will be brought to the page with the given 
-    location:
+    be used to identify which page to bring the reader to when clicked:
 </p>
 
 <div class="documentation-try-example-container text-right">
@@ -475,9 +473,8 @@ at the sad parts in the theater.
 
 <p>
     If it's in the same chapter, the time &amp; location can be used
-    together to identify which page to bring the reader to when clicked. 
-    When clicked, the reader will be brought to the page with the given time
-    and location:
+    together to identify which page to bring the reader to when clicked,
+    using the format <code>Time: Location</code>:
 </p>
 
 <div class="documentation-try-example-container text-right">
@@ -515,9 +512,8 @@ You see an army of corgis before you. One shouts out:
 <p>
     If it's in a different chapter, the chapter title, along with the 
     time &amp; location on the page can be used together to identify which 
-    page to bring the reader to when clicked. A <code>:</code> is used to 
-    differentiate between the chapter from the time and location. When clicked, 
-    the reader will be brought to the page with the given time and location:
+    page to bring the reader to when clicked. The page is specified 
+    using the format <code>Chapter: Time: Location</code>:
 </p>
 
 <div class="documentation-try-example-container text-right">
@@ -552,7 +548,8 @@ You see an army of corgis before you. One shouts out:
 
 <p>
     When it's in a different chapter, it isn't mandatory to specify both
-    time &amp; location. It can just be one or the other:
+    time &amp; location. It can just be one or the other as
+    <code>Chapter: Time</code> or <code>Chapter: Location</code>:
 </p>
 
 <div class="documentation-try-example-container text-right">
@@ -592,9 +589,10 @@ The airplane lands at JFK. It's sunny out.
 <p>
     If multiple pages share the same time and/or location, the use of the 
     <code>#</code> followed by a number is used to state that the 
-    <em>n</em><sup>th</sup> match is desired. In other words, adding a 
-    <code>#2</code> to a link would indicate that the second page with the
-    given time and/or location.
+    <em>n</em><sup>th</sup> match is desired. Otherwise, the code 
+    defaults to the first matching page. For example, adding a 
+    <code>#2</code> to a link would indicate that the second page with 
+    the given time and/or location.
 </p>
 
 <div class="documentation-try-example-container text-right">
