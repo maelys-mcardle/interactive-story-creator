@@ -120,10 +120,11 @@ This is going to be a long day.
 </div>
 
 <p>
-    A story is split up into one or more chapters. In the story code, 
-    a single <code>#</code> sign is used to signal that what follows 
-    is a chapter title, and follows the format <code># Chapter 
-    Name</code>. Each chapter must have a unique name. For instance:
+    A story is split up into one or more chapters. In the story code,
+    the start of a chapter is identified by a line that starts with 
+    a single <code>#</code> followed by the chapter title in the format
+    <code># Chapter Name</code>. Chapter names can not repeat.
+    For instance:
 </p>
 
 <pre><code class="markdown">
@@ -154,10 +155,9 @@ This is going to be a long day.
 </h2>
 
 <p>
-    Within each chapter are one or more pages. Pages are marked in the 
-    story code with a double <code>##</code> and are used to convey
-    the location that the events described in the page take place on
-    with the format <code>## Location</code>:
+    Each page starts with a page title. Page titles are used to convey 
+    the location of the events on the page and follow the format 
+    <code>## Location</code>:
 </p>
 
 <pre><code class="markdown">
@@ -174,8 +174,8 @@ This is going to be a long day.
 </code></pre>
 
 <p>
-    Optionally, the title can can also be used to mark time, using
-    the format <code>## Time: Location</code>:
+    Optionally, the title can can also include time in addition to
+    location, using the format <code>## Time: Location</code>:
 </p>
 
 <pre><code class="markdown">
@@ -196,8 +196,8 @@ This is going to be a long day.
 </h2>
 
 <p>
-    Within each page can be some text. Paragraphs are separated by 
-    an empty line. For instance:
+    Within each page can be some text. Multiple paragraphs are 
+    separated by an empty line. For instance:
 </p>
 
 <pre><code class="markdown">
@@ -217,9 +217,9 @@ paragraph of text.
 </code></pre>
 
 <p>
-    The text in the paragraphs can also be formatted. See the section on
-    <a href="#documentation-format-text">formatting text</a> for more 
-    details.
+    The text can also include quotes, lists, be made bold, etc. See the 
+    section on <a href="#documentation-format-text">formatting text</a> 
+    for more details.
 </p>
 
 <h2 id="documentation-choices">
@@ -228,7 +228,7 @@ paragraph of text.
 
 <p>
     Each page can provide one or more choices for the reader to select
-    that determines what happens next in the story. These show up as 
+    that determines where they go next in the story. These show up as 
     links to be clicked on that appear beneath the paragraphs of text.
 </p>
 
@@ -281,14 +281,10 @@ paragraph of text.
 </h2>
 
 <p>
-    At their most basic, these links are made up of three parts, but only
-    one is mandatory.
-</p>
-
-<p>
-    The first two parts is the text that appears in the link, and the
-    page that the reader is brought to when the link is clicked on. 
-    Links follow the format <code>[link text](page)</code>:
+    Links require two pieces of information to work: the text that 
+    appears in the link, and the page that the reader is brought to 
+    when the link is clicked. This is done by writing the links in the 
+    format <code>[link text](page)</code>:
 </p>
 
 <pre><code class="markdown">
@@ -307,8 +303,8 @@ paragraph of text.
 </div>
 
 <p>
-    That said, specifying a page is optional. When no page is
-    indicated, the link becomes unclickable. And so this code:
+    Specifying a page is optional. When no page is indicated, the 
+    link becomes unclickable. And so this code:
 </p>
 
 <pre><code class="markdown">
@@ -331,15 +327,15 @@ paragraph of text.
 </h2>
 
 <p>
-    The third part of a link are identifiers, which are keywords used to
-    identify what link was clicked when presenting 
-    <a href="#documentation-choice-text">choice-specific text</a>. These 
-    do not show up in the text of the link. 
+    Links can also include identifiers, which are necessary when using
+    <a href="#documentation-choice-text">choice-specific text</a>.
+    These identifiers are used to remember what choices were made on a
+    page later on. 
 </p>
 
 <p>
     The format of links with identifiers is <code>[identifier: 
-    link text](page)</code>:
+    link text](page)</code>.
 </p>
 
 <pre><code class="markdown">
@@ -349,7 +345,8 @@ paragraph of text.
 </code></pre>
 
 <p>
-    Which would produce the following:
+    Identifiers don't appear in the link text. So the links
+    for the previous example would appear as follows:
 </p>
 
 <div class="well">
