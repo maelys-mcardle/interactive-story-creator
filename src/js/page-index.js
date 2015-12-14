@@ -40,7 +40,7 @@ const html = {
     storyTimeContainer: "#story-time-container",
     storyChoices: "#story-choices",
     historyContainer: "#history-container",
-    historyLinks: "#history-container .list-group",
+    historyLinks: "#history-container .list-group:last-child",
     activeHistoryLinks: "#history-container .active",
     emptyHistoryMessage: "#empty-history-message",
     activeNavbarLink: "#navbar-links .active",

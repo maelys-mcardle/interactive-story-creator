@@ -36,6 +36,7 @@ function addEntryToHistory( title, description, buttonCallback )
     // history. Go to the play page to show them.
     var newHistoryLink = historyLink( title, description );
     newHistoryLink.click( function () {
+        startNewHistoryChain();
         buttonCallback();
         goToPlayPage();
     });
@@ -49,6 +50,11 @@ function addEntryToHistory( title, description, buttonCallback )
     
     // Add the new link.
     $( html.historyLinks ).append( newHistoryLink );
+}
+
+function startNewHistoryChain()
+{
+    $( html.historyContainer ).append( '<div class="list-group"></div>' );
 }
 
 function resetHistory()
