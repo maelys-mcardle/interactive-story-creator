@@ -233,7 +233,13 @@ $(function() {
     $( html.createStoryJumbotronButton).click( showCreateStoryDialog );
     
     // Initialize tooltips.
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
+    
+    // Initialize the markdown editor.
+    $( html.inputStoryCode ).markdown({
+        autofocus: false, 
+        savable: false, 
+        hiddenButtons: ["cmdPreview", "cmdUrl", "cmdHeading"] });
     
     // Load the story from the URL, if applicable.
     loadStoryFromUrl();
