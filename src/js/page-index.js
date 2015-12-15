@@ -238,7 +238,8 @@ $(function() {
     // Initialize the markdown editor.
     $( html.inputStoryCode ).markdown({
         autofocus: false, 
-        savable: false, 
+        savable: false,
+        fullscreen: false,
         hiddenButtons: ["cmdPreview", "cmdUrl", "cmdHeading"] });
     
     // Load the story from the URL, if applicable.
