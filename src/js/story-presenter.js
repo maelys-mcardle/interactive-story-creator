@@ -206,6 +206,7 @@ function addStoryChoice( link, story, previousChoices, chapterIndex, pageIndex )
             newPreviousChoices.push({ 
                 chapter: chapterIndex,
                 page: pageIndex,
+                text: link.text,
                 id: link.id });
                 
             if ( link.target.chapter !== chapterIndex ) {

@@ -5,10 +5,16 @@ function addStoryPageToHistory( story, previousChoices, chapterIndex, pageIndex 
     var chapter = story.chapters[ chapterIndex ];
     var page = chapter.pages[ pageIndex ];
     
-    var title = chapter.title + 
-                    (( page.time !== "" ) ? ", " + page.time : "" ) +
-                    ", " + page.location;
-    var description = "Click to go back to this point in time.";
+    var chapterTimeLocation = chapter.title + 
+        (( page.time !== "" ) ? ", " + page.time : "" ) +
+        ", " + page.location;
+    
+    var latestChoice = previousChoices.slice(-1).pop();
+    var title = ( latestChoice ) ? 
+        '"' + latestChoice.text + '"' : chapterTimeLocation;
+    var description = ( latestChoice ) ?
+        chapterTimeLocation : 'Click to go back to this point in time.';
+    
     var buttonCallback = function() {
         showStoryPage( story, previousChoices, chapterIndex, pageIndex );
     }; 
@@ -49,7 +55,7 @@ function addEntryToHistory( title, description, buttonCallback )
     $( html.emptyHistoryMessage ).hide();
     
     // Add the new link.
-    $( html.historyLinks ).append( newHistoryLink );
+    $( html.lastHistoryLinks ).append( newHistoryLink );
 }
 
 function startNewHistoryChain()
@@ -59,7 +65,7 @@ function startNewHistoryChain()
 
 function resetHistory()
 {
-    $( html.historyLinks ).empty();
+    $( html.allHistoryLinks ).empty();
 }
 
 function historyLink( title, description )
