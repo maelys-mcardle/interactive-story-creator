@@ -24,11 +24,8 @@ function downloadPublishStoryPage()
         // Define behaviour for the buttons on the page.
         $( html.publishStoryButton ).click( showPublishStoryDialog );
         
-        // Validate when url pasted.
-        $( html.publishInputStoryCodeUrl ).change( validateStoryCodeUrl );
-        $( html.publishInputStoryCodeUrl ).on('paste', 
-            function (e) { $(e.target).keyup( validateStoryCodeUrl ); });
-        
+        // Validate when url typed/pasted.
+        $( html.publishInputStoryCodeUrl ).on('input', validateStoryCodeUrl );
     });
 }
 
@@ -100,6 +97,11 @@ function showPublishStoryStep3()
         .click( showPublishStoryStep2 );
 }
 
+function hasStoryCodeUrl()
+{
+    return ( $( html.publishInputStoryCodeUrl ).val().trim().length > 0 );
+}
+
 function pageUrlFromStoryCodeUrl()
 {
     var storyCodeUrl = new URI( $( html.publishInputStoryCodeUrl ).val() );
@@ -157,28 +159,33 @@ function validateStoryCodeUrl()
         $( html.publishInputStoryCodeUrl ).parent().addClass("has-error");
     };
     
+    // Clear validation.
     validationReset();
     
-    var pageUrl = pageUrlFromStoryCodeUrl();
-    
-    $( html.publishInputStoryCodeUrlCheckingIcon ).show();
-
-    if ( pageUrl ) {
+    // Only attempt validation if there's a URL.
+    if ( hasStoryCodeUrl() ) {
         
-        $.get( pageUrl, function ( storyCode ) {
+        var storyUrl = pageUrlFromStoryCodeUrl();
+        
+        if ( storyUrl ) {
+        
+            $( html.publishInputStoryCodeUrlCheckingIcon ).show();
             
-            var story = parseStory( storyCode );
-            if ( story && story.chapters.length > 0 ) {
-                validationPassed();
-            } else {
-                validationFailed();
-            }
-        
-         }).fail( validationFailed );
-        
-    } else {
-        
-        validationFailed();
-        
+            $.get( storyUrl, function ( storyCode ) {
+                
+                var story = parseStory( storyCode );
+                if ( story && story.chapters.length > 0 ) {
+                    validationPassed();
+                } else {
+                    validationFailed();
+                }
+            
+             }).fail( validationFailed );
+             
+         } else {
+             
+             validationFailed();
+             
+         }
     }
 }
