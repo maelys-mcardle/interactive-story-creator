@@ -59,11 +59,6 @@ body {
     float: right;
 }
 
-/* Break URLs up. */
-#publish-story-url {
-    word-break: break-all;
-}
-
 /* Placing the try me button. */
 .documentation-try-example-container {
     position: relative;
@@ -72,8 +67,13 @@ body {
     top: 10px;
 }
 
-/* Adding padding missing from the bootstrap-markdown editor */
+/* Adding padding missing from the bootstrap-markdown editor. */
 #input-story-code {
     padding: 10px;
+}
+
+/* Break URLs up that are too wide to fit in a block element. */
+.break-urls {
+    word-break: break-all;
 }
 

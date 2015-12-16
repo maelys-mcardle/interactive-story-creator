@@ -190,7 +190,7 @@ function hasStoryLoaded()
 function appendCodeWarning( title, message ) 
 {
     $( html.codeWarningList ).append(
-        '<div class="alert alert-warning" role="alert">' + 
+        '<div class="alert alert-warning break-urls" role="alert">' + 
             '<strong>' + title + '</strong>: ' + message + 
         '</div>' );
 }
