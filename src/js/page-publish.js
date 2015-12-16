@@ -24,6 +24,11 @@ function downloadPublishStoryPage()
         // Define behaviour for the buttons on the page.
         $( html.publishStoryButton ).click( showPublishStoryDialog );
         
+        // Validate when url pasted.
+        $( html.publishInputStoryCodeUrl ).change( validateStoryCodeUrl );
+        $( html.publishInputStoryCodeUrl ).on('paste', 
+            function (e) { $(e.target).keyup( validateStoryCodeUrl ); });
+        
     });
 }
 
@@ -52,55 +57,6 @@ function showPublishStoryStep1()
     $( html.publishStoryBackButton ).hide();
     $( html.publishStoryNextButton ).show();
     $( html.publishStoryFinishButton ).hide();
-    
-    $( html.publishStoryNextButton ).unbind( "click" )
-        .click( validateStoryCodeUrl );
-}
-
-function pageUrlFromStoryCodeUrl()
-{
-    var storyCodeUrl = new URI( $( html.publishInputStoryCodeUrl ).val() );
-
-    if ( storyCodeUrl.domain() && storyCodeUrl.filename() ) {
-        
-        var currentUrl = new URI( window.location.href );
-        
-        var urlDirectory = ( currentUrl.directory().endsWith("/") ) ? 
-                             currentUrl.directory() :
-                             currentUrl.directory() + "/";
-                             
-        var urlFilename = ( currentUrl.filename() ) ?
-                            currentUrl.filename() : constants.indexPage;
-                            
-        // Story code URL Base64 encoded because of problem with
-        // HostGator giving Error 500 if a URL includes a protocol
-        // in the parameters.
-        var generatedUrl = currentUrl.protocol() + "://" + 
-                           currentUrl.host() + 
-                           urlDirectory + 
-                           urlFilename + 
-                           "?story=" + 
-                           encodeURIComponent( btoa( storyCodeUrl.toString() ) );
-                           
-        return generatedUrl;        
-    }
-    
-    return "";
-}
-
-function validateStoryCodeUrl()
-{
-    var pageUrl = pageUrlFromStoryCodeUrl();
-
-    if ( pageUrl ) {
-        
-        showPublishStoryStep2();
-        
-    } else {
-        
-        $( html.publishInputStoryCodeUrl ).parent().addClass("has-error");
-        
-    }
 }
 
 function showPublishStoryStep2()
@@ -142,4 +98,87 @@ function showPublishStoryStep3()
     
     $( html.publishStoryBackButton ).unbind( "click" )
         .click( showPublishStoryStep2 );
+}
+
+function pageUrlFromStoryCodeUrl()
+{
+    var storyCodeUrl = new URI( $( html.publishInputStoryCodeUrl ).val() );
+
+    if ( storyCodeUrl.domain() && storyCodeUrl.filename() ) {
+        
+        var currentUrl = new URI( window.location.href );
+        
+        var urlDirectory = ( currentUrl.directory().endsWith("/") ) ? 
+                             currentUrl.directory() :
+                             currentUrl.directory() + "/";
+                             
+        var urlFilename = ( currentUrl.filename() ) ?
+                            currentUrl.filename() : constants.indexPage;
+                            
+        // Story code URL Base64 encoded because of problem with
+        // HostGator giving Error 500 if a URL includes a protocol
+        // in the parameters.
+        var generatedUrl = currentUrl.protocol() + "://" + 
+                           currentUrl.host() + 
+                           urlDirectory + 
+                           urlFilename + 
+                           "?story=" + 
+                           encodeURIComponent( btoa( storyCodeUrl.toString() ) );
+                           
+        return generatedUrl;        
+    }
+    
+    return "";
+}
+
+function validateStoryCodeUrl()
+{
+    var validationReset = function () {
+        $( html.publishInputStoryCodeUrlFailIcon ).hide();
+        $( html.publishInputStoryCodeUrlOkIcon ).hide();
+        $( html.publishInputStoryCodeUrlCheckingIcon ).hide();
+        $( html.publishInputStoryCodeUrl ).parent().removeClass("has-error");
+        $( html.publishInputStoryCodeUrl ).parent().removeClass("has-success");
+        $( html.publishStoryNextButton ).prop('disabled', true);
+        $( html.publishStoryNextButton ).unbind( "click" );  
+    };
+    
+    var validationPassed = function () {
+        $( html.publishInputStoryCodeUrlCheckingIcon ).hide();
+        $( html.publishInputStoryCodeUrlOkIcon ).show();
+        $( html.publishInputStoryCodeUrl ).parent().addClass("has-success");
+        $( html.publishStoryNextButton ).prop('disabled', false);
+        $( html.publishStoryNextButton ).click( showPublishStoryStep2 );
+    };
+    
+    var validationFailed = function () {
+        $( html.publishInputStoryCodeUrlCheckingIcon ).hide();
+        $( html.publishInputStoryCodeUrlFailIcon ).show();
+        $( html.publishInputStoryCodeUrl ).parent().addClass("has-error");
+    };
+    
+    validationReset();
+    
+    var pageUrl = pageUrlFromStoryCodeUrl();
+    
+    $( html.publishInputStoryCodeUrlCheckingIcon ).show();
+
+    if ( pageUrl ) {
+        
+        $.get( pageUrl, function ( storyCode ) {
+            
+            var story = parseStory( storyCode );
+            if ( story && story.chapters.length > 0 ) {
+                validationPassed();
+            } else {
+                validationFailed();
+            }
+        
+         }).fail( validationFailed );
+        
+    } else {
+        
+        validationFailed();
+        
+    }
 }

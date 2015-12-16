@@ -1,0 +1,36 @@
+/* For the pulsing animation. */
+.pulse
+{
+	animation-name: pulse-animation;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulse-animation {
+	0% { -webkit-transform: scale(1.1); }
+	100% { -webkit-transform: scale(0.8); }
+	100% { -webkit-transform: scale(1.1); }
+}
+
+@keyframes pulse-animation {
+	0% { -webkit-transform: scale(1.1); }
+	50% { -webkit-transform: scale(0.8); }
+	100% { -webkit-transform: scale(1.1); }
+}
+
+/* For the rotation animation. */
+.rotate {
+	animation-name: rotate-animation;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@-webkit-keyframes rotate-animation {
+    100%  { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes rotate-animation  {
+    100% { transform: rotate(360deg);}
+}
+

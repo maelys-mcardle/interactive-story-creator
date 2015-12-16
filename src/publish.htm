@@ -39,10 +39,19 @@
                         raw story code, paste it below.
                     </p>
                     
-                    <div class="form-group">
+                    <div class="form-group has-feedback">
                         <label for="input-story-code-url">Story Code URL</label>
                         <input class="form-control" id="input-story-code-url" 
                                placeholder="http://example.com/story.md">
+                        <span id="input-story-code-url-checking-icon"
+                              class="glyphicon glyphicon-refresh rotate form-control-feedback collapse" 
+                              aria-hidden="true"></span>
+                        <span id="input-story-code-url-ok-icon"
+                              class="glyphicon glyphicon-ok form-control-feedback collapse" 
+                              aria-hidden="true"></span>
+                        <span id="input-story-code-url-fail-icon"
+                              class="glyphicon glyphicon-remove form-control-feedback collapse" 
+                              aria-hidden="true"></span>
                     </div>
         
                 </div>
@@ -92,7 +101,7 @@
                 <button id="publish-story-back-button" type="button" class="btn btn-default collapse">
                     Back
                 </button>
-                <button id="publish-story-next-button" type="button" class="btn btn-primary">
+                <button id="publish-story-next-button" type="button" class="btn btn-primary" disabled>
                     Next
                 </button>
                 <button id="publish-story-finish-button" type="button" class="btn btn-primary collapse">
