@@ -1,5 +1,5 @@
 /* For the pulsing animation. */
-.pulse
+.pulse-animation
 {
 	animation-name: pulse-animation;
 	animation-duration: 1s;
@@ -19,7 +19,7 @@
 }
 
 /* For the rotation animation. */
-.rotate {
+.rotate-animation {
 	animation-name: rotate-animation;
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
