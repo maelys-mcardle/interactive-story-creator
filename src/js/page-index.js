@@ -25,6 +25,8 @@ const html = {
     inputStoryTitle: "#input-story-title",
     inputStoryAuthors: "#input-story-authors",
     inputStoryCode: "#input-story-code",
+    inputEnableTestPanel: "#input-enable-test-panel",
+    storyTestPanel: "#story-test-panel",
     createEditStoryDialog: "#create-edit-story-dialog",
     createEditStoryDialogTitle: "#create-edit-story-dialog .modal-title",
     createEditStoryDialogActionButton: "#create-edit-story-dialog .modal-footer .btn-primary",
@@ -33,6 +35,7 @@ const html = {
     storyErrorMessage: "#story-error-message",
     storyContainer: "#story-container",
     storyPage: "#story-page",
+    storyRegularPage: "#story-regular-page",
     storyText: "#story-text",
     storyLocation: "#story-location",
     storyChapterTitle: "#story-chapter-title",
@@ -129,6 +132,18 @@ function showCodeWarningDialog()
 function hideCodeWarningDialog()
 {
     $( html.codeWarningDialog ).modal( "hide" );
+}
+
+function showTestPanel()
+{
+    $( html.storyPage ).addClass( "col-xs-8" );
+    $( html.storyTestPanel ).show();
+}
+
+function hideTestPanel()
+{
+    $( html.storyPage ).removeClass( "col-xs-8" );
+    $( html.storyTestPanel ).hide();
 }
 
 function showStoryUpdatedMessage()

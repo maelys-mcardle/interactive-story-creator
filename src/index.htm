@@ -136,59 +136,79 @@
             
                 <!-- Contents when there's a story -->
                 
-                <div id="story-page" class="panel panel-primary collapse">
-                    <div class="panel-heading text-center clearfix">
-                        <h3 class="panel-title">
-                            <span class="pull-left">
-                                <span class="glyphicon glyphicon-bookmark"></span>
-                                <span id="story-chapter-title">Chapter Title</span> 
-                            </span>
-                            
-                            <span id="story-time-container">
-                                <span class="glyphicon glyphicon-time"></span>
-                                <span id="story-time">Time</span>
-                            </span>
+                <div id="story-page" class="collapse">
+                    
+                    <!-- Story Page -->
+                    
+                    <div id="story-regular-page" class="panel panel-primary collapse">
+                        <div class="panel-heading text-center clearfix">
+                            <h3 class="panel-title">
+                                <span class="pull-left">
+                                    <span class="glyphicon glyphicon-bookmark"></span>
+                                    <span id="story-chapter-title">Chapter Title</span> 
+                                </span>
                                 
-                            <span class="pull-right">
-                                <span class="glyphicon glyphicon-map-marker"></span>
-                                <span id="story-location">Location</span>
-                            </span>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        
-                        <div id="story-text">The story text goes here.</div>
-                        
-                    </div>
-                    <div class="panel-footer">
-                        <div id="story-choices" class="list-group">
-                            <a href="#" class="list-group-item">Story Choice</a>
+                                <span id="story-time-container">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <span id="story-time">Time</span>
+                                </span>
+                                    
+                                <span class="pull-right">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                    <span id="story-location">Location</span>
+                                </span>
+                            </h3>
                         </div>
+                        <div class="panel-body">
+                            
+                            <div id="story-text">The story text goes here.</div>
+                            
+                        </div>
+                        <div class="panel-footer">
+                            <div id="story-choices" class="list-group">
+                                <a href="#" class="list-group-item">Story Choice</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chapter Title Page -->
+                    
+                    <div id="chapter-title-page" class="jumbotron collapse">
+
+                        <!-- Graphic from https://openclipart.org/detail/166649/vocabulary -->
+                        <img src="images/letters.svg" class="pull-right jumbotron-graphic" alt="letters">
+
+                        <h1 id="chapter-title-page-name">
+                            Chapter Title
+                        </h1>
+                        
+                        <p id="chapter-title-page-credits" class="text-muted">
+                            Story Name &amp; Authors
+                        </p>
+                        
+                        <p>
+                            <button id="chapter-title-page-button" 
+                               class="btn btn-primary btn-lg" type="button">
+                                Continue
+                                <span class="glyphicon glyphicon-chevron-right pulse-animation"></span>
+                            </button>
+                        </p>
                     </div>
                 </div>
                 
-                <!-- Chapter Title Page -->
+                <!-- Story testing area -->
                 
-                <div id="chapter-title-page" class="jumbotron collapse">
+                <div id="story-test-panel" class="col-xs-4 collapse">
 
-                    <!-- Graphic from https://openclipart.org/detail/166649/vocabulary -->
-                    <img src="images/letters.svg" class="pull-right jumbotron-graphic" alt="letters">
-
-                    <h1 id="chapter-title-page-name">
-                        Chapter Title
-                    </h1>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Story Testing</h3>
+                        </div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
                     
-                    <p id="chapter-title-page-credits" class="text-muted">
-                        Story Name &amp; Authors
-                    </p>
-                    
-                    <p>
-                        <button id="chapter-title-page-button" 
-                           class="btn btn-primary btn-lg" type="button">
-                            Continue
-                            <span class="glyphicon glyphicon-chevron-right pulse-animation"></span>
-                        </button>
-                    </p>
                 </div>
             
                 <!-- Message when there's no story -->
@@ -295,6 +315,12 @@
                                 <label for="input-story-code">Story Code</label>
                                 <textarea class="form-control" id="input-story-code" rows="8" 
                                     placeholder="The code for the story goes here..."></textarea>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="input-enable-test-panel" type="checkbox">
+                                    Show options to help test the story
+                                </label>
                             </div>
                         </form>
                     </div>

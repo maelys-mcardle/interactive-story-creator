@@ -12,9 +12,10 @@ function loadStoryFromCreateStoryDialog()
     var storyTitle = $( html.inputStoryTitle ).val();
     var storyAuthors = $( html.inputStoryAuthors ).val();
     var storyCode = $( html.inputStoryCode ).val();
-    
+    var enableTestPanel = $( html.inputEnableTestPanel ).is(':checked');
+        
     // Load the story in.
-    loadStory( storyTitle, storyAuthors, storyCode );
+    loadStory( storyTitle, storyAuthors, storyCode, enableTestPanel );
 }
 
 function loadStoryFromUrl()
@@ -39,7 +40,7 @@ function loadStoryFromUrl()
         $.get( storyCodeUrl, function( storyCode ) {
         
             // Load story.
-            var storyLoaded = loadStory( storyTitle, storyAuthors, storyCode );
+            var storyLoaded = loadStory( storyTitle, storyAuthors, storyCode, false );
             
             // Hide editable controls only if requested and story loaded.
             toggleEditableControls( !storyLoaded || storyEditable );
@@ -51,7 +52,7 @@ function loadStoryFromUrl()
                 "The website it's hosted on might not allow sites like this " +
                 "to access the file.");
                 
-            loadStory( storyTitle, storyAuthors, "" );
+            loadStory( storyTitle, storyAuthors, "", false );
         });
     }
 }
@@ -68,7 +69,7 @@ function loadStoryFromDocumentation( storyTitle, storyAuthors, storyCode )
         $( html.overwriteWarningOverwriteButton ).unbind( "click" ).click( 
             function() {
                 $( html.overwriteWarningDialog ).modal( "hide" );
-                loadStory( storyTitle, storyAuthors, storyCode );
+                loadStory( storyTitle, storyAuthors, storyCode, false );
             });
 
         // Show the warning.
@@ -77,12 +78,12 @@ function loadStoryFromDocumentation( storyTitle, storyAuthors, storyCode )
     // No loaded story. Proceed.
     } else {
     
-        loadStory( storyTitle, storyAuthors, storyCode );
+        loadStory( storyTitle, storyAuthors, storyCode, false );
         
     }
 }
 
-function loadStory( storyTitle, storyAuthors, storyCode )
+function loadStory( storyTitle, storyAuthors, storyCode, enableTestPanel )
 {    
     // Populate input values with what we have.
     $( html.inputStoryTitle ).val( storyTitle );
@@ -111,7 +112,7 @@ function loadStory( storyTitle, storyAuthors, storyCode )
         
         $( html.codeWarningIgnoreButton ).one( 'click', function () {
             hideCodeWarningDialog();
-            displayLoadedStory( story );
+            displayLoadedStory( storyTitle, storyAuthors, story, enableTestPanel );
         });
         
         $( html.codeWarningEditCodeButton ).one( 'click', function () {
@@ -125,11 +126,11 @@ function loadStory( storyTitle, storyAuthors, storyCode )
         return false;
         
     } else {
-        return displayLoadedStory( storyTitle, storyAuthors, story );
+        return displayLoadedStory( storyTitle, storyAuthors, story, enableTestPanel );
     }
 }
 
-function displayLoadedStory( storyTitle, storyAuthors, story )
+function displayLoadedStory( storyTitle, storyAuthors, story, enableTestPanel )
 {
     // If there's something to load, load it.
     if ( story && story.chapters.length && story.chapters[ 0 ].pages.length ) {
@@ -153,6 +154,13 @@ function displayLoadedStory( storyTitle, storyAuthors, story )
         // Fade out the message that there's no story. Once gone, fade in the 
         // generated story.
         $( html.noStoryMessage ).fadeOut('fast', function() {
+            
+            // Show test panel if applicable.
+            if ( enableTestPanel ) {
+                showTestPanel();
+            } else {
+                hideTestPanel();
+            }
             
             // Show the beginning of the story.
             showStoryBeginning( story );

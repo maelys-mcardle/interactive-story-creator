@@ -16,6 +16,8 @@ function showStoryChapterTitlePage( story, previousChoices, chapterIndex, pageIn
     // Show Chapter title page.
     fadeInChapterTitlePage( function() {
         
+        $( html.chapterTitlePage ).show();
+        
         // What to change while all content is temporarily invisible.
         $( html.chapterTitlePageName ).text( chapter.title );
         
@@ -38,6 +40,7 @@ function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
     fadeInStoryPage( function() {
         
         // What to change while all content is temporarily invisible.
+        $( html.storyRegularPage ).show();
         setStoryChapterTitle( chapter.title );
         setStoryTime( page.time );
         setStoryLocation( page.location );
@@ -55,7 +58,7 @@ function fadeInStoryPage( changesToDoWhenContentInvisible )
 
 function fadeInChapterTitlePage( changesToDoWhenContentInvisible )
 {
-    fadeInPage( html.chapterTitlePage, changesToDoWhenContentInvisible );
+    fadeInPage( html.storyPage, changesToDoWhenContentInvisible );
 }
     
 function fadeInPage( selectorToFadeIn, changesToDoWhenContentInvisible )
@@ -67,18 +70,13 @@ function fadeInPage( selectorToFadeIn, changesToDoWhenContentInvisible )
         
     // Fade out the visible chapter title or story page, then fade 
     // in the appropriate page.
-    if ( isVisible( html.chapterTitlePage ) ) {
-        
-        $( html.chapterTitlePage ).fadeOut( "fast",  fadeInFunction );
-        
-    } else if ( isVisible( html.storyPage ) ) {
+    if ( isVisible( html.storyPage ) ) {
         
         $( html.storyPage ).fadeOut( "fast", fadeInFunction );
         
     } else {
         
         // Nothing is visible. Must be on another page.
-        $( html.chapterTitlePage ).hide();
         $( html.storyPage ).hide();
         fadeInFunction();
         
