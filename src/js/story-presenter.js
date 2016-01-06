@@ -16,6 +16,8 @@ function showStoryChapterTitlePage( story, previousChoices, chapterIndex, pageIn
     // Show Chapter title page.
     fadeInChapterTitlePage( function() {
         
+        // Have the chapter title page shown.
+        $( html.storyRegularPage ).hide();
         $( html.chapterTitlePage ).show();
         
         // What to change while all content is temporarily invisible.
@@ -39,8 +41,11 @@ function showStoryPage( story, previousChoices, chapterIndex, pageIndex )
     // Show story page.
     fadeInStoryPage( function() {
         
-        // What to change while all content is temporarily invisible.
+        // Have the regular page shown.
         $( html.storyRegularPage ).show();
+        $( html.chapterTitlePage ).hide();
+        
+        // What to change while all content is temporarily invisible.        
         setStoryChapterTitle( chapter.title );
         setStoryTime( page.time );
         setStoryLocation( page.location );
